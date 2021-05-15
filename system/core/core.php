@@ -4,6 +4,7 @@ die("<h1>欢迎访问20J1网站</h1>");
 
 
 
+
 function getPath()//获取当前虚拟地址
 {
     $a = "/";//未加参数的情况
@@ -27,3 +28,4 @@ function getPath()//获取当前虚拟地址
     }
     return $c;//返回地址
 }
+
