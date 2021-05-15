@@ -1,2 +1,6 @@
 <?php
-die("<h1>欢迎访问20J1网站</h1>");
+if (file_exists("system/core/core.php")){
+    include("system/core/core.php");
+}else{
+    die("核心代码不存在");
+}
