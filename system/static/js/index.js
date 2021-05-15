@@ -1,3 +1,5 @@
+console.log("菜单按钮事件");
+console.log("制作人:20计1 25 陆睿涵");
 let burger = document.querySelector(".burger");
 let navMenu = document.querySelector(".nav-list");
 let navMenuItems = document.querySelectorAll(".nav-list li");
