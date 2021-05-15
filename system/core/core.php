@@ -27,3 +27,4 @@ function getPath()//获取当前虚拟地址
     }
     return $c;//返回地址
 }
+//
