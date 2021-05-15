@@ -10,9 +10,15 @@
     - core `动态页面路径`
         - core.php `核心模块`
         - define.php `常量定义模块`
+        - get.php `GET模块`
     - static `静态文件路径`
+        - css `CSS路径`
+            - index.css `首页的CSS文件`
         - html `HTML路径`
             - head.html `头部文件`
+            - index.html `首页的HTML文件`
+        - js `JS路径`
+            - index.js `首页的JS文件`
 * index.php `首页文件`
-* **README.md** `自述文件`
+* ***README.md*** `自述文件`
 * run.bat `调试时运行脚本`
