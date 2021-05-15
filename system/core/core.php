@@ -14,6 +14,8 @@ switch (getPath()){
 function initialize(){
     include("system/core/define.php");
     loadComponent("get");//加载get请求模块
+    loadComponent("cookie");//加载cookie模块
+    loadComponent("language");//加载语言模块
 }
 
 //获取当前虚拟地址
@@ -74,6 +76,10 @@ function loadHead(string $title,array $extraFile=null):void
 function loadHTML($name, $args = null)
 {
     $value = file_get_contents(HTML_PATH . $name . ".html");
+    for ($i = 0;$i<count(L);$i++){
+        $key = array_keys(L)[$i];
+        $value = str_replace("{".$key."}",L[$key],$value);
+    }
     if ($args) {
         for ($i = 0; $i < count($args); $i++) {
             $key = array_keys($args)[$i];
