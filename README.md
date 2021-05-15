@@ -1,4 +1,5 @@
 # 20计1展示网站
 
 网站用于展示班级以及班级内同学的风貌
-[输入链接说明](http://)
+
+[加入项目一起开发](https://gitee.com/schlibra/website_20j1/invite_link?invite=1d9215b7dfd9f7d81c484724b06f676a69bfe20df1a12785b7993663152babc5ebee344d1daf1f9c2f846e2b589479b3)
