@@ -17,8 +17,17 @@
         - html `HTML路径`
             - head.html `头部文件`
             - index.html `首页的HTML文件`
+        - img `图片路径`
         - js `JS路径`
             - index.js `首页的JS文件`
+        - language `语言文件路径`
+            - languages.json `语言列表文件`
+            - en.lang `英文语言文件`
+            - ja.lang `日语语言文件`
+            - ko.lang `韩语语言文件`
+            - zh-cn.lang `简体中文语言文件`
+            - zh-tw.lang `繁体中文语言文件`
+        - media `媒体文件路径`
 * index.php `首页文件`
 * ***README.md*** `自述文件`
 * run.bat `调试时运行脚本`
