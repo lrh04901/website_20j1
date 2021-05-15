@@ -1,5 +1,6 @@
 <?php
-
+include("system/core/define.php");
+loadHead("欢迎");
 die("<h1>欢迎访问20J1网站</h1>");
 
 
@@ -26,4 +27,9 @@ function getPath()//获取当前虚拟地址
         $c = "/";//地址未空时变为/
     }
     return $c;//返回地址
+}
+function loadHead($title){
+    $value = file_get_contents(HTML_PATH."head.html");
+    $value = str_replace("{TITLE}",$title,$value);
+    echo $value;
 }
