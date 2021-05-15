@@ -119,3 +119,117 @@ nav {
         }
     }
 }
+
+.home{
+    position: absolute;
+    top: 150px;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 0 0;
+    height: 700px;
+}
+
+.introduce{
+    flex: 2;
+    font-family:"Microsoft YaHei UI", sans-serif;
+}
+
+h1 {
+    color: #2C3E50;
+    font-size: 40px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    position: sticky;
+    top: 360px;
+    left: 760px;
+    right: 100px;
+}
+
+span.mark {
+    border-right: 2px solid #000000;
+    animation: blink 0.6s step-end infinite;
+}
+
+@keyframes blink {
+    from,
+    to {
+        border-color: transparent;
+    }
+    50% {
+        border-color: #000000;
+    }
+}
+
+.main-text{
+    color: #7894B2;
+    font-size: 25px;
+    font-weight: 200;
+    letter-spacing: 2px;
+    position: static;
+}
+
+.main-button{
+
+}
+
+.nav-link{
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 200px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    color: #ffffff;
+    text-decoration: none;
+    background: linear-gradient(90deg,#03a9f4,#f441a5,#ffeb3b,#03a9f4);
+    border-radius: 30px;
+    background-size: 400%;
+    font-size: 24px;
+    text-transform: uppercase;
+}
+
+.nav-link:hover{
+    animation: animate 8s linear infinite;
+}
+
+@keyframes animate {
+    0%{
+        background-position: 0%;
+    }
+    100%{
+        background-position: 400%;
+    }
+}
+
+.nav-link::before{
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: -1;
+    background: linear-gradient(90deg,#03a9f4,#f441a5,#ffeb3b,#03a9f4);
+    border-radius: 40px;
+    background-size: 400%;
+    opacity: -1;
+    transition: 0.5s;
+}
+
+.nav-link:hover::before{
+    filter: blur(20px);
+    opacity: 1;
+}
+
+hr{
+    color: #a5a5a5;
+    width: 55vw;
+    align-items: center;
+}
