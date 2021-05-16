@@ -1,7 +1,7 @@
 <?php
 
 initialize();
-
+runWeb();
 
 //初始化
 function initialize()
