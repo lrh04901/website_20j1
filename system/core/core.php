@@ -12,10 +12,12 @@ switch (getPath()){
 
 //初始化
 function initialize(){
-    include("system/core/define.php");
+    include("system/core/define.php");//加载定义模块
     loadComponent("get");//加载get请求模块
     loadComponent("cookie");//加载cookie模块
     loadComponent("language");//加载语言模块
+    loadComponent("argsTool");//加载参数模块
+    loadComponent("encryptTool");//加载加密模块
 }
 
 //获取当前虚拟地址
