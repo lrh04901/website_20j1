@@ -83,7 +83,7 @@ function loadHTML($name, $args = null)
     if ($args) {
         for ($i = 0; $i < count($args); $i++) {
             $key = array_keys($args)[$i];
-            str_replace("{" . $key . "}", $args[$key], $value);
+            $value = str_replace("{" . $key . "}", $args[$key], $value);
         }
     }
     echo $value;
