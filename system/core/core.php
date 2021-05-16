@@ -67,7 +67,6 @@ function loadHead(string $title,array $extraFile=null):void
             $css = $extraFile["css"];
             for ($i = 0;$i<count($css);$i++){
                 if (is_array($css)){
-//                    print_r($css);
                     $extraFileText .= "<link href='".CSS_PATH . $css[$i][0].".css' rel='stylesheet' type='text/css' ".$css[$i][1].">";
                 }elseif (is_string($css)) {
                     $extraFileText .= "<link href='" . CSS_PATH . $css[$i] . ".css' rel='stylesheet' type='text/css'>";
@@ -93,7 +92,6 @@ function loadHTML($name, $args = null)
             $value = str_replace("{" . $key . "}", $args[$key], $value);
         }
     }
-//    $value = str_replace("<","&lt;",$value);
     $index = 0;
     $args_list = array();
     $args_index = 0;
@@ -122,9 +120,11 @@ function loadHTML($name, $args = null)
             $value = str_replace("{".$item."}",IMG_PATH.$x[1].".".$x[2],$value);
         }elseif ($x[0]==="LINK"){
             $path = substr($x[1],0,1)==="/"?$x[1]:"/".$x[1];
-            $value = str_replace("{".$item."}","./?/".$x[1],$value);
+            $value = str_replace("{".$item."}","./?".$path,$value);
         }
     }
-//    print_r($args_list);
     echo $value;
+}
+function clearConsole(){
+    echo "<script>console.clear();</script>";
 }
