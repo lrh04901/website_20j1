@@ -120,6 +120,8 @@ function loadHTML($name, $args = null)
         $x = explode("_",$item);
         if ($x[0]==="IMG"){
             $value = str_replace("{".$item."}",IMG_PATH.$x[1].".".$x[2],$value);
+        }elseif ($x[0]==="LINK"){
+            $value = str_replace("{".$item."}","./?/".$x[1],$value);
         }
     }
 //    print_r($args_list);
