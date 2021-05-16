@@ -11,23 +11,23 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;欢迎来到20计1
             </p><br><br>
-            <p class="main-button"><a href="#" class="nav-link action-button">
+            <p class="main-button"><a href="{LINK_/}" class="nav-link action-button">
                 进入我们班</a></p><br><br><br><br>
         </header>
         <hr><br><br>
         <div class="article">
             <div class="feature">
-                <h2>******</h2>
-                <p>******************</p>
-            </div>
+                <br><h2>test</h2>
+                <p>测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试</p>
+            </div><br>
             <div class="feature">
-                <h2>*****</h2>
-                <p>*******************</p>
-            </div>
+                <br><h2>test</h2>
+                <p>测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试</p>
+            </div><br>
             <div class="feature">
-                <h2>*****</h2>
-                <p>*******************</p>
-            </div>
+                <br><h2>test</h2>
+                <p>测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试</p>
+            </div><br>
         </div>
     </main>
 
@@ -36,19 +36,19 @@
         <div class="nav-h">20计1网站</div>
         <ul class="nav-list" type="none">
             <li>
-                <a href="index.html">首页</a>
+                <a href="{LINK_/}">首页</a>
             </li>
             <li>
-                <a href="#">text</a>
+                <a href="{LINK_/}">text</a>
             </li>
             <li>
-                <a href="#">text</a>
+                <a href="{LINK_/}">text</a>
             </li>
             <li>
-                <a href="#">text</a>
+                <a href="{LINK_/}">text</a>
             </li>
             <li>
-                <a href="#">text</a>
+                <a href="{LINK_/}">text</a>
             </li>
         </ul>
         <div class="burger">
@@ -58,6 +58,80 @@
         </div>
     </nav>
 
+<script type="text/javascript">
+    console.log("打字效果");
+    console.log("制作人:20计1 25 陆睿涵");
+    const textEl = document.querySelector("#text");
+    const texts = JSON.parse(
+        textEl.getAttribute("data-text")
+    );
 
+    let index = 0;
+    let charIndex = 0;
+    let delta = 500;
+    let start = null;
+    let isDeleting = false;
+
+    function type(time) {
+        window.requestAnimationFrame(type);
+        if (!start) start = time;
+        let progress = time - start;
+        if (progress > delta) {
+            let text = texts[index];
+            if (!isDeleting) {
+                textEl.innerHTML = text.slice(
+                    0,
+                    ++charIndex
+                );
+                delta = 500 - Math.random() * 400;
+            } else {
+                textEl.innerHTML = text.slice(
+                    0,
+                    charIndex--
+                );
+            }
+
+            start = time;
+
+            if (charIndex === text.length) {
+                isDeleting = true;
+                delta = 200;
+                start = time + 1200;
+            }
+
+            if (charIndex < 0) {
+                isDeleting = false;
+                start = time + 200;
+                index = ++index % texts.length;
+            }
+        }
+    }
+
+    window.requestAnimationFrame(type);
+
+</script>
+
+<script type="text/javascript">
+    console.log("菜单按钮事件");
+    console.log("制作人:20计1 25 陆睿涵");
+    let burger = document.querySelector(".burger");
+    let navMenu = document.querySelector(".nav-list");
+    let navMenuItems = document.querySelectorAll(".nav-list li");
+    let widthHr = document.querySelector(".triangle");
+    // console.info(burger);
+    burger.addEventListener("click", function ()  {
+        burger.classList.toggle("active");
+        navMenu.classList.toggle("open");
+        navMenuItems.forEach((item, index) => {
+            if (item.style.animation) {
+                item.style.animation = "";
+            } else {
+                item.style.animation = `0.3s ease-in slideIn forwards ${index *
+                0.1 +
+                0.3}s`;
+            }
+        });
+        /*widthHr.style.width = 250px;*/
+    },false);
+</script>
 </body>
-
