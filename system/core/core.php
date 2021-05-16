@@ -121,6 +121,7 @@ function loadHTML($name, $args = null)
         if ($x[0]==="IMG"){
             $value = str_replace("{".$item."}",IMG_PATH.$x[1].".".$x[2],$value);
         }elseif ($x[0]==="LINK"){
+            $path = substr($x[1],0,1)==="/"?$x[1]:"/".$x[1];
             $value = str_replace("{".$item."}","./?/".$x[1],$value);
         }
     }
