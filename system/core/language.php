@@ -2,7 +2,8 @@
 $language_list = file_get_contents(LANG_PATH."languages.json");
 $language_list = json_decode($language_list,true);
 $language_list_json = array();
-$local_language = cookie::get("local_language") ? cookie::get("local_language") : "zh-cn";
+$local_language = cookie::get("local_language");
+if (!$local_language)$local_language="zh-cn";
 define("LOCAL_LANGUAGE",$local_language);
 foreach ($language_list as $item) {
     $language_list_json[$item] = explode("=",explode("\n",str_replace("\n\n","\n",str_replace("\r","\n",file_get_contents(LANG_PATH.$item.".lang"))))[0])[1];

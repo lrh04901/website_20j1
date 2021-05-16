@@ -66,7 +66,12 @@ function loadHead(string $title,array $extraFile=null):void
         if (isset($extraFile["css"])){
             $css = $extraFile["css"];
             for ($i = 0;$i<count($css);$i++){
-                $extraFileText.="<link href='".CSS_PATH.$css[$i].".css' rel='stylesheet' type='text/css'>";
+                if (is_array($css)){
+//                    print_r($css);
+                    $extraFileText .= "<link href='".CSS_PATH . $css[$i][0].".css' rel='stylesheet' type='text/css' ".$css[$i][1].">";
+                }elseif (is_string($css)) {
+                    $extraFileText .= "<link href='" . CSS_PATH . $css[$i] . ".css' rel='stylesheet' type='text/css'>";
+                }
             }
         }
     }
@@ -88,5 +93,35 @@ function loadHTML($name, $args = null)
             $value = str_replace("{" . $key . "}", $args[$key], $value);
         }
     }
+//    $value = str_replace("<","&lt;",$value);
+    $index = 0;
+    $args_list = array();
+    $args_index = 0;
+    $left=false;
+    while(true){
+        $t = substr($value,$index,1);
+        $index++;
+        if ($t==="{"){
+            $left=true;
+            continue;
+        }
+        if ($t==="}"){
+            $left=false;
+            $args_index++;
+        }
+        if ($left){
+            $args_list[$args_index].=$t;
+        }
+        if ($index===strlen($value)){
+            break;
+        }
+    }
+    foreach ($args_list as $item) {
+        $x = explode("_",$item);
+        if ($x[0]==="IMG"){
+            $value = str_replace("{".$item."}",IMG_PATH.$x[1].".".$x[2],$value);
+        }
+    }
+//    print_r($args_list);
     echo $value;
 }
