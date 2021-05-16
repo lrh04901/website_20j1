@@ -1,5 +1,4 @@
 <?php
-
 initialize();
 runWeb();
 
@@ -62,6 +61,9 @@ function getPath()
     }
     if ($c == "") {
         $c = "/";//地址未空时变为/
+    }
+    if (substr($c,0,1)!="/"){
+        header("Location:./?/");
     }
     return $c;//返回地址
 }
