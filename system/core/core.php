@@ -1,7 +1,7 @@
 <?php
 
 initialize();
-
+runWeb();
 
 //初始化
 function initialize()
@@ -24,6 +24,9 @@ function runWeb()
                     break;
                 case "/update":
                     get::update();
+                    break;
+                case "/classIntroduce":
+                    get::classIntroduce();
                     break;
                 default:
                     break;
