@@ -90,4 +90,3 @@ function loadHTML($name, $args = null)
     }
     echo $value;
 }
-function abababca(){}
