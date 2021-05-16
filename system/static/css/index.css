@@ -16,7 +16,7 @@
 }
 
 nav {
-    position: absolute;
+    position: sticky;
     top: 0;
     left: 0;
     right: 0;
@@ -144,7 +144,7 @@ h1 {
     font-size: 40px;
     font-weight: 400;
     letter-spacing: 3px;
-    position: sticky;
+    position: static;
     top: 360px;
     left: 760px;
     right: 100px;
@@ -232,4 +232,31 @@ hr{
     color: #a5a5a5;
     width: 55vw;
     align-items: center;
+}
+
+.article{
+    flex: 2;
+    position: absolute;
+    left: calc(30vw - 40px);
+    top: 700px;
+    text-align: left;
+
+}
+
+.feature{
+    background: #FFEEEE;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #DDEFBB, #FFEEEE);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #DDEFBB, #FFEEEE); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background-repeat: no-repeat;
+    height: 95px;
+    width: 45vw;
+    border-radius: 30px;
+}
+
+.feature h2{
+    text-indent: 1em;
+}
+
+.feature p{
+    text-indent: 2em;
 }
