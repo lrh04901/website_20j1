@@ -2,7 +2,7 @@
 
 <!--===============body================-->
     <main aria-labelledby="main-title" class="home">
-        <header class="introduce"><img src="../img/j1logo.jpg" alt="20计1-logo">
+        <header class="introduce"><img src="{IMG_j1logo_jpg}" alt="20计1-logo">
             <h1>
                 <span id="text" data-text='["20计1", "一个充满智慧的班级", "一个充满正能量的班级"]'></span>
                 <span class="mark"></span>
@@ -110,5 +110,28 @@
     window.requestAnimationFrame(type);
 
 </script>
-<script type="text/javascript" src="../js/index.js"></script>
+
+<script type="text/javascript">
+    console.log("菜单按钮事件");
+    console.log("制作人:20计1 25 陆睿涵");
+    let burger = document.querySelector(".burger");
+    let navMenu = document.querySelector(".nav-list");
+    let navMenuItems = document.querySelectorAll(".nav-list li");
+    let widthHr = document.querySelector(".triangle");
+    // console.info(burger);
+    burger.addEventListener("click", function ()  {
+        burger.classList.toggle("active");
+        navMenu.classList.toggle("open");
+        navMenuItems.forEach((item, index) => {
+            if (item.style.animation) {
+                item.style.animation = "";
+            } else {
+                item.style.animation = `0.3s ease-in slideIn forwards ${index *
+                0.1 +
+                0.3}s`;
+            }
+        });
+        /*widthHr.style.width = 250px;*/
+    },false);
+</script>
 </body>
