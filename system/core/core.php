@@ -11,6 +11,9 @@ function initialize()
     loadComponent("language");//加载语言模块
     loadComponent("argsTool");//加载参数模块
     loadComponent("encryptTool");//加载加密模块
+    loadComponent("dbTool");//加载数据库模块
+    loadComponent("fileDBTool");//加载文件数据库模块
+    loadComponent("mysqlTool");//加载MySQL数据库模块
 }
 
 function runWeb()
@@ -71,7 +74,13 @@ function getPath()
 //加载模块
 function loadComponent($name)
 {
-    include(CORE_PATH . $name . ".php");
+    $component_path =  CORE_PATH . $name . ".php";
+    if (file_exists($component_path)) {
+        include($component_path);
+    }else{
+        echo "<b style='color: red'>没有找到组件：".$name."</b>";
+        die();
+    }
 }
 
 //加载头部文件
@@ -94,13 +103,13 @@ function loadHead(string $title, array $extraFile = null): void
         if (isset($extraFile["css"])) {
             $css = $extraFile["css"];
             for ($i = 0; $i < count($css); $i++) {
-                if (is_array($css)) {
-                    if (substr($css[$i], 0, 7) === "http://" || substr($css[$i], 0, 8) === "https://" || substr($css[$i], 0, 2) === "//") {
+                if (is_array($css[$i])) {
+                    if (substr($css, 0, 7) === "http://" || substr($css[$i], 0, 8) === "https://" || substr($css[$i], 0, 2) === "//") {
                         $extraFileText .= "<link href='" . $css[$i][0] . "' rel='stylesheet' type='text/css' " . $css[$i][1] . ">";
                     } else {
                         $extraFileText .= "<link href='" . CSS_PATH . $css[$i][0] . ".css' rel='stylesheet' type='text/css' " . $css[$i][1] . ">";
                     }
-                } elseif (is_string($css)) {
+                } elseif (is_string($css[$i])) {
                     if (substr($css[$i], 0, 7) === "http://" || substr($css[$i], 0, 8) === "https://" || substr($css[$i], 0, 2) === "//") {
                         $extraFileText .= "<link href='" . $css[$i] . "' rel='stylesheet' type='text/css'>";
                     } else {
