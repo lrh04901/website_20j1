@@ -7,7 +7,7 @@ class get
         loadHTML("index");
     }
     public static function update(){
-        loadHead("更新站点",["css"=>["https://cdnjs.cloudflare.com/ajax/libs/zui/1.9.2/css/zui.min.css"]]);
+        loadHead("更新站点",["css"=>["zui.min.css","zui.uploader.min.css"],"js"=>["zui.uploader.min.js"]]);
         loadHTML("update");
     }
     public static function classIntroduce(){
