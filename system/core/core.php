@@ -125,8 +125,8 @@ function loadHead(string $title, array $extraFile = null): void
     echo $value;
 }
 
-//加载HTML文件
-function loadHTML($name, $args = null)
+//加载页面主体文件
+function loadBody($name, $args = null)
 {
     $value = file_get_contents(HTML_PATH . $name . ".html");
     for ($i = 0; $i < count(L); $i++) {
