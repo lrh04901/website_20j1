@@ -1,1 +1,10 @@
 LANGUAGE_NAME=English
+TEST=test
+UPLOAD_CHOOSE_FILE=upload
+UPLOAD_START_UPLOAD=start uploading
+HOME=Home
+INTRODUCE=introduce
+INDEX_TITLE=Welcome to 20j1
+INDEX_BUTTON=Enter our class
+NAV_TITLE=20j1 website
+CLASS_INTRODUCE=Class Introduce
