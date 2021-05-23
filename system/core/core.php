@@ -5,8 +5,9 @@ runWeb();
 //初始化
 function initialize()
 {
-    include("system/core/define.php");//加载定义模块
+    loadComponent("define");//加载定义模块
     loadComponent("get");//加载get请求模块
+    loadComponent("post");//加载post请求模块
     loadComponent("cookie");//加载cookie模块
     loadComponent("language");//加载语言模块
     loadComponent("argsTool");//加载参数模块
@@ -36,6 +37,11 @@ function runWeb()
             }
             break;
         case "POST":
+            switch (getPath()){
+                case "/update_upload":
+                    post::update_uploader();
+                    break;
+            }
             break;
         default:
             echo "不支持的请求方式";
@@ -74,7 +80,11 @@ function getPath()
 //加载模块
 function loadComponent($name)
 {
-    $component_path =  CORE_PATH . $name . ".php";
+    if (defined("CORE_PATH")) {
+        $component_path = CORE_PATH . $name . ".php";
+    }else{
+        $component_path = "system/core/" . $name . ".php";
+    }
     if (file_exists($component_path)) {
         include($component_path);
     }else{
@@ -103,18 +113,11 @@ function loadHead(string $title, array $extraFile = null): void
         if (isset($extraFile["css"])) {
             $css = $extraFile["css"];
             for ($i = 0; $i < count($css); $i++) {
-                if (is_array($css[$i])) {
-                    if (substr($css, 0, 7) === "http://" || substr($css[$i], 0, 8) === "https://" || substr($css[$i], 0, 2) === "//") {
-                        $extraFileText .= "<link href='" . $css[$i][0] . "' rel='stylesheet' type='text/css' " . $css[$i][1] . ">";
-                    } else {
-                        $extraFileText .= "<link href='" . CSS_PATH . $css[$i][0] . ".css' rel='stylesheet' type='text/css' " . $css[$i][1] . ">";
-                    }
-                } elseif (is_string($css[$i])) {
-                    if (substr($css[$i], 0, 7) === "http://" || substr($css[$i], 0, 8) === "https://" || substr($css[$i], 0, 2) === "//") {
-                        $extraFileText .= "<link href='" . $css[$i] . "' rel='stylesheet' type='text/css'>";
-                    } else {
-                        $extraFileText .= "<link href='" . CSS_PATH . $css[$i] . ".css' rel='stylesheet' type='text/css'>";
-                    }
+                $t = $css[$i];
+                if (is_string($t)){
+                    echo "<link href='".CSS_PATH.$t.".css' rel='stylesheet' type='text/css'>";
+                }elseif (is_array($t)){
+                    echo "<link href='".CSS_PATH.$t[0].".css' rel='stylesheet' type='text/css' ".$t[1].">";
                 }
             }
         }
@@ -129,7 +132,7 @@ function loadHTML($name, $args = null)
     $value = file_get_contents(HTML_PATH . $name . ".html");
     for ($i = 0; $i < count(L); $i++) {
         $key = array_keys(L)[$i];
-        $value = str_replace("{" . $key . "}", L[$key], $value);
+        $value = str_replace("{TEXT_" . $key . "}", L[$key], $value);
     }
     if ($args) {
         for ($i = 0; $i < count($args); $i++) {
@@ -166,6 +169,10 @@ function loadHTML($name, $args = null)
         } elseif ($x[0] === "LINK") {
             $path = substr($x[1], 0, 1) === "/" ? $x[1] : "/" . $x[1];
             $value = str_replace("{" . $item . "}", "./?" . $path, $value);
+        }elseif ($x[0]==="JS"){
+            $value = str_replace("{".$item."}",JS_PATH.$x[1].".js",$value);
+        }elseif ($x[0]==="MEDIA"){
+            $value = str_replace("{".$item."}",MEDIA_PATH.$x[1].".".$x[2],$value);
         }
     }
     echo $value;
