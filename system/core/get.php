@@ -11,7 +11,7 @@ class get
         loadHTML("update");
     }
     public static function classIntroduce(){
-        loadHead("胡杨班");
+        loadHead("胡杨班",["css"=>[["classIntroduce","media=\"screen\""]]]);
         loadHTML("classIntroduce");
     }
 }
