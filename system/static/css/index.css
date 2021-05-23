@@ -66,7 +66,7 @@ nav {
     display: none;
 }
 
-@media screen and (max-width: 871px) {
+@media screen and (max-width: 890px) {
     .burger {
         display: block;
     }
@@ -75,7 +75,7 @@ nav {
         top: 80px;
         right: 0;
         bottom: 0;
-        width: 50vw;
+        width: 35vw;
         height: calc(100vh - 80px);
 
         background-color: rgba(65, 81, 101, 0.9);
