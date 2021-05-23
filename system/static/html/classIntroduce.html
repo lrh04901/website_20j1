@@ -1,3 +1,64 @@
 <body>
-<img src="{IMG_j1logo_jpg}" alt="胡杨logo">
+    <div class="intro-main">
+        <div class="intro-img">
+            <img src="{IMG_j1logo_jpg}" alt="胡杨logo">
+        </div>
+
+        <main>
+            <br>
+            <div class="intro-title"><h2 align="center">班级介绍</h2></div><br>
+            <div class="intro-article">测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试</div>
+        </main>
+    </div>
+    <!--===========header===========-->
+    <nav>
+        <div class="nav-h">20计1网站</div>
+        <ul class="nav-list" type="none">
+            <li>
+                <a href="{LINK_/}">首页</a>
+            </li>
+            <li>
+                <a href="{LINK_classIntroduce}">介绍</a>
+            </li>
+            <li>
+                <a href="{LINK_/}">text</a>
+            </li>
+            <li>
+                <a href="{LINK_/}">text</a>
+            </li>
+            <li>
+                <a href="{LINK_/}">text</a>
+            </li>
+        </ul>
+        <div class="burger">
+            <div class="top-line"></div>
+            <div class="middle-line"></div>
+            <div class="bottom-line"></div>
+        </div>
+    </nav>
+
+
+    <script type="text/javascript">
+        console.log("菜单按钮事件");
+        console.log("制作人:20计1 25 陆睿涵");
+        let burger = document.querySelector(".burger");
+        let navMenu = document.querySelector(".nav-list");
+        let navMenuItems = document.querySelectorAll(".nav-list li");
+        let widthHr = document.querySelector(".triangle");
+        // console.info(burger);
+        burger.addEventListener("click", function ()  {
+            burger.classList.toggle("active");
+            navMenu.classList.toggle("open");
+            navMenuItems.forEach((item, index) => {
+                if (item.style.animation) {
+                    item.style.animation = "";
+                } else {
+                    item.style.animation = `0.3s ease-in slideIn forwards ${index *
+                    0.1 +
+                    0.3}s`;
+                }
+            });
+            /*widthHr.style.width = 250px;*/
+        },false);
+    </script>
 </body>

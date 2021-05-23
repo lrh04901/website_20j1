@@ -1,0 +1,162 @@
+/*Copyright © 2021 lrhhz All rights reserved*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:"Microsoft YaHei UI", sans-serif , simHei , Onyx;
+}
+
+nav{
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5vw;
+    height: 80px;
+    background-color: #999999;
+}
+
+.nav-h{
+    font-size: 30px;
+    font-weight: 600;
+    color: #ffffff;
+    flex: 1;
+}
+
+.nav-list{
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    max-width: 650px;
+}
+
+.nav-list li{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.nav-list li a{
+    text-shadow: 1px 1px 1px #a5a5a5;
+    text-decoration: none;
+    color: #1d1d1d;
+}
+
+.burger div{
+    width: 25px;
+    height: 3px;
+    background-color: aliceblue;
+    margin: 4px;
+}
+
+.burger{
+    display: none;
+}
+
+@media screen and (max-width: 871px) {
+    .burger {
+        display: block;
+    }
+    .nav-list {
+        position: absolute;
+        top: 80px;
+        right: 0;
+        bottom: 0;
+        width: 50vw;
+        height: calc(100vh - 80px);
+
+        background-color: rgba(65, 81, 101, 0.9);
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+
+        transform: translateX(100%);
+    }
+    .nav-list.open {
+        transform: translateX(0);
+        transition: 0.4s ease-in-out;
+    }
+    .nav-list li {
+        margin: 3vh;
+        transform: translateX(20px);
+        opacity: 0;
+    }
+    .burger.active div {
+        transition: 0.3s ease-in-out 0.3s;
+    }
+    .burger.active .top-line {
+        transform: rotate(45deg) translate(4px, 6px);
+    }
+    .burger.active .bottom-line {
+        transform: rotate(-45deg) translate(4px, -6px);
+    }
+    .burger.active .middle-line {
+        opacity: 0;
+        transform: translateX(10px);
+        transition: 0.3s ease-in-out;
+    }
+    @keyframes slideIn {
+        from {
+            transform: translateX(20px);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+}
+
+.intro-main{
+    position: absolute;
+    top: 150px;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 0 0;
+    height: 700px;
+}
+
+.intro-img{
+    position: absolute;
+    top: -5vh;
+    flex: 1;
+}
+
+main{
+    border-radius: 10px;
+    background-color: rgba(111, 97, 97, 0.1);
+    width: 93%;
+    height: 98%;
+    margin-left: 3%;
+    flex: 2;
+    position: absolute;
+    top: 45%;
+}
+
+.intro-title{
+    font-family: "Microsoft YaHei";
+    font-weight: lighter;
+    font-size: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-shadow: 10px 10px 10px #cccccc;
+    align-items: center;
+    justify-content: center;
+}
+
+.intro-article{
+    margin-left: 3%;
+    font-family: Onyx;
+    font-weight: lighter;
+    line-height: 35px;
+    text-indent: 2em;
+}
