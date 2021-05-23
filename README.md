@@ -24,6 +24,9 @@
             - index.css `首页的CSS文件`
             - zui.min.css `ZUI最小化样式文件`
             - zui.uploader.min.css `ZUI上传文件插件样式文件`
+        - fonts `字体目录`
+            - zenicon.ttf `ZUI使用到的字体`
+            - zenicon.woff `ZUI使用到的字体`
         - html `HTML路径`
             - classIntroduce.html `班级介绍文件`
             - head.html `头部文件`
