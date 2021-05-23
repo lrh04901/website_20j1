@@ -3,7 +3,7 @@
 class get
 {
     public static function index(){
-        loadHead("欢迎来到20计1",["css"=>[["index","media=\"screen\""]]]);
+        loadHead(L["INDEX_TITLE"],["css"=>[["index","media=\"screen\""]]]);
         loadHTML("index");
     }
     public static function update(){
