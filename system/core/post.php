@@ -4,6 +4,12 @@
 class post
 {
     public static function update_uploader(){
+        if (!is_dir("data")){
+            if (file_exists("data")){
+                unlink("data");
+            }
+            mkdir("data");
+        }
         $log="";
         $log.=sys_get_temp_dir()."\r\n";
         $log.=json_encode($_POST)."\r\n";
@@ -12,7 +18,6 @@ class post
         if (move_uploaded_file($_FILES["file"]["tmp_name"],"data/update.zip")){
             $log.="上传成功\r\n";
             $log.=self::unzip("data/update.zip","data/update/");
-            copy("data/update/system","data/system");
         }else{
             $log.="上传失败\r\n";
         }
@@ -29,4 +34,5 @@ class post
             return "解压成功\r\n";
         }
     }
+//    private static function xcopy()
 }
