@@ -7,7 +7,7 @@ class get
         loadHTML("index");
     }
     public static function update(){
-        loadHead("更新站点",["css"=>["zui.min.css","zui.uploader.min.css"],"js"=>["zui.uploader.min.js"]]);
+        loadHead("更新站点",["css"=>["zui.min","zui.uploader.min"],"js"=>["zui.uploader.min"]]);
         loadHTML("update");
     }
     public static function classIntroduce(){
