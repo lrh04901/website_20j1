@@ -8,3 +8,7 @@ define("JS_PATH",STATIC_PATH."js/");
 define("IMG_PATH",STATIC_PATH."img/");
 define("LANG_PATH",STATIC_PATH."language/");
 define("MEDIA_PATH",STATIC_PATH."media/");
+define("CONFIG_PATH","config/");
+define("FILE_DB_PATH",SYSTEM_PATH."data/");
+define("SECRET","20J1YYDS");
+define("FILE_DB_POSTFIX","db");
