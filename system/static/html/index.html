@@ -31,6 +31,31 @@
         </div>
     </main>
 
+<section>
+    <input type="button" id="ji" value="鸡">
+    <input type="button" id="ni" value="你">
+    <input type="button" id="tai" value="太">
+    <input type="button" id="mei" value="美">
+</section>
+
+<script>
+    function $(id){
+        return document.getElementById(id);
+    }
+    $('ji').onclick=function(){
+        new Audio('../audio/鸡.mp3').play();
+    }
+    $('ni').onclick=function(){
+        new Audio('../audio/你.mp3').play();
+    }
+    $('tai').onclick=function(){
+        new Audio('../audio/太.mp3').play();
+    }
+    $('mei').onclick=function(){
+        new Audio('../audio/美.mp3').play();
+    }
+</script>
+
 <!--===========header===========-->
     <nav>
         <div class="nav-h">20计1网站</div>
