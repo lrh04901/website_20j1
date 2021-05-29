@@ -173,7 +173,6 @@ function loadBody($name, $args = null)
         }elseif ($x[0]==="MEDIA"){
             $value = str_replace("{".$item."}",MEDIA_PATH.$x[1].".".$x[2],$value);
         }elseif ($x[0]==="AUDIO"){
-
             $value = str_replace("{".$item."}",AUDIO_PATH.$x[1].".".$x[2],$value);
         }
     }
