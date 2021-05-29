@@ -30,6 +30,9 @@ function runWeb()
                 case "/classIntroduce":
                     get::classIntroduce();
                     break;
+                case "/yule":
+                    get::yule();
+                    break;
                 default:
                     break;
 
@@ -155,6 +158,10 @@ function loadBody($name, $args = null)
             $args_index++;
         }
         if ($left) {
+            if ($t===" "||$t==="\r"||$t==="\n"){
+                $left=false;
+                continue;
+            }
             $args_list[$args_index] .= $t;
         }
         if ($index === strlen($value)) {

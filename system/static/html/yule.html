@@ -1,0 +1,34 @@
+<body>
+<style>
+  input.cstm-button{
+    background: url({IMG_cxk_jpg});
+  }
+</style>
+<section>
+  <input class="cstm-button" type="button" id="ji" value="鸡">
+  <input class="cstm-button" type="button" id="ni" value="你">
+  <input class="cstm-button" type="button" id="tai" value="太">
+  <input class="cstm-button" type="button" id="mei" value="美">
+</section>
+<script>
+  //数据定义区域
+  ji_mp3 = '{AUDIO_ji_mp3}';
+  ni_mp3 = '{AUDIO_ni_mp3}';
+  tai_mp3 = '{AUDIO_tai_mp3}';
+  mei_mp3 = '{AUDIO_mei_mp3}';
+</script>
+<script>
+  $('#ji').click(function(){
+    new Audio(ji_mp3).play();
+  });
+  $('#ni').click(function(){
+    new Audio(ni_mp3).play();
+  });
+  $('#tai').click(function(){
+    new Audio(tai_mp3).play();
+  });
+  $('#mei').click(function(){
+    new Audio(mei_mp3).play();
+  });
+</script>
+</body>

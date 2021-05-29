@@ -7,7 +7,7 @@
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-    background: url(u=2953735509,1813074166&fm=26&gp=0.jpg) 0px 0px;
+    /*background: url() 0px 0px;*/
     background-size: auto;
     background-attachment: fixed;
     color: red;
@@ -21,7 +21,7 @@
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-    background: url(u=2953735509,1813074166&fm=26&gp=0.jpg)  0px 0px;
+    /*background: url()  0px 0px;*/
     background-size: auto;
     background-attachment: fixed;
     color: green;
@@ -35,7 +35,7 @@
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-    background: url(u=2953735509,1813074166&fm=26&gp=0.jpg)  0px 0px;
+    /*background: url({IMG_cxk_jpg})  0px 0px;*/
     background-size: auto;
     background-attachment: fixed;
     color: yellow;
@@ -49,7 +49,7 @@
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-    background: url(u=2953735509,1813074166&fm=26&gp=0.jpg)  0px 0px;
+    /*background: url()  0px 0px;*/
     background-size: auto;
     background-attachment: fixed;
     color: aqua;
