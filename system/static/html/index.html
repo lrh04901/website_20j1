@@ -37,22 +37,28 @@
     <input type="button" id="tai" value="太">
     <input type="button" id="mei" value="美">
 </section>
-
+<script>
+    //数据定义区域
+    ji_mp3 = '{AUDIO_ji_mp3}';
+    ni_mp3 = '{AUDIO_ni_mp3}';
+    tai_mp3 = '{AUDIO_tai_mp3}';
+    mei_mp3 = '{AUDIO_mei_mp3}';
+</script>
 <script>
     function $(id){
         return document.getElementById(id);
     }
     $('ji').onclick=function(){
-        new Audio('{AUDIO_ji_mp3}').play();
+        new Audio(ji_mp3).play();
     }
     $('ni').onclick=function(){
-        new Audio('../audio/你.mp3').play();
+        new Audio(ni_mp3).play();
     }
     $('tai').onclick=function(){
-        new Audio('../audio/太.mp3').play();
+        new Audio(tai_mp3).play();
     }
     $('mei').onclick=function(){
-        new Audio('../audio/美.mp3').play();
+        new Audio(mei_mp3).play();
     }
 </script>
 
