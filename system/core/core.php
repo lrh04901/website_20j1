@@ -14,6 +14,7 @@ function initialize()
     loadComponent("dbTool");//加载数据库模块
     loadComponent("fileDBTool");//加载文件数据库模块
     loadComponent("mysqlTool");//加载MySQL数据库模块
+    loadComponent("xcpak");//加载XC包模块
 }
 
 function runWeb()
@@ -39,6 +40,9 @@ function runWeb()
             switch (getPath()){
                 case "/update_upload":
                     post::update_uploader();
+                    break;
+                case "/applyUpdate":
+                    post::apply_update();
                     break;
             }
             break;
