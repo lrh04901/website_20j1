@@ -25,7 +25,7 @@ class post
         file_put_contents("data/upload.log",$log);
     }
     public static function apply_update(){
-        xcpak::decode("./data/update.xcpak",DATA_PATH."out/");
+        xcpak::decode("./data/update.xcpak",SYSTEM_PATH);
     }
     private static function unzip($name,$out){
         $zip = new ZipArchive();
