@@ -16,24 +16,15 @@ function initialize()
     loadComponent("mysqlTool");//加载MySQL数据库模块
     loadComponent("xcpak");//加载XC包模块
 }
-
+//运行网站
 function runWeb()
 {
-    $rm = $_SERVER["REQUEST_METHOD"];
-    $path = getPath();
-    $path = substr($path,1);
-    if ($path===""){
+    $rm = strtolower($_SERVER["REQUEST_METHOD"]);
+    $path = substr(getPath(),1);
+    if (!$path){
         $path="index";
     }
-    $rm=strtolower($rm);
     call_user_func($rm."::".$path);
-    /*if ($rm==="GET"){
-        call_user_func("get::".$path);
-    }elseif ($rm==="POST"){
-        call_user_func("post::".$path);
-    }else{
-        die("不允许的请求方法");
-    }*/
 }
 
 //获取当前虚拟地址
