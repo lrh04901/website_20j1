@@ -22,8 +22,23 @@
 </div>
 <script>
     var option = {
-        file_data_name: "file"
+        file_data_name: "file",
+        responseHandler: function (object){
+            if (object.response==="successful"){
+                console.log("上传成功");
+                applyUpdate();
+            }else if (object.response==="unsuccessful"){
+                console.log("上传失败");
+            }else {
+                console.log("未知错误："+object.response);
+            }
+        }
     };
     $("#uploader").uploader(option);
+    function applyUpdate(){
+        $.post("./?/applyUpdate",function (data) {
+            console.log(data);
+        })
+    }
 </script>
 </body>
