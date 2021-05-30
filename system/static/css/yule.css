@@ -116,7 +116,7 @@ nav {
 }
 
 
-#ji,#ni,#tai,#mei {
+#ji,#ni,#tai,#mei,#wcadlq,#a,#chang,#tiao,#rap,#lq,#zwjs {
     width: 100px;
     height: 100px;
     font-size: 24px;
@@ -136,6 +136,25 @@ nav {
 #mei{
     color: yellow;
 }
+#wcadlq{
+    color: pink;
+}
+#a{
+    color: purple;
+}
+#chang{
+    color: #ff8c0e;
+}
+#tiao{
+    color: #0afaff;
+}
+#rap{
+    color: #b3ff85;
+}
+#lq{
+    color: #ff795c;
+}
+
 
 .kunyueqi{
     position: absolute;
