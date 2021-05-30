@@ -1,21 +1,4 @@
 <body>
-<style>
-    input.cstm-button {
-        background: url({IMG_cxk_jpg});
-    }
-</style>
-<div class="kunyueqi">
-    <details class=" " >
-        <summary>鲲乐器</summary>
-        <div class="box">
-        <input class="cstm-button" type="button" id="ji" value="鸡">
-        <input class="cstm-button" type="button" id="ni" value="你">
-        <input class="cstm-button" type="button" id="tai" value="太">
-        <input class="cstm-button" type="button" id="mei" value="美">
-        </div>
-    </details>
-</div>
-
 <!--===========header===========-->
 <nav>
     <div class="nav-h">20计1网站</div>
@@ -43,12 +26,72 @@
     </div>
 </nav>
 
+<style>
+    input.cstm-button-cxk {
+        background: url({IMG_cxk_jpg});
+    }
+    input.cstm-button-laoba{
+        background: url({IMG_laoba_jpg});
+    }
+</style>
+<div class="kunyueqi">
+    <details>
+        <summary>鲲乐器</summary>
+        <div class="box">
+            <input class="cstm-button-cxk" type="button" id="ji" value="鸡">
+            <input class="cstm-button-cxk" type="button" id="ni" value="你">
+            <input class="cstm-button-cxk" type="button" id="tai" value="太">
+            <input class="cstm-button-cxk" type="button" id="mei" value="美">
+            <input class="cstm-button-cxk" type="button" id="wcadlq" value="我超爱打篮球">
+            <input class="cstm-button-cxk" type="button" id="a" value="啊~~~">
+            <input class="cstm-button-cxk" type="button" id="chang" value="唱">
+            <input class="cstm-button-cxk" type="button" id="tiao" value="跳">
+            <input class="cstm-button-cxk" type="button" id="rap" value="rap">
+            <input class="cstm-button-cxk" type="button" id="lq" value="篮球">
+            <input class="cstm-button-cxk" type="button" id="zwjs" value="自我介绍">
+        </div>
+    </details>
+</div>
+
+<div class="bayueqi">
+    <details>
+        <summary>八音盒</summary>
+        <div class="box">
+            <input class="cstm-button-laoba" type="button" id="o1" value="呕1">
+            <input class="cstm-button-laoba" type="button" id="o2" value="呕2">
+            <input class="cstm-button-laoba" type="button" id="o3" value="呕3">
+            <input class="cstm-button-laoba" type="button" id="mbp" value="面包片">
+            <input class="cstm-button-laoba" type="button" id="lgm" value="老干妈">
+            <input class="cstm-button-laoba" type="button" id="fr" value="腐乳">
+            <input class="cstm-button-laoba" type="button" id="nm" value="柠檬">
+            <input class="cstm-button-laoba" type="button" id="xhb" value="小汉堡">
+        </div>
+    </details>
+</div>
+
+
 <script>
     //数据定义区域
     ji_mp3 = '{AUDIO_ji_mp3}';
     ni_mp3 = '{AUDIO_ni_mp3}';
     tai_mp3 = '{AUDIO_tai_mp3}';
     mei_mp3 = '{AUDIO_mei_mp3}';
+    wcadlq_mp3 = '{AUDIO_wcadlq_mp3}';
+    a_mp3 = '{AUDIO_a_mp3}';
+    chang_mp3 ='{AUDIO_chang_mp3}';
+    tiao_mp3 ='{AUDIO_tiao_mp3}';
+    rap_mp3 ='{AUDIO_rap_mp3}';
+    lq_mp3 ='{AUDIO_lq_mp3}';
+    zwjs_mp3 ='{AUDIO_zwjs_mp3}';
+    o1_mp3 ='{AUDIO_o1_mp3}';
+    o2_mp3 ='{AUDIO_o2_mp3}';
+    o3_mp3 ='{AUDIO_o3_mp3}';
+    nm_mp3 ='{AUDIO_nm_mp3}';
+    xhb_mp3 ='{AUDIO_xhb_mp3}';
+    mbp_mp3 ='{AUDIO_mbp_mp3}';
+    lgm_mp3 ='{AUDIO_lgm_mp3}';
+    ll_mp3 ='{AUDIO_ll_mp3}';
+    fr_mp3 ='{AUDIO_fr_mp3}';
 </script>
 <script>
     $('#ji').click(function () {
@@ -62,6 +105,54 @@
     });
     $('#mei').click(function () {
         new Audio(mei_mp3).play();
+    });
+    $('#wcadlq').click(function () {
+        new Audio(wcadlq_mp3).play();
+    });
+    $('#a').click(function () {
+        new Audio(a_mp3).play();
+    });
+    $('#chang').click(function () {
+        new Audio(chang_mp3).play();
+    });
+    $('#rap').click(function () {
+        new Audio(rap_mp3).play();
+    });
+    $('#tiao').click(function () {
+        new Audio(tiao_mp3).play();
+    });
+    $('#lq').click(function () {
+        new Audio(lq_mp3).play();
+    });
+    $('#zwjs').click(function () {
+        new Audio(zwjs_mp3).play();
+    });
+    $('#o1').click(function () {
+        new Audio(o1_mp3).play();
+    });
+    $('#o2').click(function () {
+        new Audio(o2_mp3).play();
+    });
+    $('#o3').click(function () {
+        new Audio(o3_mp3).play();
+    });
+    $('#mbp').click(function () {
+        new Audio(mbp_mp3).play();
+    });
+    $('#ll').click(function () {
+        new Audio(ll_mp3).play();
+    });
+    $('#lgm').click(function () {
+        new Audio(lgm_mp3).play();
+    });
+    $('#xhb').click(function () {
+        new Audio(xhb_mp3).play();
+    });
+    $('#fr').click(function () {
+        new Audio(fr_mp3).play();
+    });
+    $('#nm').click(function () {
+        new Audio(nm_mp3).play();
     });
 </script>
 </body>
