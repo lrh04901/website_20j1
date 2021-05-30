@@ -186,16 +186,17 @@ class xcpak
         echo "准备应用文件(夹)\n";
         $dir = self::getDirFromPath($GLOBALS["path"]);
 //    echo $dir."\n";
-        if (is_dir($dir . "out")) {
+        if (is_dir($dir)) {
             echo "yes";
         } else {
-            mkdir($dir . "out");
+            mkdir($dir);
         }
         echo "\n";
         $out_dir = $out_path === $GLOBALS["path"] ?: $out_path;
         foreach ($data_array as $item) {
 //        create_file($dir.$out_dir."out",$item[0]);
-            $a = $dir . $out_dir . "out" . str_replace("/", "\\", $item[0]);
+            $a = $dir . $out_dir  . str_replace("/", "\\", $item[0]);
+            self::setFileData($a,$item[2]);
             echo $a . "\n";
             mkdir($a, 0777, true);
             rmdir($a);
@@ -211,39 +212,18 @@ class xcpak
         return str_replace($b, "", $path);
     }
 
-    private static function create_file($base_path, $path)
-    {
-        $path_ = str_replace("/", "\\", $path);
-//    echo $path_."\t";
-        /**创建文件(自动补全缺少文件夹)
-         * $1为基本目录，表示文件创建的位置
-         * $2为相对路径地址，相对于基本目录的地址
-         *
-         * $1=C:\Users\SCH\PhpstormProjects\xcpak\test\out\
-         * $2=d\d\f
-         */
-        if (count(explode("\\", $path_)) === 1) {//判断是否包含目录分隔符
-            touch($base_path . $path_);
-//        echo "yes";
-        } else {
-            $a = explode("\\", $path_);//用分隔符分开
-//        print_r($a);
-            $b = $a[0];//第一个目录
-            if (!is_dir($base_path . $b)) {//不是目录
-                if (is_file($base_path . $b)) {//为文件的情况
-                    unlink($base_path . $b);
-                }
+    private static function setFileData($path,$data){
+        if (file_exists($path)){
+            if (is_dir($path)){
+                rmdir($path);
             }
-//        echo $base_path.$path_."\n";
-            if (!is_dir($base_path . $path_)) {
-                mkdir($base_path . $path_);
+            if (is_file($path)){
+                unlink($path);
             }
-            $base_path_new = $base_path . "\\" . $b;
-            $path_new = "";
-            for ($i = 1; $i < count($a) - 1; $i++) {
-                $path_new .= "\\" . $a[$i];
-            }
-            self::create_file($base_path_new, $path_new);
         }
+        mkdir($path);//创建目录用来代替文件
+        rmdir($path);//删除文件夹，此时保留中间的目录
+        touch($path);//创建文件
+        file_put_contents($path,$data);//写入数据
     }
 }
