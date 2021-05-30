@@ -30,15 +30,15 @@ class post
         unlink(PATH."run.bat");
         unlink(PATH."run.php");
     }
-    private static function unzip($name,$out){
-        $zip = new ZipArchive();
-        if (!$zip->open($name)){
-            return "解压失败\r\n";
-        }else{
-            $zip->extractTo($out);
-            $zip->close();
-            return "解压成功\r\n";
-        }
-    }
+//    private static function unzip($name,$out){
+//        $zip = new ZipArchive();
+//        if (!$zip->open($name)){
+//            return "解压失败\r\n";
+//        }else{
+//            $zip->extractTo($out);
+//            $zip->close();
+//            return "解压成功\r\n";
+//        }
+//    }
 //    private static function xcopy()
 }
