@@ -10,11 +10,12 @@ class post
             }
             mkdir("data");
         }
-        $log="";
-        $log.=sys_get_temp_dir()."\r\n";
-        $log.=json_encode($_POST)."\r\n";
-        $log.=json_encode($_FILES)."\r\n";
-        $log.=file_exists($_FILES["file"]["tmp_name"])?"file exist\r\n":"file not exist\r\n";
+        $log = "临时目录：".sys_get_temp_dir() . "\r\n";
+        $log.="POST变量：".json_encode($_POST)."\r\n";
+        $log.="FILE变量：".json_encode($_FILES)."\r\n";
+        $log.="REQUEST变量：".json_encode($_REQUEST)."\r\n";
+        $log.=file_exists($_FILES["file"]["tmp_name"])?"文件存在\r\n":"文件不存在\r\n";
+        $log.=file_exists($_FILES["file"]["tmp_name"].$_REQUEST["chunk"])?"分片1存在\r\n":"分片1不存在\r\n";
         if (move_uploaded_file($_FILES["file"]["tmp_name"],"data/update.xcpak")){
             $log.="上传成功\r\n";
             echo "successful";
@@ -25,7 +26,9 @@ class post
         file_put_contents("data/upload.log",$log);
     }
     public static function apply_update(){
-        xcpak::decode("./data/update.xcpak",SYSTEM_PATH);
+        xcpak::decode("./data/update.xcpak",PATH);
+        unlink(PATH."run.bat");
+        unlink(PATH."run.php");
     }
     private static function unzip($name,$out){
         $zip = new ZipArchive();
