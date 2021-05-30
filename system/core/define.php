@@ -12,6 +12,6 @@ define("MEDIA_PATH", STATIC_PATH . "media/");
 define("AUDIO_PATH", STATIC_PATH . "audio/");
 define("CONFIG_PATH", PATH . "config/");
 define("FILE_DB_PATH", SYSTEM_PATH . "data/");
-define("DATA_PATH", PATH . "data");
+define("DATA_PATH", PATH . "data/");
 define("SECRET", "20J1YYDS");
 define("FILE_DB_POSTFIX", "db");
