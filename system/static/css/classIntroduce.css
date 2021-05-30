@@ -17,7 +17,7 @@ nav{
     justify-content: space-between;
     padding: 0 5vw;
     height: 80px;
-    background-color: #999999;
+    background-color: rgba(153, 153, 153, 0.9);
 }
 
 .nav-h{
