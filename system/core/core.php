@@ -163,6 +163,8 @@ function link_process($input):string{
             $value = str_replace("{".$item."}",MEDIA_PATH.$x[1].".".$x[2],$value);
         }elseif ($x[0]==="AUDIO"){
             $value = str_replace("{".$item."}",AUDIO_PATH.$x[1].".".$x[2],$value);
+        }elseif ($x[0]==="FONT"){
+            $value = str_replace("{".$item."}",FONT_PATH.$x[1].".".$x[2],$value);
         }
     }
     return $value;
