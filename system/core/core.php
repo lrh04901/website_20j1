@@ -129,6 +129,7 @@ function loadHead(string $title, array $extraFile = null): void
         }
     }
     $value = str_replace("{extraFile}", $extraFileText, $value);
+    $value = link_process($value);
     echo $value;
 }
 
@@ -146,6 +147,11 @@ function loadBody($name, $args = null)
             $value = str_replace("{" . $key . "}", $args[$key], $value);
         }
     }
+    $value = link_process($value);
+    echo $value;
+}
+function link_process($input):string{
+    $value = $input;
     $index = 0;
     $args_list = array();
     $args_index = 0;
@@ -187,7 +193,7 @@ function loadBody($name, $args = null)
             $value = str_replace("{".$item."}",AUDIO_PATH.$x[1].".".$x[2],$value);
         }
     }
-    echo $value;
+    return $value;
 }
 
 function clearConsole()
