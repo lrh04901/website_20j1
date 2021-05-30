@@ -3,7 +3,7 @@
 
 class post
 {
-    public static function update_uploader(){
+    public static function uploadUpdate(){
         if (!is_dir("data")){
             if (file_exists("data")){
                 unlink("data");
@@ -25,7 +25,7 @@ class post
         }
         file_put_contents("data/upload.log",$log);
     }
-    public static function apply_update(){
+    public static function applyUpdate(){
         xcpak::decode("./data/update.xcpak",PATH);
         unlink(PATH."run.bat");
         unlink(PATH."run.php");
