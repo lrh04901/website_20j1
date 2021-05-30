@@ -1,4 +1,4 @@
-#ji {
+#ji,#ni,#tai,#mei {
     width: 100px;
     height: 100px;
     font-size: 24px;
@@ -7,50 +7,15 @@
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-    /*background: url() 0px 0px;*/
-    background-size: auto;
-    background-attachment: fixed;
     color: red;
 }
 #ni{
-    width: 100px;
-    height: 100px;
-    font-size: 24px;
-    border-radius: 12px;
-    border: 2px solid black;
-    -webkit-transition-duration: 0.4s;
-    transition-duration: 0.4s;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-    /*background: url()  0px 0px;*/
-    background-size: auto;
-    background-attachment: fixed;
-    color: green;
+    color: blue;
 }
 #tai{
-    width: 100px;
-    height: 100px;
-    font-size: 24px;
-    border-radius: 12px;
-    border: 2px solid black;
-    -webkit-transition-duration: 0.4s;
-    transition-duration: 0.4s;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-    /*background: url({IMG_cxk_jpg})  0px 0px;*/
-    background-size: auto;
-    background-attachment: fixed;
-    color: yellow;
+    color: #2c8931;
 }
 #mei{
-    width: 100px;
-    height: 100px;
-    font-size: 24px;
-    border-radius: 12px;
-    border: 2px solid black;
-    -webkit-transition-duration: 0.4s;
-    transition-duration: 0.4s;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-    /*background: url()  0px 0px;*/
-    background-size: auto;
-    background-attachment: fixed;
-    color: aqua;
+    color: yellow;
 }
+

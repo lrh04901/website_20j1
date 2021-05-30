@@ -15,7 +15,7 @@ class get
         loadBody("classIntroduce");
     }
     public static function yule(){
-        loadHead("胡杨班",["css"=>[["yule","media=\"screen\""]]]);
+        loadHead("娱乐",["css"=>[["yule","media=\"screen\""]]]);
         loadBody("yule");
     }
 }
