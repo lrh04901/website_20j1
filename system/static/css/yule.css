@@ -116,7 +116,7 @@ nav {
 }
 
 
-#ji,#ni,#tai,#mei,#wcadlq,#a,#chang,#tiao,#rap,#lq,#zwjs {
+#ji,#ni,#tai,#mei,#wcadlq,#a,#chang,#tiao,#rap,#lq,#zwjs,#o1,#o2,#o3,#fr,#lgm,#ll,#mbp,#nm,#xhb{
     width: 100px;
     height: 100px;
     font-size: 24px;
@@ -127,25 +127,25 @@ nav {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     color: red;
 }
-#ni{
+#ni,#o2{
     color: blue;
 }
-#tai{
+#tai,#o3{
     color: #2c8931;
 }
-#mei{
+#mei,#mbp{
     color: yellow;
 }
-#wcadlq{
+#wcadlq,#lgm{
     color: pink;
 }
-#a{
+#a,#fr{
     color: purple;
 }
-#chang{
+#chang,#nm{
     color: #ff8c0e;
 }
-#tiao{
+#tiao,#xhb{
     color: #0afaff;
 }
 #rap{
@@ -159,6 +159,10 @@ nav {
 .kunyueqi{
     position: absolute;
     top: 20vh;
+}
+.bayueqi{
+    top: 40vh;
+    position: absolute;
 }
 
 summary{
