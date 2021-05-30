@@ -26,6 +26,7 @@
         responseHandler: function (object){
             if (object.response==="successful"){
                 console.log("上传成功");
+                applyUpdate();
             }else if (object.response==="unsuccessful"){
                 console.log("上传失败");
             }else {
