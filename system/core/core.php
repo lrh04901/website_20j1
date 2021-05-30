@@ -19,40 +19,21 @@ function initialize()
 
 function runWeb()
 {
-    switch ($_SERVER["REQUEST_METHOD"]) {
-        case "GET":
-            switch (getPath()) {
-                case "/":
-                    get::index();
-                    break;
-                case "/update":
-                    get::update();
-                    break;
-                case "/classIntroduce":
-                    get::classIntroduce();
-                    break;
-                case "/yule":
-                    get::yule();
-                    break;
-                default:
-                    break;
-
-            }
-            break;
-        case "POST":
-            switch (getPath()){
-                case "/update_upload":
-                    post::update_uploader();
-                    break;
-                case "/applyUpdate":
-                    post::apply_update();
-                    break;
-            }
-            break;
-        default:
-            echo "不支持的请求方式";
-            break;
+    $rm = $_SERVER["REQUEST_METHOD"];
+    $path = getPath();
+    $path = substr($path,1);
+    if ($path===""){
+        $path="index";
     }
+    $rm=strtolower($rm);
+    call_user_func($rm."::".$path);
+    /*if ($rm==="GET"){
+        call_user_func("get::".$path);
+    }elseif ($rm==="POST"){
+        call_user_func("post::".$path);
+    }else{
+        die("不允许的请求方法");
+    }*/
 }
 
 //获取当前虚拟地址
