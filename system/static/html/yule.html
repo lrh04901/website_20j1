@@ -33,9 +33,15 @@
     input.cstm-button-laoba{
         background: url({IMG_laoba_jpg});
     }
+    @font-face {
+        font-family: 'Iceland';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Iceland'), local('Iceland-Regular'), url({FONT_iceland_woff}) format('woff');
+    }
 </style>
 <div class="kunyueqi">
-    <details>
+    <details open>
         <summary>鲲乐器</summary>
         <div class="box">
             <input class="cstm-button-cxk" type="button" id="ji" value="鸡">
@@ -54,7 +60,7 @@
 </div>
 
 <div class="bayueqi">
-    <details>
+    <details open>
         <summary>八音盒</summary>
         <div class="box">
             <input class="cstm-button-laoba" type="button" id="o1" value="呕1">
