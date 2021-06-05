@@ -1,4 +1,4 @@
-[![star](https://gitee.com/schlibra/website_20j1/badge/star.svg?theme=dark)](https://gitee.com/schlibra/website_20j1/stargazers)
+[![star](https://gitee.com/schlibra/website_20j1/badge/star.svg?theme=gold)](https://gitee.com/schlibra/website_20j1/stargazers)
 
 # 20计1展示网站
 
