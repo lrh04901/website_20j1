@@ -6,43 +6,25 @@
     <br>
 </div>
 <div class="container">
-    <br><br><br>
-    <div id="list" class="uploader-list"></div>
-    <div class="btns">
-        <div id="picker">选择文件</div>
-        <button id="ctlBtn" class="btn btn-default">开始上传</button>
+    <br>
+    <div id="progress">
+        <div id="finish" style="width: 0%;" progress="0"></div>
+    </div>
+    <br>
+    <div id="form">
+        <input type="file" name="file" id="file"><br>
+        <input type="button" value="停止" id="stop">
     </div>
 </div>
 <script>
-    var option = {
-        file_data_name: "file",
-        // chunk_size:0,
-        filters:{
-            mime_types:[
-                {
-                    title : 'XC包文件',
-                    extensions : 'xcpak'
-                }
-            ]
-        },
-        responseHandler: function (object){
-            if (object.response==="successful"){
-                console.log("上传成功");
-                applyUpdate();
-            }else if (object.response==="unsuccessful"){
-                console.log("上传失败");
-            }else {
-                console.log("未知错误："+object.response);
-            }
-        }
-    };
-    $("#uploader").uploader(option);
-    function applyUpdate(){
-        $.post("./?/applyUpdate",function (data) {
-            // console.log(data);
-            alert(data);
-            location.reload();
-        })
-    }
+    let upload = new Upload();
+    $("#file").change(function () {
+        upload.addFileAndSend(this);
+    });
+    $("#stop").click(function () {
+        this.value = "停止中";
+        upload.stop();
+        this.value = "已停止";
+    });
 </script>
 </body>
