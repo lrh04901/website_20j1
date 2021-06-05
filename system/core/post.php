@@ -10,21 +10,9 @@ class post
             }
             mkdir("data");
         }
-        $log = "临时目录：".sys_get_temp_dir() . "\r\n";
-        $log.="POST变量：".json_encode($_POST)."\r\n";
-        $log.="FILE变量：".json_encode($_FILES)."\r\n";
-        $log.="REQUEST变量：".json_encode($_REQUEST)."\r\n";
-        $log.="TEMP目录下的文件：".json_encode(scandir(sys_get_temp_dir()))."\r\n";
-        $log.=file_exists($_FILES["file"]["tmp_name"])?"文件存在\r\n":"文件不存在\r\n";
-        $log.=file_exists($_FILES["file"]["tmp_name"]."1")?"分片1存在\r\n":"分片1不存在\r\n";
-        if (move_uploaded_file($_FILES["file"]["tmp_name"],"data/update.xcpak")){
-            $log.="上传成功\r\n";
-            echo "successful";
-        }else{
-            $log.="上传失败\r\n";
-            echo "unsuccessful";
-        }
-        file_put_contents("data/upload.log",$log);
+        $upload = new uploader($_FILES['file']['tmp_name'],$_POST['blob_num'],$_POST['total_blob_num'],$_POST['file_name']);
+        $a = $upload->apiReturn();
+        file_put_contents(DATA_PATH."upload.log",file_get_contents(DATA_PATH."upload.log").$a."\n");
     }
     public static function applyUpdate(){
         xcpak::decode("./data/update.xcpak",PATH);

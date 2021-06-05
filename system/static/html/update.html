@@ -6,50 +6,25 @@
     <br>
 </div>
 <div class="container">
-    <br><br><br>
-    <div id='uploader' class="uploader" data-ride="uploader" data-url="?/uploadUpdate">
-        <div class="uploader-message text-center">
-            <div class="content"></div>
-            <button type="button" class="close">×</button>
-        </div>
-        <div class="uploader-files file-list file-list-lg" data-drag-placeholder="拖拽一个XCPAK文件到这里或者点击上传"></div>
-        <div class="uploader-actions">
-            <div class="uploader-status pull-right text-muted"></div>
-            <button type="button" class="btn btn-link uploader-btn-browse"><i class="icon icon-plus"></i> {TEXT_UPLOAD_CHOOSE_FILE}</button>
-            <button type="button" class="btn btn-link uploader-btn-start"><i class="icon icon-cloud-upload"></i> {TEXT_UPLOAD_START_UPLOAD}</button>
-        </div>
+    <br>
+    <div id="progress">
+        <div id="finish" style="width: 0%;" progress="0"></div>
+    </div>
+    <br>
+    <div id="form">
+        <input type="file" name="file" id="file"><br>
+        <input type="button" value="停止" id="stop">
     </div>
 </div>
 <script>
-    var option = {
-        file_data_name: "file",
-        // chunk_size:0,
-        filters:{
-            mime_types:[
-                {
-                    title : 'XC包文件',
-                    extensions : 'xcpak'
-                }
-            ]
-        },
-        responseHandler: function (object){
-            if (object.response==="successful"){
-                console.log("上传成功");
-                applyUpdate();
-            }else if (object.response==="unsuccessful"){
-                console.log("上传失败");
-            }else {
-                console.log("未知错误："+object.response);
-            }
-        }
-    };
-    $("#uploader").uploader(option);
-    function applyUpdate(){
-        $.post("./?/applyUpdate",function (data) {
-            // console.log(data);
-            alert(data);
-            location.reload();
-        })
-    }
+    let upload = new Upload();
+    $("#file").change(function () {
+        upload.addFileAndSend(this);
+    });
+    $("#stop").click(function () {
+        this.value = "停止中";
+        upload.stop();
+        this.value = "已停止";
+    });
 </script>
 </body>
