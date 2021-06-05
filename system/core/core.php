@@ -15,6 +15,7 @@ function initialize()
     loadComponent("fileDBTool");//加载文件数据库模块
     loadComponent("mysqlTool");//加载MySQL数据库模块
     loadComponent("xcpak");//加载XC包模块
+    loadComponent("uploader");//加载上传模块
 }
 //运行网站
 function runWeb()
@@ -109,10 +110,6 @@ function loadHead(string $title, array $extraFile = null): void
 function loadBody($name, $args = null)
 {
     $value = file_get_contents(HTML_PATH . $name . ".html");
-    for ($i = 0; $i < count(L); $i++) {
-        $key = array_keys(L)[$i];
-        $value = str_replace("{TEXT_" . $key . "}", L[$key], $value);
-    }
     if ($args) {
         for ($i = 0; $i < count($args); $i++) {
             $key = array_keys($args)[$i];
@@ -120,6 +117,7 @@ function loadBody($name, $args = null)
         }
     }
     $value = link_process($value);
+    $value = str_replace("{nav}",link_process(file_get_contents(HTML_PATH."nav.html")),$value);
     echo $value;
 }
 function link_process($input):string{
@@ -128,6 +126,10 @@ function link_process($input):string{
     $args_list = array();
     $args_index = 0;
     $left = false;
+    for ($i = 0; $i < count(L); $i++) {
+        $key = array_keys(L)[$i];
+        $value = str_replace("{TEXT_" . $key . "}", L[$key], $value);
+    }
     while (true) {
         $t = substr($value, $index, 1);
         $index++;
