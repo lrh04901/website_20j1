@@ -1,3 +1,5 @@
+[![star](https://gitee.com/schlibra/website_20j1/badge/star.svg?theme=dark)](https://gitee.com/schlibra/website_20j1/stargazers)
+
 # 20计1展示网站
 
 网站用于展示班级以及班级内同学的风貌
