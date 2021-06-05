@@ -1,4 +1,4 @@
-<a href='https://gitee.com/schlibra/website_20j1' align='right'><img src='https://gitee.com/schlibra/website_20j1/widgets/widget_1.svg?color=c71d23' alt='Fork me on Gitee'></img></a>
+<div align='right'><a href='https://gitee.com/schlibra/website_20j1'><img src='https://gitee.com/schlibra/website_20j1/widgets/widget_1.svg?color=c71d23' alt='Fork me on Gitee'></img></a></div>
 
 [![star](https://gitee.com/schlibra/website_20j1/badge/star.svg?theme=white)](https://gitee.com/schlibra/website_20j1/stargazers)
 
