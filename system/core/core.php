@@ -17,15 +17,16 @@ function initialize()
     loadComponent("xcpak");//加载XC包模块
     loadComponent("uploader");//加载上传模块
 }
+
 //运行网站
 function runWeb()
 {
     $rm = strtolower($_SERVER["REQUEST_METHOD"]);
-    $path = substr(getPath(),1);
-    if (!$path){
-        $path="index";
+    $path = substr(getPath(), 1);
+    if (!$path) {
+        $path = "index";
     }
-    call_user_func($rm."::".$path);
+    call_user_func($rm . "::" . $path);
 }
 
 //获取当前虚拟地址
@@ -50,7 +51,7 @@ function getPath()
     if ($c == "") {
         $c = "/";//地址未空时变为/
     }
-    if (substr($c,0,1)!="/"){
+    if (substr($c, 0, 1) != "/") {
         header("Location:./?/");
     }
     return $c;//返回地址
@@ -61,13 +62,13 @@ function loadComponent($name)
 {
     if (defined("CORE_PATH")) {
         $component_path = CORE_PATH . $name . ".php";
-    }else{
+    } else {
         $component_path = "system/core/" . $name . ".php";
     }
     if (file_exists($component_path)) {
         include($component_path);
-    }else{
-        echo "<b style='color: red'>没有找到组件：".$name."</b>";
+    } else {
+        echo "<b style='color: red'>没有找到组件：" . $name . "</b>";
         die();
     }
 }
@@ -93,10 +94,10 @@ function loadHead(string $title, array $extraFile = null): void
             $css = $extraFile["css"];
             for ($i = 0; $i < count($css); $i++) {
                 $t = $css[$i];
-                if (is_string($t)){
-                    echo "<link href='".CSS_PATH.$t.".css' rel='stylesheet' type='text/css'>";
-                }elseif (is_array($t)){
-                    echo "<link href='".CSS_PATH.$t[0].".css' rel='stylesheet' type='text/css' ".$t[1].">";
+                if (is_string($t)) {
+                    echo "<link href='" . CSS_PATH . $t . ".css' rel='stylesheet' type='text/css'>";
+                } elseif (is_array($t)) {
+                    echo "<link href='" . CSS_PATH . $t[0] . ".css' rel='stylesheet' type='text/css' " . $t[1] . ">";
                 }
             }
         }
@@ -117,10 +118,12 @@ function loadBody($name, $args = null)
         }
     }
     $value = link_process($value);
-    $value = str_replace("{nav}",link_process(file_get_contents(HTML_PATH."nav.html")),$value);
+    $value = str_replace("{nav}", link_process(file_get_contents(HTML_PATH . "nav.html")), $value);
     echo $value;
 }
-function link_process($input):string{
+
+function link_process($input): string
+{
     $value = $input;
     $index = 0;
     $args_list = array();
@@ -142,8 +145,8 @@ function link_process($input):string{
             $args_index++;
         }
         if ($left) {
-            if ($t===" "||$t==="\r"||$t==="\n"){
-                $left=false;
+            if ($t === " " || $t === "\r" || $t === "\n") {
+                $left = false;
                 continue;
             }
             $args_list[$args_index] .= $t;
@@ -159,14 +162,14 @@ function link_process($input):string{
         } elseif ($x[0] === "LINK") {
             $path = substr($x[1], 0, 1) === "/" ? $x[1] : "/" . $x[1];
             $value = str_replace("{" . $item . "}", "./?" . $path, $value);
-        }elseif ($x[0]==="JS"){
-            $value = str_replace("{".$item."}",JS_PATH.$x[1].".js",$value);
-        }elseif ($x[0]==="MEDIA"){
-            $value = str_replace("{".$item."}",MEDIA_PATH.$x[1].".".$x[2],$value);
-        }elseif ($x[0]==="AUDIO"){
-            $value = str_replace("{".$item."}",AUDIO_PATH.$x[1].".".$x[2],$value);
-        }elseif ($x[0]==="FONT"){
-            $value = str_replace("{".$item."}",FONT_PATH.$x[1].".".$x[2],$value);
+        } elseif ($x[0] === "JS") {
+            $value = str_replace("{" . $item . "}", JS_PATH . $x[1] . ".js", $value);
+        } elseif ($x[0] === "MEDIA") {
+            $value = str_replace("{" . $item . "}", MEDIA_PATH . $x[1] . "." . $x[2], $value);
+        } elseif ($x[0] === "AUDIO") {
+            $value = str_replace("{" . $item . "}", AUDIO_PATH . $x[1] . "." . $x[2], $value);
+        } elseif ($x[0] === "FONT") {
+            $value = str_replace("{" . $item . "}", FONT_PATH . $x[1] . "." . $x[2], $value);
         }
     }
     return $value;
