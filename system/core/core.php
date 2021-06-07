@@ -175,7 +175,7 @@ function link_process($input): string
     return $value;
 }
 
-function clearConsole()
+/*function clearConsole()
 {
     echo "<script>console.clear();</script>";
-}
+}*/
