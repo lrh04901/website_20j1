@@ -1,6 +1,5 @@
 <body>
-<!--===========header===========-->
-{nav}
+
 
 <style>
     input.cstm-button-cxk {
@@ -15,10 +14,18 @@
         font-weight: 400;
         src: local('Iceland'), local('Iceland-Regular'), url({FONT_iceland_woff}) format('woff');
     }
+
+    h2{
+        position: absolute;
+        top: 11vh;
+    }
 </style>
+
+<h2>请用Chrome 和 Safari 6以上版本的浏览器阅读本页面<br>火狐、IE、Opera浏览器无法阅读本页面</h2>
+
 <div class="kunyueqi">
     <details open>
-        <summary>鲲乐器</summary>
+        <summary id="kyq">鲲乐器</summary>
         <div class="box">
             <input class="cstm-button-cxk" type="button" id="ji" value="鸡">
             <input class="cstm-button-cxk" type="button" id="ni" value="你">
@@ -37,7 +44,7 @@
 
 <div class="bayueqi">
     <details open>
-        <summary>八音盒</summary>
+        <summary id="byh">八音盒</summary>
         <div class="box">
             <input class="cstm-button-laoba" type="button" id="o1" value="呕1">
             <input class="cstm-button-laoba" type="button" id="o2" value="呕2">
@@ -51,6 +58,10 @@
     </details>
 </div>
 
+<!--===========header===========-->
+{nav}
+
+<main></main>
 
 <script>
     //数据定义区域
@@ -75,6 +86,39 @@
     ll_mp3 ='{AUDIO_ll_mp3}';
     fr_mp3 ='{AUDIO_fr_mp3}';
 </script>
+
+<script type="text/javascript">
+    console.log("菜单按钮事件");
+    console.log("制作人:20计1 25 陆睿涵");
+    let burger = document.querySelector(".burger");
+    let navMenu = document.querySelector(".nav-list");
+    let navMenuItems = document.querySelectorAll(".nav-list li");
+    let widthHr = document.querySelector(".triangle");
+    // console.info(burger);
+    burger.addEventListener("click", function ()  {
+        burger.classList.toggle("active");
+        navMenu.classList.toggle("open");
+        navMenuItems.forEach((item, index) => {
+            if (item.style.animation) {
+                item.style.animation = "";
+            } else {
+                item.style.animation = `0.3s ease-in slideIn forwards ${index *
+                0.1 +
+                0.3}s`;
+            }
+        });
+        /*widthHr.style.width = 250px;*/
+    },false);
+</script>
+
+<script>
+  let myHover = document.querySelector('#kyq');
+  myHover.addEventListener("click",function () {
+      let styleChange = document.querySelector('.bayueqi');
+      styleChange.style.transition = "all 0.5s";
+  },false);
+</script>
+
 <script>
     $('#ji').click(function () {
         new Audio(ji_mp3).play();

@@ -10,6 +10,12 @@
     src: local('Iceland'), local('Iceland-Regular'), url(http://themes.googleusercontent.com/static/fonts/iceland/v3/F6LYTZLHrG9BNYXRjU7RSw.woff) format('woff');
 }*/
 
+/*body{
+    background:linear-gradient(#243949,#517fa4);
+    background:linear-gradient(#fff1eb,#ace0f9);
+    opacity:0.7;
+}*/
+
 nav {
     position: sticky;
     top: 0;
@@ -61,7 +67,7 @@ nav {
     display: none;
 }
 
-@media screen and (max-width: 890px) {
+@media screen and (max-width: 1250px) {
     .burger {
         display: block;
     }
@@ -115,6 +121,11 @@ nav {
     }
 }
 
+details summary{
+    outline: none;
+    cursor: pointer;
+    user-select: none;
+}
 
 #ji,#ni,#tai,#mei,#wcadlq,#a,#chang,#tiao,#rap,#lq,#zwjs,#o1,#o2,#o3,#fr,#lgm,#ll,#mbp,#nm,#xhb{
     width: 100px;
@@ -158,11 +169,36 @@ nav {
 
 .kunyueqi{
     position: absolute;
-    top: 20vh;
+    top: 22vh;
 }
+
+
 .bayueqi{
-    top: 40vh;
     position: absolute;
+    top: 45vh;
+    transition: all 0.5s;
+}
+
+@media screen and (max-width: 1252px){
+    .bayueqi{
+        position: absolute;
+        top: 50vh;
+    }
+}
+
+@media screen and (max-width: 1157px){
+    .bayueqi{
+        position: absolute;
+        top: 65vh;
+    }
+}
+
+
+@media screen and (max-width: 670px){
+    .bayueqi{
+        position: absolute;
+        top: 75vh;
+    }
 }
 
 summary{
@@ -171,86 +207,50 @@ summary{
     -moz-transition: all 0.5s;
     transition: all 0.5s;
     font-size:1.5em;
-    color:#228DFF;
-    font-family:Iceland;
+    color: #69FF97;
+    font-family: Onyx;
 }
 
 summary:hover{
-    -webkit-animation: neon2 1.5s ease-in-out infinite alternate;
-    -moz-animation: neon2 1.5s ease-in-out infinite alternate;
-    animation: neon2 1.5s ease-in-out infinite alternate;
+    -webkit-animation: textColor 1.6s ease-in-out infinite alternate;
+    -moz-animation:  textColor 1.6s ease-in-out infinite alternate;
+    animation: textColor 1.6s ease-in-out infinite alternate;
 }
 
-@-webkit-keyframes neon2 {
+@keyframes textColor {
     from {
-        text-shadow: 0 0 10px #fff,
-        0 0 10px  #fff,
-        0 0 20px  #fff,
-        0 0 30px  #228DFF,
-        0 0 60px  #228DFF,
-        0 0 70px  #228DFF,
-        0 0 80px #228DFF,
-        0 0 120px #228DFF;
+        text-shadow: 10px 10px 20px 5px #9ebba3;
+        color: #69FF97;
     }
-    to {
-        text-shadow: 0 0 5px #fff,
-        0 0 10px #fff,
-        0 0 15px #fff,
-        0 0 20px #228DFF,
-        0 0 35px #228DFF,
-        0 0 40px #228DFF,
-        0 0 50px #228DFF,
-        0 0 75px #228DFF;
+    to{
+        text-shadow: 10px 10px 20px 5px #09fff5;
+        color: #00E4FF;
     }
 }
 
-@-moz-keyframes neon2 {
+@-webkit-keyframes textColor {
     from {
-        text-shadow: 0 0 10px #fff,
-        0 0 10px  #fff,
-        0 0 20px  #fff,
-        0 0 30px  #228DFF,
-        0 0 60px  #228DFF,
-        0 0 70px  #228DFF,
-        0 0 80px #228DFF,
-        0 0 120px #228DFF;
+        text-shadow: 50px 50px 100px 25px #9ebba3;
+        color: #69FF97;
     }
-    to {
-        text-shadow: 0 0 5px #fff,
-        0 0 5px #fff,
-        0 0 10px #fff,
-        0 0 15px #228DFF,
-        0 0 25px #228DFF,
-        0 0 30px #228DFF,
-        0 0 40px #228DFF,
-        0 0 60px #228DFF;
+    to{
+        text-shadow: 50px 50px 100px 25px #09fff5;
+        color: #00E4FF;
     }
 }
 
-@keyframes neon2 {
+@-moz-keyframes textColor {
     from {
-        text-shadow: 0 0 10px #fff,
-        0 0 10px  #fff,
-        0 0 20px  #fff,
-        0 0 30px  #228DFF,
-        0 0 60px  #228DFF,
-        0 0 70px  #228DFF,
-        0 0 80px #228DFF,
-        0 0 120px #228DFF;
+        text-shadow: 50px 50px 100px 25px #9ebba3;
+        color: #69FF97;
     }
-    to {
-        text-shadow: 0 0 5px #fff,
-        0 0 5px #fff,
-        0 0 8px #fff,
-        0 0 10px #228DFF,
-        0 0 25px #228DFF,
-        0 0 20px #228DFF,
-        0 0 35px #228DFF,
-        0 0 60px #228DFF;
+    to{
+        text-shadow: 50px 50px 100px 25px #09fff5;
+        color: #00E4FF;
     }
 }
 
-@media (max-width: 650px) {
+@media (max-width: 1250px) {
 
     .kunyueqi{
         width: 100%;
@@ -260,4 +260,11 @@ summary:hover{
         font-size:3.5em;
     }
 
+}
+
+main {
+    width: 100vw;
+    height: calc(100vh - 80px);
+    background:linear-gradient(#fff1eb,#ace0f9);
+    background-size: cover;
 }
