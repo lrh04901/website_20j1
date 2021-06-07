@@ -121,11 +121,11 @@ nav {
     }
 }
 
-details summary{
+/*details summary{
     outline: none;
     cursor: pointer;
     user-select: none;
-}
+}*/
 
 #ji,#ni,#tai,#mei,#wcadlq,#a,#chang,#tiao,#rap,#lq,#zwjs,#o1,#o2,#o3,#fr,#lgm,#ll,#mbp,#nm,#xhb{
     width: 100px;
@@ -179,7 +179,7 @@ details summary{
     transition: all 0.5s;
 }
 
-@media screen and (max-width: 1252px){
+/*@media screen and (max-width: 1252px){
     .bayueqi{
         position: absolute;
         top: 50vh;
@@ -199,9 +199,9 @@ details summary{
         position: absolute;
         top: 76vh;
     }
-}
+}*/
 
-summary{
+/*summary{
     text-decoration:none;
     -webkit-transition: all 0.5s;
     -moz-transition: all 0.5s;
@@ -248,7 +248,7 @@ summary:hover{
         text-shadow: 50px 50px 100px 25px #09fff5;
         color: #00E4FF;
     }
-}
+}*/
 
 @media (max-width: 1250px) {
 
