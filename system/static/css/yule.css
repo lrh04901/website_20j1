@@ -67,7 +67,7 @@ nav {
     display: none;
 }
 
-@media screen and (max-width: 1250px) {
+@media screen and (max-width: 1300px) {
     .burger {
         display: block;
     }
@@ -250,7 +250,7 @@ summary:hover{
     }
 }
 
-@media (max-width: 1250px) {
+@media (max-width: 1300px) {
 
     .kunyueqi{
         width: 100%;
