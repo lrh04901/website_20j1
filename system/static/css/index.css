@@ -53,6 +53,11 @@ nav {
     text-shadow: 1px 1px 1px #a5a5a5;
     text-decoration: none;
     color: #1d1d1d;
+    transition: 0.3s;
+}
+
+.nav-list li a:hover{
+    color: #fff;
 }
 
 .burger div{

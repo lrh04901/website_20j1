@@ -25,4 +25,10 @@ class get
         loadHead("娱乐", ["css" => [["yule", "media=\"screen\""]]]);
         loadBody("yule");
     }
+
+    public static  function Page404()
+    {
+        loadHead("404 Not Found", ["css" => [["Page404", "media=\"screen\""]]]);
+        loadBody("Page404");
+    }
 }

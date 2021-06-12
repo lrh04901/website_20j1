@@ -43,6 +43,11 @@ nav{
     text-shadow: 1px 1px 1px #a5a5a5;
     text-decoration: none;
     color: #1d1d1d;
+    transition: 0.3s;
+}
+
+.nav-list li a:hover{
+    color: #fff;
 }
 
 .burger div{
@@ -125,6 +130,7 @@ nav{
 }
 
 .intro-img{
+    margin: 0 45%;
     position: absolute;
     top: -5vh;
     flex: 1;
@@ -154,7 +160,7 @@ main{
 }
 
 .intro-article{
-    margin-left: 3%;
+    margin: 0 3%;
     font-family: Onyx;
     font-weight: lighter;
     line-height: 35px;

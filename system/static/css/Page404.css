@@ -7,13 +7,20 @@ body {
 
 h1{
     font-size: 85px;
-    color: #fff;
+    color: #000000;
     letter-spacing: 8px;
     text-align: center;
+    text-decoration: none;
     position: absolute;
     top: 30%;
     left: 35%;
     right: 30%;
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+}
+
+h1:hover{
+    color: #fff;
 }
 
 .snow {
