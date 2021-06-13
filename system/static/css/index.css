@@ -71,7 +71,7 @@ nav {
     display: none;
 }
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1450px) {
     .burger {
         display: block;
     }
