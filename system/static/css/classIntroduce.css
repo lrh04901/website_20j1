@@ -6,6 +6,11 @@
     font-family:"Microsoft YaHei UI", sans-serif , simHei , Onyx;
 }
 
+html {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
 nav{
     position: sticky;
     top: 0;

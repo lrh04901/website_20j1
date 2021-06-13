@@ -16,6 +16,11 @@
     opacity:0.7;
 }*/
 
+html {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
 nav {
     position: sticky;
     top: 0;
