@@ -20,10 +20,13 @@
         - define.php `常量定义模块`
         - encryptTool.php `加密模块`
         - fileDBTool.php `文件数据库模块`
+        - fileTool.php `文件处理模块`
         - get.php `GET模块`
         - language.php `语言模块`
         - mysqlTool.php `MySQL数据库模块`
         - post.php `POST模块`
+        - uploader.php `上传处理模块`
+        - xcpak.php `更新包处理模块`
     - static `静态文件路径`
         - css `CSS路径`
             - index.css `首页的CSS文件`
