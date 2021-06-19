@@ -1,7 +1,7 @@
 <?php
 include "redirect.php";
 /**
- * <h4>Core模块</h4>
+ * class core
  * <p>核心模块，用于加载其余模块、加载网页等</p>
  */
 class core
