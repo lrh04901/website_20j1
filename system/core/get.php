@@ -35,8 +35,8 @@ class get
                         $js[count($js)] = $item;
                     }
                 }
-                loadHead($title, ["css" => $css, "js" => $js]);
-                loadBodyByText($html);
+                core::loadHead($title, ["css" => $css, "js" => $js]);
+                core::loadBodyByText($html);
             } else {
                 if (explode("=", $args_array[0])[0] == "function"){
                     $a = trim(explode("=", $args_array[0])[1]);
@@ -44,7 +44,7 @@ class get
                 }
             }
         }else{
-            loadErrorPage("无法加载","当前页面存在一些问题，所以你暂时无法访问这个页面。");
+            core::loadErrorPage("无法加载","当前页面存在一些问题，所以你暂时无法访问这个页面。");
         }
     }
     /*public static function index()
@@ -74,12 +74,12 @@ class get
 //        loadHead("娱乐", ["css" => [["yule", "media=\"screen\""]],"js"=>["jquery"]]);
 //        loadBody("yule");
     }*/
-
+/*
     public static  function Page404()
     {
-        loadHead("404 Not Found", ["css" => [["Page404", "media=\"screen\""]]]);
+        core::loadHead("404 Not Found", ["css" => [["Page404", "media=\"screen\""]]]);
         loadBody("Page404");
-    }
+    }*/
 
     public static function setLang(){
         $lang = argsTool::get("lang");
