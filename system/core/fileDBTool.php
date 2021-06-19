@@ -1,6 +1,9 @@
 <?php
 include "redirect.php";
 
+/**
+ * 文件数据库模块
+ */
 class fileDBTool
 {
     public static function createTable(string $tableName, array $cols): array
