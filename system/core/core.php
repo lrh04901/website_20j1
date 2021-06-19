@@ -1,12 +1,16 @@
 <?php
 include "redirect.php";
+
 /**
  * 核心模块，用于加载其余模块、加载网页等
  */
 class core
 {
-    //初始化
-    public static function initialize()
+    /**
+     * <p>初始化程序，加载一些需要的模块</p>
+     * @return void
+     */
+    public static function initialize():void
     {
         self::loadComponent("define");//加载定义模块
         self::loadComponent("get");//加载get请求模块
