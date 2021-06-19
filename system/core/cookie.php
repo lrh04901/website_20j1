@@ -10,8 +10,8 @@ class cookie
 {
     /**
      * @param $name "数据名"
-     * @param $value
-     * @return cookie
+     * @param $value "数据内容"
+     * @return cookie 返回cookie对象，可以用于连续操作
      */
     static function set($name, $value):cookie
     {
@@ -19,6 +19,10 @@ class cookie
         return new cookie();
     }
 
+    /**
+     * @param $name
+     * @return mixed|null
+     */
     static function get($name)
     {
         if (isset($_COOKIE[$name])) {
