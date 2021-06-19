@@ -1,17 +1,19 @@
 <?php
 include "redirect.php";
+
 class get
 {
     //Array ( [0] => title=更新站点 [1] => css=zui.min,zui.uploader.min,update [2] => js=zui.uploader.min,webuploader.min,update [3] => )
-    public static function load(string $name){
-        $html = file_get_contents(HTML_PATH.$name.".html");
-        $args = strstr($html,"\n",true);
+    public static function load(string $name)
+    {
+        $html = file_get_contents(HTML_PATH . $name . ".html");
+        $args = strstr($html, "\n", true);
         $html = str_replace($args, "", $html);
-        for ($i = 0;$i<count(L);$i++){
+        for ($i = 0; $i < count(L); $i++) {
             $key = array_keys(L)[$i];
-            $args = str_replace("{".$key."}",L[$key],$args);
+            $args = str_replace("{" . $key . "}", L[$key], $args);
         }
-        if (substr($args,0,4)=="<!--") {
+        if (substr($args, 0, 4) == "<!--") {
             $args = str_replace("<!--", "", str_replace("-->", "", $args));
             $args = trim($args, " ");
             $args_array = explode(";", $args);
@@ -38,13 +40,13 @@ class get
                 core::loadHead($title, ["css" => $css, "js" => $js]);
                 core::loadBodyByText($html);
             } else {
-                if (explode("=", $args_array[0])[0] == "function"){
+                if (explode("=", $args_array[0])[0] == "function") {
                     $a = trim(explode("=", $args_array[0])[1]);
                     call_user_func("get::$a");
                 }
             }
-        }else{
-            core::loadErrorPage("无法加载","当前页面存在一些问题，所以你暂时无法访问这个页面。");
+        } else {
+            core::loadErrorPage("无法加载", "当前页面存在一些问题，所以你暂时无法访问这个页面。");
         }
     }
     /*public static function index()
@@ -74,17 +76,18 @@ class get
 //        loadHead("娱乐", ["css" => [["yule", "media=\"screen\""]],"js"=>["jquery"]]);
 //        loadBody("yule");
     }*/
-/*
-    public static  function Page404()
-    {
-        core::loadHead("404 Not Found", ["css" => [["Page404", "media=\"screen\""]]]);
-        loadBody("Page404");
-    }*/
+    /*
+        public static  function Page404()
+        {
+            core::loadHead("404 Not Found", ["css" => [["Page404", "media=\"screen\""]]]);
+            loadBody("Page404");
+        }*/
 
-    public static function setLang(){
+    public static function setLang()
+    {
         $lang = argsTool::get("lang");
         $from = argsTool::get("from");
-        cookie::set("local_language",$lang);
-        header("Location:./?/".$from);
+        cookie::set("local_language", $lang);
+        header("Location:./?/" . $from);
     }
 }

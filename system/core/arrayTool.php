@@ -12,7 +12,7 @@ class arrayTool
      * @param object $value 需要插入的数据
      * @return array 返回新的数组
      */
-    static function add(array $array,object $value):array
+    static function add(array $array, object $value): array
     {
         $temp = array();
         for ($i = 0; $i <= count($array); $i++) {
@@ -31,7 +31,7 @@ class arrayTool
      * @param object $value 需要删除的数据
      * @return array 返回新的数组
      */
-    static function remove(array $array,object $value):array
+    static function remove(array $array, object $value): array
     {
         $temp = array();
         $index = 0;
@@ -55,7 +55,7 @@ class arrayTool
      * @param array $array 需要处理的数组
      * @return array 返回新的数组
      */
-    static function removeFirst(array $array):array
+    static function removeFirst(array $array): array
     {
         $temp = array();
         for ($i = 1; $i < count($array); $i++) {
@@ -70,7 +70,7 @@ class arrayTool
      * @param int $index 需要删除的索引
      * @return array 返回新的数组
      */
-    static function removeByIndex(array $array,int $index):array
+    static function removeByIndex(array $array, int $index): array
     {
         $newArray = array();
         for ($i = 0; $i < count($array); $i++) {

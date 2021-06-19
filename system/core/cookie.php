@@ -1,9 +1,9 @@
 <?php
 include "redirect.php";
+
 /**
  * Cookie处理模块，将一些数据存储至浏览器中
  */
-
 class cookie
 {
     /**
@@ -12,7 +12,7 @@ class cookie
      * @param string $value 数据内容
      * @return cookie 返回cookie对象，用于连续操作
      */
-    static function set(string $name, string $value):cookie
+    static function set(string $name, string $value): cookie
     {
         setcookie($name, $value);
         return new cookie();
@@ -37,7 +37,7 @@ class cookie
      * @param string $name 数据名
      * @return cookie 返回cookie对象，用于连续操作
      */
-    static function delete(string $name):cookie
+    static function delete(string $name): cookie
     {
         setcookie($name, "", 0);
         return new cookie();

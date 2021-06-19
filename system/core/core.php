@@ -10,7 +10,7 @@ class core
      * 初始化程序，加载一些模块，并进行一些配置
      * @return void
      */
-    public static function initialize():void
+    public static function initialize(): void
     {
         self::loadComponent("define");//加载定义模块
         self::loadComponent("get");//加载get请求模块
@@ -30,7 +30,7 @@ class core
      * 加载网页，根据不同请求方式及请求路径加载不同的代码
      * @return void
      */
-    public static function runWeb():void
+    public static function runWeb(): void
     {
         $rm = strtolower($_SERVER["REQUEST_METHOD"]);
         $path = substr(self::getPath(), 1);
@@ -60,7 +60,7 @@ class core
      * 返回当前请求的虚拟地址
      * @return string 返回虚拟地址
      */
-    public static function getPath():string
+    public static function getPath(): string
     {
         $a = "/";//未加参数的情况
         if (isset($_SERVER['QUERY_STRING'])) {//指定地址参数时
@@ -92,7 +92,7 @@ class core
      * @param string $name 模块名
      * @return void
      */
-    public static function loadComponent(string $name):void
+    public static function loadComponent(string $name): void
     {
         if (defined("CORE_PATH")) {
             $component_path = CORE_PATH . $name . ".php";
@@ -102,7 +102,7 @@ class core
         if (file_exists($component_path)) {
             include($component_path);
         } else {
-            self::loadErrorPage("网站加载失败","<b style='color: red'>没有找到组件：" . $name . "</b>");
+            self::loadErrorPage("网站加载失败", "<b style='color: red'>没有找到组件：" . $name . "</b>");
             die();
         }
     }
@@ -152,7 +152,7 @@ class core
      * @param array|null $args 页面参数，用于替换代码中的引用数据，优先级比link_process高
      * @return void
      */
-    public static function loadBody(string $name,array $args = null):void
+    public static function loadBody(string $name, array $args = null): void
     {
         $value = file_get_contents(HTML_PATH . $name . ".html");
         if ($args) {
@@ -171,7 +171,7 @@ class core
      * @param array|null $args 页面参数，用于替换代码中的引用数据，优先级比link_process高
      * @return void
      */
-    public static function loadBodyByText(string $content,array $args = null):void
+    public static function loadBodyByText(string $content, array $args = null): void
     {
         $value = $content;
         if ($args) {
@@ -190,7 +190,7 @@ class core
      * @param string $message 错误页面的消息
      * @return void
      */
-    public static function loadErrorPage(string $title, string $message):void
+    public static function loadErrorPage(string $title, string $message): void
     {
         self::loadHead($title);
         self::loadBody("error", ["ERROR_TITLE" => $title, "ERROR_CONTENT" => $message]);
@@ -259,7 +259,7 @@ class core
      * 清空浏览器控制台内容
      * @return void
      */
-    function clearConsole():void
+    function clearConsole(): void
     {
         echo "<script>console.clear();</script>";
     }

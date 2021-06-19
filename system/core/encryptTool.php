@@ -1,5 +1,6 @@
 <?php
 include "redirect.php";
+
 class encryptTool
 {
     //加密部分
@@ -71,11 +72,11 @@ class encryptTool
             $h[$i] = $i_c;//替换数组内的数据
         }
         $t = "";
-        for ($i = 0;$i<count($h);$i++){
-            $t.=$h[$i];
+        for ($i = 0; $i < count($h); $i++) {
+            $t .= $h[$i];
         }
-        $t.=$f;
-        $h=str_split($t);
+        $t .= $f;
+        $h = str_split($t);
         for ($i = 0; $i < count($h); $i++) {//对每一项进行混淆
             $a = chr(rand(ord("a"), ord("z")));//随机生成一个小写字母
             $A = chr(rand(ord("A"), ord("Z")));//随机生成一个大写字母
@@ -96,48 +97,48 @@ class encryptTool
     {
         $a = str_split($string);//拆开加密的数据
         $b = "";//创建一个空变量用于存储第一阶段的数据
-        for ($i = 0;$i<count($a);$i++){//对每一项进行处理
+        for ($i = 0; $i < count($a); $i++) {//对每一项进行处理
             $i_a = ord($a[$i]);//获取这一项的ASCII码
             $_a = ord("a");//a的ASCII码
             $_z = ord("z");//z的ASCII码
             $_A = ord("A");//A的ASCII码
             $_Z = ord("Z");//Z的ASCII码
-            if ($i_a <= $_z && $i_a >= $_a){
-                $b.="0";//将小写字母转换为0
-            }else if ($i_a <=$_Z&&$i_a>=$_A){
-                $b.="1";//将大写字母转换为1
+            if ($i_a <= $_z && $i_a >= $_a) {
+                $b .= "0";//将小写字母转换为0
+            } else if ($i_a <= $_Z && $i_a >= $_A) {
+                $b .= "1";//将大写字母转换为1
             }
         }
-        $c = substr($b,0,strlen($b)-8);//读取主数据
-        $d = substr($b,strlen($b)-8,8);//读取掩码数据
+        $c = substr($b, 0, strlen($b) - 8);//读取主数据
+        $d = substr($b, strlen($b) - 8, 8);//读取掩码数据
         $c_a = str_split($c);//将主数据拆开
         $c_b = str_split($d);//将掩码拆开
         $e = "";//空变量用于第二阶段
-        for ($i = 0;$i<count($c_a);$i++){//对每一项进行处理
+        for ($i = 0; $i < count($c_a); $i++) {//对每一项进行处理
             $i_a = $c_a[$i];//每一项的数据
-            $i_b = $c_b[$i%8];//对应位置的掩码
+            $i_b = $c_b[$i % 8];//对应位置的掩码
             $i_c = $i_a === $i_b ? "0" : "1";//反掩码计算
-            $e.=$i_c;//追加数据
+            $e .= $i_c;//追加数据
         }
-        $f = str_split($e,8);//将数据拆开
-        $g = str_split(substr(hash("sha256",$secret),0,strlen($secret)));
+        $f = str_split($e, 8);//将数据拆开
+        $g = str_split(substr(hash("sha256", $secret), 0, strlen($secret)));
         $h = "";//空变量用于第三阶段
-        for ($i = 0;$i<count($f);$i++){
+        for ($i = 0; $i < count($f); $i++) {
             $x_a = bindec($f[$i]);
-            $x_b = ord($g[$i%count($g)]);
-            $x_c = chr($x_a-$x_b);
-            $h.=$x_c;
+            $x_b = ord($g[$i % count($g)]);
+            $x_c = chr($x_a - $x_b);
+            $h .= $x_c;
         }
-        $m = str_split($h,2);
+        $m = str_split($h, 2);
         $n = "";
-        for ($i = 0;$i<count($m);$i++){
-            $i_a = chr(127-hexdec($m[$i]));
-            $n.=$i_a;
+        for ($i = 0; $i < count($m); $i++) {
+            $i_a = chr(127 - hexdec($m[$i]));
+            $n .= $i_a;
         }
         $o = base64_decode($n);
-        if ($return){
+        if ($return) {
             return $o;
-        }else{
+        } else {
             echo $o;
         }
     }

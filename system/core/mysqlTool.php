@@ -1,5 +1,6 @@
 <?php
 include "redirect.php";
+
 class mysqlTool
 {
     public static function createTable(string $tableName, array $cols): array

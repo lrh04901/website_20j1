@@ -1,8 +1,9 @@
 <?php
 include "redirect.php";
+
 class fileTool
 {
-    public static function createDir(string $path):bool
+    public static function createDir(string $path): bool
     {
         $aimUrl = str_replace('', '/', $path);
         $aimDir = '';

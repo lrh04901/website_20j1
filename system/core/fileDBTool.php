@@ -1,5 +1,6 @@
 <?php
 include "redirect.php";
+
 class fileDBTool
 {
     public static function createTable(string $tableName, array $cols): array
@@ -8,7 +9,7 @@ class fileDBTool
         return ["status" => "success"];
     }
 
-    public static function insert(string $tableName, array $keys, array $values):array
+    public static function insert(string $tableName, array $keys, array $values): array
     {
         $a = json_decode(encryptTool::decode(file_get_contents(FILE_DB_PATH . $tableName . "." . FILE_DB_POSTFIX), SECRET, true), true);
         $b = array();

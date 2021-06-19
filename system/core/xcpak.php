@@ -1,5 +1,6 @@
 <?php
 include "redirect.php";
+
 class xcpak
 {
     public static function encode($dir_path): string
@@ -36,7 +37,7 @@ class xcpak
         if (is_file($file_path)) {
             if (substr($file_path, strlen($file_path) - 5) === "xcpak") {
                 $data = file_get_contents($file_path);
-                file_put_contents(DATA_PATH."out.temp",$data);
+                file_put_contents(DATA_PATH . "out.temp", $data);
 //                echo $data[0];
 //                echo substr($data,0,5);
 //                echo $data;
@@ -142,7 +143,7 @@ class xcpak
         $c = substr(hash("sha256", $secret), 0, strlen($secret));
         $d = "";
         for ($i = 0; $i < strlen($a); $i += 2) {
-            $i_a = self::xor_num(hexdec($a[$i].$a[$i+1]), ord($c[($i / 2) % strlen($c)]));
+            $i_a = self::xor_num(hexdec($a[$i] . $a[$i + 1]), ord($c[($i / 2) % strlen($c)]));
             $i_b = self::xor_num($i_a, hexdec($b));
             $i_c = 255 - $i_b;
             $d .= chr($i_c);
@@ -198,7 +199,7 @@ class xcpak
     private static function applyData($data_array, $out_path)
     {
 //        echo "准备应用文件(夹)\n";
-        $dir = str_replace("\\","/",self::getDirFromPath($GLOBALS["path"]));
+        $dir = str_replace("\\", "/", self::getDirFromPath($GLOBALS["path"]));
 //    echo $dir."\n";
 //        if (is_dir($dir)) {
 //            echo "yes";
@@ -209,9 +210,9 @@ class xcpak
         $out_dir = $out_path === $GLOBALS["path"] ?: $out_path;
         foreach ($data_array as $item) {
 //        create_file($dir.$out_dir."out",$item[0]);
-            $a = $dir . $out_dir  . str_replace("/", "\\", $item[0]);
-            $a = str_replace("\\","/",$a);
-            self::setFileData($a,$item[2]);
+            $a = $dir . $out_dir . str_replace("/", "\\", $item[0]);
+            $a = str_replace("\\", "/", $a);
+            self::setFileData($a, $item[2]);
 //            echo $a . "\n";
 //            mkdir($a, 0777, true);
 //            rmdir($a);
@@ -228,19 +229,20 @@ class xcpak
         return str_replace($b, "", $path);
     }
 
-    private static function setFileData($path,$data){
-        $path_new=str_replace("\\","/",$path);
-        if (file_exists($path_new)){
-            if (is_dir($path_new)){
+    private static function setFileData($path, $data)
+    {
+        $path_new = str_replace("\\", "/", $path);
+        if (file_exists($path_new)) {
+            if (is_dir($path_new)) {
                 rmdir($path_new);
             }
-            if (is_file($path_new)){
+            if (is_file($path_new)) {
                 unlink($path_new);
             }
         }
         mkdir($path_new);//创建目录用来代替文件
         rmdir($path_new);//删除文件夹，此时保留中间的目录
         touch($path_new);//创建文件
-        file_put_contents($path_new,$data);//写入数据
+        file_put_contents($path_new, $data);//写入数据
     }
 }

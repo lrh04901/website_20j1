@@ -9,7 +9,7 @@ class dbTool
 
     private static function getDataBaseType(): string
     {//获取数据库类型
-        if (isset($_GET["debug"])||isset($_POST["debug"])) {
+        if (isset($_GET["debug"]) || isset($_POST["debug"])) {
             if ($_GET["debug"] === "yes" || $_POST["debug"] === "yes") {
                 return "file";
             }
@@ -17,14 +17,14 @@ class dbTool
         return json_decode(file_get_contents(CONFIG_PATH . "db_config.json"), true)['type'];
     }
 
-    public static function connectDB():array
+    public static function connectDB(): array
     {//连接数据库(用于MySQL)
         $a = json_decode(file_get_contents(CONFIG_PATH . "db_config.json"), true);
         $conn = mysqli_connect($a['host'], $a['user'], $a['pwd'], $a['name'], $a['port']);
-        if (!$conn){
-            return ["status"=>"fail","reason"=>mysqli_connect_error()];
-        }else{
-            return ["status"=>"success","conn"=>$conn];
+        if (!$conn) {
+            return ["status" => "fail", "reason" => mysqli_connect_error()];
+        } else {
+            return ["status" => "success", "conn" => $conn];
         }
     }
 
@@ -42,10 +42,10 @@ class dbTool
         $result = "";
         switch (self::getDataBaseType()) {
             case "file":
-                $result = fileDBTool::createTable($tableName,$cols);
+                $result = fileDBTool::createTable($tableName, $cols);
                 break;
             case "mysql":
-                $result = mysqlTool::createTable($tableName,$cols);
+                $result = mysqlTool::createTable($tableName, $cols);
                 break;
         }
         return $result;
@@ -56,10 +56,10 @@ class dbTool
         $result = "";
         switch (self::getDataBaseType()) {
             case "file":
-                $result = fileDBTool::insert($tableName,$keys,$values);
+                $result = fileDBTool::insert($tableName, $keys, $values);
                 break;
             case "mysql":
-                $result = mysqlTool::insert($tableName,$keys,$values);
+                $result = mysqlTool::insert($tableName, $keys, $values);
                 break;
         }
         return $result;
@@ -107,7 +107,7 @@ class dbTool
                 }
                 $a = "SELECT $k FROM $tableName $w;";
                 $conn = self::connectDB();
-                if ($conn["status"]==="success") {
+                if ($conn["status"] === "success") {
                     $r = mysqli_query($conn["conn"], $a);
                     if (!$r) {
                         $result = ["status" => "fail", "reason" => mysqli_error($conn["conn"])];
@@ -121,8 +121,8 @@ class dbTool
                     }
                     $result = ["status" => "success", "data" => $data];
 //                    print_r($result);
-                }else{
-                    $result = ["status"=>"fail","reason"=>$conn["reason"]];
+                } else {
+                    $result = ["status" => "fail", "reason" => $conn["reason"]];
                 }
                 break;
         }
@@ -159,7 +159,7 @@ class dbTool
             case "mysql":
                 $a = "DELETE FROM $tableName";
                 $c = self::connectDB();
-                if ($c["status"]==="success") {
+                if ($c["status"] === "success") {
                     if (count($where)) {
                         $a .= " WHERE ";
                         for ($i = 0; $i < count($where); $i++) {
@@ -172,8 +172,8 @@ class dbTool
                     } else {
                         $result = ["status" => "fail", "reason" => mysqli_error($c["conn"])];
                     }
-                }else{
-                    $result = ["status"=>"fail","reason"=>$c["reason"]];
+                } else {
+                    $result = ["status" => "fail", "reason" => $c["reason"]];
                 }
                 break;
         }
@@ -198,15 +198,15 @@ class dbTool
             case "mysql":
                 $a = "DROP TABLE $tableName";
                 $conn = self::connectDB();
-                if ($conn["status"]==="success") {
+                if ($conn["status"] === "success") {
                     $r = mysqli_query($conn["conn"], $a);
                     if (!$r) {
                         $result = ["status" => "fail", "reason" => mysqli_error($conn["conn"])];
                         return $result;
                     }
                     $result = ["status" => "success"];
-                }else{
-                    $result = ["status"=>"fail","reason"=>$conn["reason"]];
+                } else {
+                    $result = ["status" => "fail", "reason" => $conn["reason"]];
                 }
                 break;
         }
@@ -220,9 +220,9 @@ class dbTool
                 return file_exists(FILE_DB_PATH . $tableName . ".xcdb");
             case "mysql":
                 $conn = self::connectDB();
-                if ($conn["status"]==="success") {
+                if ($conn["status"] === "success") {
                     return mysqli_query($conn["conn"], "SELECT * FROM " . $tableName) ? true : false;
-                }else{
+                } else {
                     return false;
                 }
         }
@@ -237,7 +237,7 @@ class dbTool
                 $h = self::getTableHead($a);
                 for ($i = 1; $i < count($a); $i++) {
                     if ($a[$i][$h[array_keys($where)[0]]] == $where[array_keys($where)[0]]) {
-                        for ($j=0;$j<count($keys);$j++){
+                        for ($j = 0; $j < count($keys); $j++) {
                             $a[$i][$h[$keys[$j]]] = $values[$j];
                         }
                     }
@@ -251,23 +251,23 @@ class dbTool
                     $a .= $keys[$i] . "='" . $values[$i] . "',";
                 }
                 $a = substr($a, 0, strlen($a) - 1);
-                if (count($where)){
-                    $a.=" WHERE ";
-                    for ($i=0;$i<count($where);$i++){
-                        $a.=array_keys($where)[$i]."='".$where[array_keys($where)[$i]]."',";
+                if (count($where)) {
+                    $a .= " WHERE ";
+                    for ($i = 0; $i < count($where); $i++) {
+                        $a .= array_keys($where)[$i] . "='" . $where[array_keys($where)[$i]] . "',";
                     }
-                    $a=substr($a,0,strlen($a)-1);
+                    $a = substr($a, 0, strlen($a) - 1);
                 }
                 $c = self::connectDB();
-                if ($c["status"]==="success") {
+                if ($c["status"] === "success") {
                     $r = mysqli_query($c["conn"], $a);
                     if (!$r) {
                         $result = ["status" => "fail", "reason" => mysqli_error($c["conn"])];
                     } else {
                         $result = ["status" => "success"];
                     }
-                }else{
-                    $result = ["status"=>"fail","reason"=>$c["reason"]];
+                } else {
+                    $result = ["status" => "fail", "reason" => $c["reason"]];
                 }
                 break;
         }
