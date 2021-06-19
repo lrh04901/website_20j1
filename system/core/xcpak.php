@@ -1,6 +1,5 @@
 <?php
-
-
+include "redirect.php";
 class xcpak
 {
     public static function encode($dir_path): string

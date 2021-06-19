@@ -1,6 +1,5 @@
 <?php
-
-
+include "redirect.php";
 class encryptTool
 {
     //加密部分

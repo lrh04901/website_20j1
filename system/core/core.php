@@ -1,4 +1,5 @@
 <?php
+include "redirect.php";
 initialize();
 runWeb();
 //初始化
@@ -28,7 +29,10 @@ function runWeb()
     }
     if($rm=="get"){
         if (file_exists(HTML_PATH.$path.".html")){
-            call_user_func($rm."::".$path);
+            get::load($path);
+            /*if (!call_user_func($rm."::".$path)){
+//                get::oneKeyLoad($path);
+            }*/
         }else{
             loadErrorPage("404 Not Found","找不到你要访问的页面或资源");
         }

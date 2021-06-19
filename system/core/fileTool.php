@@ -1,5 +1,5 @@
 <?php
-
+include "redirect.php";
 class fileTool
 {
     public static function createDir(string $path):bool

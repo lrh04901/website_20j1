@@ -1,4 +1,5 @@
 <?php
+include "redirect.php";
 /**
  * Class argsTool
  * 参数处理模块

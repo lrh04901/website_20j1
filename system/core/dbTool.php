@@ -1,6 +1,5 @@
 <?php
-
-
+include "redirect.php";
 class dbTool
 {
     function __construct()

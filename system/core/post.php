@@ -1,6 +1,5 @@
 <?php
-
-
+include "redirect.php";
 class post
 {
     public static function uploadUpdate(){

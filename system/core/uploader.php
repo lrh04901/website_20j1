@@ -1,6 +1,5 @@
 <?php
-
-
+include "redirect.php";
 class uploader
 {
     private $filepath = './data';

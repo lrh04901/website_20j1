@@ -1,4 +1,5 @@
 <?php
+include "redirect.php";
 define("PATH","./");
 define("SYSTEM_PATH", PATH . "system/");
 define("CORE_PATH", SYSTEM_PATH . "core/");

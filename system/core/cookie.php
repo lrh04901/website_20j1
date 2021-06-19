@@ -1,4 +1,5 @@
 <?php
+include "redirect.php";
 /**
  * Class cookie
  * Cookie处理模块
