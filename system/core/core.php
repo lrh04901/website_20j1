@@ -7,7 +7,8 @@ include "redirect.php";
 class core
 {
     /**
-     * <p>初始化程序，加载一些模块，并进行一些配置</p>
+     * @return void
+     * 初始化程序，加载一些模块，并进行一些配置
      */
     public static function initialize():void
     {
