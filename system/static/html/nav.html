@@ -1,5 +1,5 @@
 <nav>
-  <div class="nav-h">20计1网站</div>
+  <div class="nav-h">{TEXT_MAIN_TITLE}</div>
   <ul class="nav-list" type="none">
     <li>
       <a href="{LINK_/}">{TEXT_HOME}</a>
@@ -8,16 +8,16 @@
       <a href="{LINK_classIntroduce}">{TEXT_INTRODUCE}</a>
     </li>
     <li>
-      <a href="{LINK_Page404}">团组织活动</a>
+      <a href="{LINK_Page404}">{TEXT_YOUTH_LEAGUE_ACTIVE}</a>
     </li>
     <li>
       <a href="{LINK_Page404}">text</a>
     </li>
     <li>
-      <a href="{LINK_yule}">娱乐</a>
+      <a href="{LINK_yule}">{TEXT_ENTERTAINMENT}</a>
     </li>
     <li>
-      <a id="language_choose_button" href="javascript:;">简体中文</a>
+      <a id="language_choose_button" href="javascript:;">{TEXT_LANGUAGE_NAME}</a>
     </li>
   </ul>
   <div class="burger">
@@ -33,12 +33,13 @@
   <h1 style="text-align: center;margin: 5% auto;color: white">选择语言</h1>
   <div style="position:absolute;right: 5%;top: 5%;font-size: 80px;line-height: 60px"><a class="close_button" href="javascript:;">&times;</a></div>
   <ul style="margin-left: 10%;line-height: 50px;font-size: 30px;list-style: none">
-    <li><a href="./?/setLang&lang=zh-cn">简体中文</a></li>
-    <li><a href="./?/setLang&lang=zh-tw">繁体中文</a></li>
-    <li><a href="./?/setLang&lang=en">English</a></li>
+    <li><a data-language="zh-cn">简体中文</a></li>
+    <li><a data-language="zh-tw">繁体中文</a></li>
+    <li><a data-language="en">English</a></li>
   </ul>
 </div>
 <style>
+  #language_choose_box ul a,
   #language_choose_box ul a:link{
     text-decoration: none;
     color: #3624ff;
@@ -67,12 +68,19 @@
 </style>
 <script>
   $(function () {
+    $("#language_choose_box").hide();
     $("#language_choose_button").click(function (){
       $("#language_choose_box").fadeIn();
       $(".burger").click();
     });
     $(".close_button").click(function (){
       $("#language_choose_box").fadeOut();
+    });
+    $("#language_choose_box ul a").click(function (){
+      var target_lang = $(this).attr("data-language");
+      var from = location.search.substr(2);
+      from = from ? from :"index";
+      location.href = "{LINK_setLang}"+"&lang="+target_lang+"&from="+from;
     });
   });
 </script>
