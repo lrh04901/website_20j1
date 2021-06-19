@@ -1,9 +1,18 @@
 <?php
 include "redirect.php";
 
+/**
+ * 加密模块
+ */
 class encryptTool
 {
-    //加密部分
+    /**
+     * 加密字符串
+     * @param string $string 需要加密的数据
+     * @param string $secret 加密用的密钥
+     * @param bool $return 是否返回，默认不返回直接输出
+     * @return string 返回加密后的数据
+     */
     public static function encode(string $string, string $secret, bool $return = false): string
     {
 
@@ -91,9 +100,17 @@ class encryptTool
         } else {
             echo $g;
         }
+        return "";
     }
 
-    public static function decode($string, $secret, $return)
+    /**
+     * 解密字符串
+     * @param string $string 需要解密的数据
+     * @param string $secret 解密用的密钥
+     * @param bool $return 是否返回，默认不返回直接输出
+     * @return string 返回解密后的数据
+     */
+    public static function decode(string $string, string $secret, bool $return = false): string
     {
         $a = str_split($string);//拆开加密的数据
         $b = "";//创建一个空变量用于存储第一阶段的数据
@@ -141,5 +158,6 @@ class encryptTool
         } else {
             echo $o;
         }
+        return "";
     }
 }
