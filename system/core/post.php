@@ -1,9 +1,16 @@
 <?php
 include "redirect.php";
 
+/**
+ * post处理模块
+ */
 class post
 {
-    public static function uploadUpdate()
+    /**
+     * 上传更新包
+     * @return void
+     */
+    public static function uploadUpdate():void
     {
         if (!is_dir("data")) {
             if (file_exists("data")) {
@@ -16,7 +23,11 @@ class post
         file_put_contents(DATA_PATH . "upload.log", file_get_contents(DATA_PATH . "upload.log") . $a . "\n");
     }
 
-    public static function applyUpdate()
+    /**
+     * 应用更新
+     * @return void
+     */
+    public static function applyUpdate():void
     {
         xcpak::decode("./data/update.xcpak", PATH);
 //        unlink(PATH."run.bat");
