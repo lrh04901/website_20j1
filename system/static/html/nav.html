@@ -33,29 +33,39 @@
   <h1 style="text-align: center;margin: 5% auto;color: white">选择语言</h1>
   <div style="position:absolute;right: 5%;top: 5%;font-size: 80px;line-height: 60px"><a class="close_button" href="javascript:;">&times;</a></div>
   <ul style="margin-left: 10%;line-height: 50px;font-size: 30px;list-style: none">
-    <li><a data-language="zh-cn">简体中文</a></li>
-    <li><a data-language="zh-tw">繁体中文</a></li>
-    <li><a data-language="en">English</a></li>
+    <li><a data-language="zh-cn" class="lang">简体中文</a></li>
+    <li><a data-language="zh-tw" class="lang">繁体中文</a></li>
+    <li><a data-language="en" class="lang">English</a></li>
   </ul>
 </div>
 <style>
+  #language_choose_box{
+    border-radius: 20px;
+  }
+
+  #language_choose_box ul a{
+    transition: 0.3s ease-in;
+    line-height: 3em;
+    font-size: 40px;
+  }
+
   #language_choose_box ul a,
   #language_choose_box ul a:link{
     text-decoration: none;
-    color: #3624ff;
+    color: rgb(137,113,133);
   }
   #language_choose_box ul a:visited{
 
-    color: #3624ff;
+    color: rgb(137,113,133);
   }
   #language_choose_box ul a:hover{
-    text-decoration: underline;
-    text-decoration-color: orangered;
-    color: #0afaff;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+
   }
   #language_choose_box ul a:active{
-    text-decoration: underline;
-    text-decoration-color: green;
+    text-decoration: none;
     color: yellow;
   }
   .close_button:link,
@@ -66,6 +76,14 @@
     text-decoration: none;
   }
 </style>
+
+<script>
+  const myHover = document.querySelector('.lang');
+  myHover.addEventListener("click",function () {
+      myHover.style.color = "#33d4c0"
+  },false);
+</script>
+
 <script>
   $(function () {
     $("#language_choose_box").hide();
