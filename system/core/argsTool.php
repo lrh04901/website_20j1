@@ -9,10 +9,10 @@ include "redirect.php";
 class argsTool
 {
     /**
-     * @param string $name "参数名"
+     * @param string $name 参数名
      * @static
      * @return string
-     * 在GET请求方式获取参数
+     * @method "在GET请求方式获取参数"
      */
     public static function get(string $name):string{
         if (isset($_GET[$name])){
