@@ -131,10 +131,25 @@ function loadBody($name, $args = null)
         }
     }
     $value = link_process($value);
-    $value = str_replace("{nav}", link_process(file_get_contents(HTML_PATH . "nav.html")), $value);
     echo $value;
 }
 
+function loadBodyByText($content,$args=null){
+    $value = $content;
+    if ($args) {
+        for ($i = 0; $i < count($args); $i++) {
+            $key = array_keys($args)[$i];
+            $value = str_replace("{" . $key . "}", $args[$key], $value);
+        }
+    }
+    $value = link_process($value);
+    echo $value;
+}
+
+/**
+ * @param string $title 错误页面的标题
+ * @param string $message 错误消息
+ */
 function loadErrorPage(string $title,string $message){
     loadHead($title);
     loadBody("error",["ERROR_TITLE"=>$title,"ERROR_CONTENT"=>$message]);
@@ -147,6 +162,7 @@ function link_process($input): string
     $args_list = array();
     $args_index = 0;
     $left = false;
+    $value = str_replace("{nav}", file_get_contents(HTML_PATH . "nav.html"), $value);
     for ($i = 0; $i < count(L); $i++) {
         $key = array_keys(L)[$i];
         $value = str_replace("{TEXT_" . $key . "}", L[$key], $value);
