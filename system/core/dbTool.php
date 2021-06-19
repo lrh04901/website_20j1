@@ -1,12 +1,11 @@
 <?php
 include "redirect.php";
+
+/**
+ * 数据库模块
+ */
 class dbTool
 {
-    function __construct()
-    {//用于强制指定文件数据库
-        global $force_file_db;
-        $GLOBALS["force_file_db"]=true;
-    }
 
     private static function getDataBaseType(): string
     {//获取数据库类型
@@ -71,7 +70,7 @@ class dbTool
         $result = "";
         switch (self::getDataBaseType()) {
             case "file":
-                $a = json_decode(encryptTool::decode(file_get_contents(FILE_DB_PATH . $tableName . ".xcdb"), XCGZS_SECRET, true), true);
+                $a = json_decode(encryptTool::decode(file_get_contents(FILE_DB_PATH . $tableName . ".xcdb"), SECRET, true), true);
                 $data = array();
                 $b = self::getTableHead($a);
                 foreach ($a as $value) {
@@ -139,7 +138,7 @@ class dbTool
                     $result = ["status" => "fail", "reason" => "where参数不能为空数组，若要删除所有数据请指定where为[*]"];
                     break;
                 }
-                $a = json_decode(encryptTool::decode(file_get_contents(FILE_DB_PATH . $tableName . ".xcdb"), XCGZS_SECRET, true), true);
+                $a = json_decode(encryptTool::decode(file_get_contents(FILE_DB_PATH . $tableName . ".xcdb"), SECRET, true), true);
                 $h = self::getTableHead($a);
                 $c = array();
                 for ($i = 1; $i < count($a); $i++) {//遍历总数据的每一行
@@ -154,7 +153,7 @@ class dbTool
                         $a = arrayTool::remove($a, $item);
                     }
                 }
-                file_put_contents(FILE_DB_PATH . $tableName . ".xcdb", encryptTool::encode(json_encode($a), XCGZS_SECRET, true));
+                file_put_contents(FILE_DB_PATH . $tableName . ".xcdb", encryptTool::encode(json_encode($a), SECRET, true));
                 $result = ["status" => "success"];
                 break;
             case "mysql":
@@ -234,7 +233,7 @@ class dbTool
         $result = "";
         switch (self::getDataBaseType()) {
             case "file":
-                $a = json_decode(encryptTool::decode(file_get_contents(FILE_DB_PATH . $tableName . ".xcdb"), XCGZS_SECRET, true), true);
+                $a = json_decode(encryptTool::decode(file_get_contents(FILE_DB_PATH . $tableName . ".xcdb"), SECRET, true), true);
                 $h = self::getTableHead($a);
                 for ($i = 1; $i < count($a); $i++) {
                     if ($a[$i][$h[array_keys($where)[0]]] == $where[array_keys($where)[0]]) {
@@ -243,7 +242,7 @@ class dbTool
                         }
                     }
                 }
-                file_put_contents(FILE_DB_PATH . $tableName . ".xcdb", encryptTool::encode(json_encode($a), XCGZS_SECRET, true));
+                file_put_contents(FILE_DB_PATH . $tableName . ".xcdb", encryptTool::encode(json_encode($a), SECRET, true));
                 $result = ["status" => "success"];
                 break;
             case "mysql":
