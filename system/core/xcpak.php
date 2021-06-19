@@ -1,9 +1,17 @@
 <?php
 include "redirect.php";
 
+/**
+ * 数据包处理模块
+ */
 class xcpak
 {
-    public static function encode($dir_path): string
+    /**
+     * 创建一个数据包
+     * @param string $dir_path 文件夹位置
+     * @return string 返回状态消息，若消息为空时则没有问题
+     */
+    public static function encode(string $dir_path): string
     {
         if (is_dir($dir_path)) {
             $outPak = $GLOBALS["path"] . "/out.xcpak";
@@ -32,7 +40,13 @@ class xcpak
         return "";
     }
 
-    public static function decode(string $file_path, $out_path = ""): string
+    /**
+     * 解析一个数据包
+     * @param string $file_path 文件位置
+     * @param string $out_path 输出目录
+     * @return string 返回状态消息，若消息为空时则没有问题
+     */
+    public static function decode(string $file_path, string $out_path = ""): string
     {
         if (is_file($file_path)) {
             if (substr($file_path, strlen($file_path) - 5) === "xcpak") {
@@ -108,7 +122,13 @@ class xcpak
         return "";
     }
 
-    private static function string_encode($string, $secret): string
+    /**
+     * 字符串加密（简易版）
+     * @param string $string 需要加密的数据
+     * @param string $secret 加密用的密钥
+     * @return string 返回加密后的数据
+     */
+    private static function string_encode(string $string, string $secret): string
     {
         $a = base64_encode($string);
 //    echo $a;
@@ -133,7 +153,13 @@ class xcpak
         return $d;
     }
 
-    private static function string_decode($string, $secret): string
+    /**
+     * 字符串解密（简易版）
+     * @param string $string 需要解密的数据
+     * @param string $secret 解密用的密钥
+     * @return string 返回解密后的数据
+     */
+    private static function string_decode(string $string, string $secret): string
     {
         //假设字符串数据为d8ffe5cadaf481857f
         $z = strlen($string);
@@ -151,17 +177,32 @@ class xcpak
         return base64_decode($d);
     }
 
-    private static function hash_encode($string): string
+    /**
+     * 创建一个密码
+     * @param string $string 需要加密的文字
+     * @return string 返回加密后的数据
+     */
+    private static function hash_encode(string $string): string
     {
         return self::string_encode($string, "XCPAK");
     }
 
-    private static function hash_decode($string): string
+    /**
+     * 对密码进行解密
+     * @param string $string 需要解密的文字
+     * @return string 返回解密后的数据
+     */
+    private static function hash_decode(string $string): string
     {
         return self::string_decode($string, "XCPAK");
     }
 
-    private static function list_dir($path_dir)
+    /**
+     * 读取目录的结构及文件位置
+     * @param string $path_dir 目录位置
+     * @return void
+     */
+    private static function list_dir(string $path_dir): void
     {
         $a = scandir($path_dir);
         foreach ($a as $value) {
@@ -177,6 +218,12 @@ class xcpak
         }
     }
 
+    /**
+     * 对两个数字进行异或运算
+     * @param int $num1 第一个数字
+     * @param int $num2 第二个数字
+     * @return int 计算后的数字
+     */
     private static function xor_num(int $num1, int $num2): int
     {
         $bin1 = decbin($num1);
@@ -196,7 +243,13 @@ class xcpak
         return bindec($str);
     }
 
-    private static function applyData($data_array, $out_path)
+    /**
+     * 从数据表写入数据到目录
+     * @param array $data_array 存放数据的数组
+     * @param string $out_path 输出目录
+     * @return void
+     */
+    private static function applyData(array $data_array, string $out_path): void
     {
 //        echo "准备应用文件(夹)\n";
         $dir = str_replace("\\", "/", self::getDirFromPath($GLOBALS["path"]));
@@ -222,14 +275,24 @@ class xcpak
         echo "文件释放完成";
     }
 
-    private static function getDirFromPath($path)
+    /**
+     * 将目录处理成上级位置
+     * @param string $path 目录位置
+     * @return string 返回上级位置
+     */
+    private static function getDirFromPath(string $path): string
     {
         $a = explode("\\", $path);
         $b = $a[count($a) - 1];
         return str_replace($b, "", $path);
     }
 
-    private static function setFileData($path, $data)
+    /**
+     * 写入数据到指定文件中
+     * @param string $path 文件名
+     * @param object $data 文件数据
+     */
+    private static function setFileData(string $path, object $data): void
     {
         $path_new = str_replace("\\", "/", $path);
         if (file_exists($path_new)) {
