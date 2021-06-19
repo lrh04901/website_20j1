@@ -18,7 +18,7 @@ class get
             if (explode("=", $args_array[0])[0] == "title") {
                 $title = explode("=", $args_array[0])[1];
                 $css = array();
-                foreach (explode(";", substr($args_array[1], 4)) as $item) {
+                foreach (explode(",", substr($args_array[1], 4)) as $item) {
                     if (strstr($item, "(") && strstr($item, ")")) {
                         $css_name = strstr($item, "(", true);
                         $css_args = trim(str_replace($css_name, "", $item), "()");
