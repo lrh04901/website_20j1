@@ -89,8 +89,8 @@ class core
 
     /**
      * @param string $name 模块名
-     * <p>加载模块，找不到指定模块将会终止网页执行</p>
      * @return void
+     * <p>加载模块，找不到指定模块将会终止网页执行</p>
      */
     public static function loadComponent(string $name):void
     {
