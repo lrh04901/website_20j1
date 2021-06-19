@@ -17,7 +17,6 @@ function initialize()
     loadComponent("mysqlTool");//加载MySQL数据库模块
     loadComponent("xcpak");//加载XC包模块
     loadComponent("uploader");//加载上传模块
-    loadComponent("redirect");//加载重定向模块
 }
 
 //运行网站
