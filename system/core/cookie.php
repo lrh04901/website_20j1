@@ -9,8 +9,8 @@ include "redirect.php";
 class cookie
 {
     /**
-     * @param $name "数据名"
-     * @param $value "数据内容"
+     * @param $name 数据名
+     * @param $value 数据内容
      * @return cookie 返回cookie对象，可以用于连续操作
      */
     static function set($name, $value):cookie
@@ -20,8 +20,8 @@ class cookie
     }
 
     /**
-     * @param $name
-     * @return mixed|null
+     * @param $name 数据名
+     * @return mixed|null 返回cookie中的数据，若该数据不存在则返回null
      */
     static function get($name)
     {
