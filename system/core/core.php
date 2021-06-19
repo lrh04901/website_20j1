@@ -88,7 +88,7 @@ class core
     }
 
     /**
-     * <p>加载模块，找不到指定模块将会终止网页执行</p>
+     * 加载模块，找不到指定模块将会终止网页执行
      * @param string $name 模块名
      * @return void
      */
@@ -108,9 +108,9 @@ class core
     }
 
     /**
+     * 加载网页的头部文件，有助于简化每个页面的代码
      * @param string $title 网页标题
      * @param array|null $extraFile 加载外部引用文件，可用于加载css和js
-     * <p>加载网页的头部文件，有助于简化每个页面的代码</p>
      * @return void
      */
     public static function loadHead(string $title, array $extraFile = null): void
@@ -147,9 +147,9 @@ class core
     }
 
     /**
+     * 通过文件加载主体部分代码，根据不同文件名加载不同页面
      * @param string $name 加载页面的文件名
      * @param array|null $args 页面参数，用于替换代码中的引用数据，优先级比link_process高
-     * <p>通过文件加载主体部分代码，根据不同文件名加载不同页面</p>
      * @return void
      */
     public static function loadBody(string $name,array $args = null):void
@@ -166,9 +166,9 @@ class core
     }
 
     /**
+     * 通过代码文本加载主体部分，将处理过后的代码进行加载
      * @param string $content 页面的代码文本
      * @param array|null $args 页面参数，用于替换代码中的引用数据，优先级比link_process高
-     * 通过代码文本加载主体部分，将处理过后的代码进行加载
      * @return void
      */
     public static function loadBodyByText(string $content,array $args = null):void
@@ -185,9 +185,9 @@ class core
     }
 
     /**
+     * 加载一个错误页面
      * @param string $title 错误页面的标题
      * @param string $message 错误页面的消息
-     * <p>加载一个错误页面</p>
      * @return void
      */
     public static function loadErrorPage(string $title, string $message):void
@@ -197,8 +197,8 @@ class core
     }
 
     /**
+     * 对代码文本进行处理，将代码中的一些引用数据替换成对应内容
      * @param string $input 将需要处理的代码文本输入
-     * <p>对代码文本进行处理，将代码中的一些引用数据替换成对应内容</p>
      * @return string 返回处理后的代码文本
      */
     public static function link_process(string $input): string
