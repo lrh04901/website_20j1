@@ -10,8 +10,8 @@ class argsTool
 {
     /**
      * @param string $name 参数名
-     * @static
-     * @return string 返回GET请求url中的参数，不存在时返回null
+     * @return string 返回指定参数的内容，参数未提供时返回null
+     * <p>返回GET请求url中的参数</p>
      */
     public static function get(string $name):string{
         if (isset($_GET[$name])){
@@ -23,8 +23,8 @@ class argsTool
 
     /**
      * @param string $name 参数名
-     * @static
-     * @return string 返回POST请求头中的参数，不存在时返回null
+     * @return string 返回指定参数的内容，参数未提供时返回null
+     * <p>返回POST请求头中的参数</p>
      */
     public static function post(string $name):string{
         if (isset($_POST[$name])){
