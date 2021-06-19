@@ -26,7 +26,20 @@ function runWeb()
     if (!$path) {
         $path = "index";
     }
-    call_user_func($rm . "::" . $path);
+    if($rm=="get"){
+        if (file_exists(HTML_PATH.$path.".html")){
+            call_user_func($rm."::".$path);
+        }else{
+            loadErrorPage("404 Not Found","找不到你要访问的页面或资源");
+        }
+    }elseif ($rm=="post"){
+        if (function_exists("post::".$path)){
+            call_user_func($rm."::".$path);
+        }else{
+            die("404 not fount:找不到你要访问的页面或资源");
+        }
+    }
+//    call_user_func($rm . "::" . $path);
 }
 
 //获取当前虚拟地址
@@ -120,6 +133,11 @@ function loadBody($name, $args = null)
     $value = link_process($value);
     $value = str_replace("{nav}", link_process(file_get_contents(HTML_PATH . "nav.html")), $value);
     echo $value;
+}
+
+function loadErrorPage(string $title,string $message){
+    loadHead($title);
+    loadBody("error",["ERROR_TITLE"=>$title,"ERROR_CONTENT"=>$message]);
 }
 
 function link_process($input): string
