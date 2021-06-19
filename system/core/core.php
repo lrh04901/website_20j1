@@ -26,8 +26,11 @@ class core
         self::loadComponent("uploader");//加载上传模块
     }
 
-//运行网站
-    public static function runWeb()
+    /**
+     * 加载网页，根据不同请求方式及请求路径加载不同的代码
+     * @return void
+     */
+    public static function runWeb():void
     {
         $rm = strtolower($_SERVER["REQUEST_METHOD"]);
         $path = substr(self::getPath(), 1);
