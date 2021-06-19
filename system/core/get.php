@@ -13,25 +13,29 @@ class get
 //        print_r($args_array);
         $title = explode("=",$args_array[0])[1];
         $css = array();
-        foreach (explode(",",explode("=",$args_array[1])[1]) as $item) {
+        foreach (explode(";",substr($args_array[1],4)) as $item) {
             if (strstr($item,"(")&&strstr($item,")")){
                 $css_name = strstr($item,"(",true);
                 $css_args = trim(str_replace($css_name,"",$item),"()");
                 $css[count($css)] = [$css_name,$css_args];
             }else{
-                $css[count($css)] = $item;
+                if ($item) {
+                    $css[count($css)] = $item;
+                }
             }
         }
         $js = array();
         foreach (explode(",",explode("=",$args_array[2])[1]) as $item){
-            $js[count($js)] = $item;
+            if ($item) {
+                $js[count($js)] = $item;
+            }
         }
         loadHead($title,["css"=>$css,"js"=>$js]);
         loadBodyByText($html);
     }
     public static function index()
     {
-        loadHead(L["INDEX_TITLE"], ["css" => [["index", "media=\"screen\""]]]);
+        loadHead(L["INDEX_TITLE"], ["css" => [["index", "media=\"screen\""]],"js"=>["jquery"]]);
         loadBody("index");
     }
 
@@ -44,8 +48,9 @@ class get
 
     public static function classIntroduce()
     {
-        loadHead("胡杨班", ["css" => [["classIntroduce", "media=\"screen\""]]]);
-        loadBody("classIntroduce");
+        self::oneKeyLoad("classIntroduce");
+//        loadHead("胡杨班", ["css" => [["classIntroduce", "media=\"screen\""]]]);
+//        loadBody("classIntroduce");
     }
 
     public static function yule()
