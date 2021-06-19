@@ -56,8 +56,11 @@ class core
 //    call_user_func($rm . "::" . $path);
     }
 
-//获取当前虚拟地址
-    public static function getPath()
+    /**
+     * 返回当前请求的虚拟地址
+     * @return string 返回虚拟地址
+     */
+    public static function getPath():string
     {
         $a = "/";//未加参数的情况
         if (isset($_SERVER['QUERY_STRING'])) {//指定地址参数时
@@ -84,8 +87,12 @@ class core
         return $c;//返回地址
     }
 
-//加载模块
-    public static function loadComponent($name)
+    /**
+     * @param string $name 模块名
+     * 加载模块，找不到指定模块将会终止网页执行
+     * @return void
+     */
+    public static function loadComponent(string $name):void
     {
         if (defined("CORE_PATH")) {
             $component_path = CORE_PATH . $name . ".php";
@@ -95,12 +102,17 @@ class core
         if (file_exists($component_path)) {
             include($component_path);
         } else {
-            echo "<b style='color: red'>没有找到组件：" . $name . "</b>";
+            self::loadErrorPage("网站加载失败","<b style='color: red'>没有找到组件：" . $name . "</b>");
             die();
         }
     }
 
-//加载头部文件
+    /**
+     * @param string $title 网页标题
+     * @param array|null $extraFile 加载外部引用文件，可用于加载css和js
+     * 加载网页的头部文件，有助于简化每个页面的代码
+     * @return void
+     */
     public static function loadHead(string $title, array $extraFile = null): void
     {
         $value = file_get_contents(HTML_PATH . "head.html");//读取头部文件
@@ -134,8 +146,13 @@ class core
         echo $value;
     }
 
-//加载页面主体文件
-    public static function loadBody($name, $args = null)
+    /**
+     * @param string $name 加载页面的文件名
+     * @param array|null $args 页面参数，用于替换代码中的引用数据，优先级比link_process高
+     * 通过文件加载主体部分代码，根据不同文件名加载不同页面
+     * @return void
+     */
+    public static function loadBody(string $name,array $args = null):void
     {
         $value = file_get_contents(HTML_PATH . $name . ".html");
         if ($args) {
@@ -148,7 +165,13 @@ class core
         echo $value;
     }
 
-    public static function loadBodyByText($content, $args = null)
+    /**
+     * @param string $content 页面的代码文本
+     * @param array|null $args 页面参数，用于替换代码中的引用数据，优先级比link_process高
+     * 通过代码文本加载主体部分，将处理过后的代码进行加载
+     * @return void
+     */
+    public static function loadBodyByText(string $content,array $args = null):void
     {
         $value = $content;
         if ($args) {
@@ -163,15 +186,22 @@ class core
 
     /**
      * @param string $title 错误页面的标题
-     * @param string $message 错误消息
+     * @param string $message 错误页面的消息
+     * 加载一个错误页面
+     * @return void
      */
-    public static function loadErrorPage(string $title, string $message)
+    public static function loadErrorPage(string $title, string $message):void
     {
         self::loadHead($title);
         self::loadBody("error", ["ERROR_TITLE" => $title, "ERROR_CONTENT" => $message]);
     }
 
-    public static function link_process($input): string
+    /**
+     * @param string $input 将需要处理的代码文本输入
+     * 对代码文本进行处理，将代码中的一些引用数据替换成对应内容
+     * @return string 返回处理后的代码文本
+     */
+    public static function link_process(string $input): string
     {
         $value = $input;
         $index = 0;
@@ -225,8 +255,12 @@ class core
         return $value;
     }
 
-    /*function clearConsole()
+    /**
+     * 清空浏览器控制台内容
+     * @return void
+     */
+    function clearConsole():void
     {
         echo "<script>console.clear();</script>";
-    }*/
+    }
 }
