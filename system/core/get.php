@@ -1,10 +1,18 @@
 <?php
 include "redirect.php";
 
+/**
+ * get处理模块
+ */
 class get
 {
     //Array ( [0] => title=更新站点 [1] => css=zui.min,zui.uploader.min,update [2] => js=zui.uploader.min,webuploader.min,update [3] => )
-    public static function load(string $name)
+    /**
+     * 加载指定页面
+     * @param string $name 页面名称
+     * @return void
+     */
+    public static function load(string $name):void
     {
         $html = file_get_contents(HTML_PATH . $name . ".html");
         $args = strstr($html, "\n", true);
@@ -82,8 +90,11 @@ class get
             core::loadHead("404 Not Found", ["css" => [["Page404", "media=\"screen\""]]]);
             loadBody("Page404");
         }*/
-
-    public static function setLang()
+    /**
+     * 设置语言
+     * @return void
+     */
+    public static function setLang():void
     {
         $lang = argsTool::get("lang");
         $from = argsTool::get("from");
