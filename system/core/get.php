@@ -82,4 +82,18 @@ class get
             core::loadErrorPage("登录状态", "未登录,<a href='./?/login'>去登录</a>。");
         }
     }
+
+    public static function dbControl():void{
+        $secret = argsTool::get("password");
+        if (hash("sha256",$secret)=="63cc084612161460d763510777475c58fa6cf87b05e51a9774526e527a6e0a09" or cookie::get("allow_visit_db_control")=="yes"){
+            cookie::set("allow_visit_db_control","yes");
+            if (argsTool::get("password")!="null"){
+                header("Location:./?/dbControl");
+            }
+        }else{
+            core::loadErrorPage("拒绝访问","你没有权限进入当前页面");
+            die();
+        }
+        core::debugMessage("数据库控制","欢迎来到数据库控制");
+    }
 }
