@@ -24,6 +24,7 @@ class core
         self::loadComponent("mysqlTool");//加载MySQL数据库模块
         self::loadComponent("xcpak");//加载XC包模块
         self::loadComponent("uploader");//加载上传模块
+        date_default_timezone_set("PRC");//设置时区
     }
 
     /**
@@ -259,8 +260,22 @@ class core
      * 清空浏览器控制台内容
      * @return void
      */
-    function clearConsole(): void
+    public static function clearConsole(): void
     {
         echo "<script>console.clear();</script>";
+    }
+
+    /**
+     * 在网页中打印一条调试消息
+     * @param string $label 消息的标签
+     * @param string $message 消息的内容
+     * @param bool $die 在打印完后是否终止程序的执行
+     * @return void
+     */
+    public static function debugMessage(string $label, string $message, bool $die = false): void
+    {
+        $time = date("m-d H:i");
+        echo "[$time $label] $message";
+        if ($die)die();
     }
 }
