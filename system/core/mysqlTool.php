@@ -120,12 +120,12 @@ class mysqlTool
         return $result;
     }
 
-    public static function tableExist(string $tableName):bool{
+    public static function tableExist(string $tableName):string{
         $conn = dbTool::connectDB();
         if ($conn["status"] === "success") {
-            return (bool)mysqli_query($conn["conn"], "SELECT * FROM " . $tableName);
+            return mysqli_query($conn["conn"], "SELECT * FROM " . $tableName)?"yes":"no";
         } else {
-            return false;
+            return "no";
         }
     }
 
