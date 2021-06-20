@@ -8,9 +8,9 @@ class post
 {
     /**
      * 上传更新包
-     * @return void
+     * @return bool 返回true，防止执行错误
      */
-    public static function uploadUpdate():void
+    public static function uploadUpdate():bool
     {
         if (!is_dir("data")) {
             if (file_exists("data")) {
@@ -21,27 +21,23 @@ class post
         $upload = new uploader($_FILES['file']['tmp_name'], $_POST['blob_num'], $_POST['total_blob_num'], $_POST['file_name']);
         $a = $upload->apiReturn();
         file_put_contents(DATA_PATH . "upload.log", file_get_contents(DATA_PATH . "upload.log") . $a . "\n");
+        return true;
     }
 
     /**
      * 应用更新
-     * @return void
+     * @return bool 返回true，防止执行错误
      */
-    public static function applyUpdate():void
+    public static function applyUpdate():bool
     {
         xcpak::decode("./data/update.xcpak", PATH);
 //        unlink(PATH."run.bat");
         unlink(PATH . "run.php");
+        return true;
     }
-//    private static function unzip($name,$out){
-//        $zip = new ZipArchive();
-//        if (!$zip->open($name)){
-//            return "解压失败\r\n";
-//        }else{
-//            $zip->extractTo($out);
-//            $zip->close();
-//            return "解压成功\r\n";
-//        }
-//    }
-//    private static function xcopy()
+
+    public static function login():bool{
+        echo "Yes";
+        return true;
+    }
 }

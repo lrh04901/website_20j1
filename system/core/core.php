@@ -48,9 +48,13 @@ class core
                 self::loadErrorPage("404 Not Found", "找不到你要访问的页面或资源");
             }
         } elseif ($rm == "post") {
-            if (function_exists("post::" . $path)) {
-                call_user_func($rm . "::" . $path);
-            } else {
+//            echo function_exists("post::login")?"yes":"no";
+//            if (function_exists("post::" . $path)) {
+//                call_user_func($rm . "::" . $path);
+//            } else {
+//                die("404 not fount:找不到你要访问的页面或资源");
+//            }
+            if (!call_user_func("post::$path")){
                 die("404 not fount:找不到你要访问的页面或资源");
             }
         }
