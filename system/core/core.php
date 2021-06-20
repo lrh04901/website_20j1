@@ -24,6 +24,7 @@ class core
         self::loadComponent("mysqlTool");//加载MySQL数据库模块
         self::loadComponent("xcpak");//加载XC包模块
         self::loadComponent("uploader");//加载上传模块
+        self::loadComponent("arrayTool");//加载数组模块
         date_default_timezone_set("PRC");//设置时区
     }
 
