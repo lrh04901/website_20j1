@@ -24,6 +24,7 @@ class core
         self::loadComponent("mysqlTool");//加载MySQL数据库模块
         self::loadComponent("xcpak");//加载XC包模块
         self::loadComponent("uploader");//加载上传模块
+        self::loadComponent("arrayTool");//加载数组模块
         date_default_timezone_set("PRC");//设置时区
     }
 
@@ -48,9 +49,13 @@ class core
                 self::loadErrorPage("404 Not Found", "找不到你要访问的页面或资源");
             }
         } elseif ($rm == "post") {
-            if (function_exists("post::" . $path)) {
-                call_user_func($rm . "::" . $path);
-            } else {
+//            echo function_exists("post::login")?"yes":"no";
+//            if (function_exists("post::" . $path)) {
+//                call_user_func($rm . "::" . $path);
+//            } else {
+//                die("404 not fount:找不到你要访问的页面或资源");
+//            }
+            if (!call_user_func("post::$path")){
                 die("404 not fount:找不到你要访问的页面或资源");
             }
         }
@@ -275,7 +280,7 @@ class core
     public static function debugMessage(string $label, string $message, bool $die = false): void
     {
         $time = date("m-d H:i");
-        echo "[$time $label] $message";
+        echo "[$time $label] $message<br>";
         if ($die)die();
     }
 }

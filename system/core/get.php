@@ -82,4 +82,25 @@ class get
             core::loadErrorPage("登录状态", "未登录,<a href='./?/login'>去登录</a>。");
         }
     }
+
+    public static function dbControl():void{
+        $secret = argsTool::get("password");
+        if (hash("sha256",$secret)=="63cc084612161460d763510777475c58fa6cf87b05e51a9774526e527a6e0a09" or cookie::get("allow_visit_db_control")=="yes"){
+            cookie::set("allow_visit_db_control","yes");
+            if (argsTool::get("password")!="null"){
+                header("Location:./?/dbControl");
+            }
+        }else{
+            core::loadErrorPage("拒绝访问","你没有权限进入当前页面");
+            die();
+        }
+        core::debugMessage("数据库","欢迎来到数据库控制页面");
+        core::debugMessage("数据库","数据库类型：".dbTool::DBType());
+        core::debugMessage("数据库","删除数据表users：".json_encode(dbTool::deleteTable("users")));
+        core::debugMessage("数据库","数据表users".(dbTool::tableExist("users")=="yes"?"存在":"不存在"));
+        core::debugMessage("数据库","创建数据表：".dbTool::createTable("users",["username","name","password","email","ban","banReason"])["status"]);
+        core::debugMessage("数据库","插入数据：".dbTool::insert("users",["username","name","password","email","ban","banReason"],["sch","sch","123","sch@20j1.cn","",""])["status"]);
+//        core::debugMessage("数据库","删除数据：".dbTool::deleteRow("users",["username"=>"sch"])["status"]);
+        core::debugMessage("数据库","读取数据：".json_encode(dbTool::select("users",["*"],["username"=>"sch"])));
+    }
 }
