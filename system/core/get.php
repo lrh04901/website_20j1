@@ -79,7 +79,7 @@ class get
         if ($isLogin === "yes") {
             core::loadErrorPage("登录状态", "已登录");
         } else {
-            core::loadErrorPage("登录状态", "未登录");
+            core::loadErrorPage("登录状态", "未登录,<a href='./?/login'>去登录</a>。");
         }
     }
 }
