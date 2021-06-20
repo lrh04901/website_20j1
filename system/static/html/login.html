@@ -12,11 +12,11 @@
       <div class="convert">
         <span id="login" class="active">{TEXT_LOGIN}</span><span>/</span><span id="signup">{TEXT_SIGNUP}</span>
       </div>
-      <form action="login.php" method="POST">
+      <form action="{LINK_login}" method="POST">
         <div id="email" class="input" placeholder='E-mail'><input type="text"></div>
         <div class="input" placeholder='{TEXT_LOGIN_USERNAME}'><input type="text"></div>
-        <div class="input" placeholder='{TEXT_PASSWORD}'><input type="password"></div>
-        <div id="repeat" class="input" placeholder='{TEXT_CONFIRM_PASSWORD}'><input type="password"></div>
+        <div class="input" placeholder='{TEXT_LOGIN_PASSWORD}'><input type="password"></div>
+        <div id="repeat" class="input" placeholder='{TEXT_LOGIN_CONFIRM_PASSWORD}'><input type="password"></div>
         <a href="{LINK_forgetPassword}"><span>{TEXT_FORGET_PASSWORD}</span></a><br>
         <a href="{LINK_/}" target="_self"><span>{TEXT_BACK_TO_HOME}</span></a>
         <button type="submit">{TEXT_LOGIN}</button>
