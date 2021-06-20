@@ -25,18 +25,30 @@ nav{
     background-color: rgba(153, 153, 153, 0.9);
 }
 
-.nav-h{
+.nav-h a{
     font-size: 30px;
     font-weight: 600;
     color: #ffffff;
     flex: 1;
+    text-decoration: none;
+    color: #000;
+    transition: 0.2s ease-in-out;
+}
+
+.nav-h a:hover{
+    cursor: pointer;
+    color: #fff;
+}
+
+.nav-h a:visited{
+    color: #fff;
 }
 
 .nav-list{
     flex: 1;
     display: flex;
     justify-content: space-between;
-    max-width: 650px;
+    max-width: 750px;
 }
 
 .nav-list li{
@@ -66,7 +78,7 @@ nav{
     display: none;
 }
 
-@media screen and (max-width: 14500px) {
+@media screen and (max-width: 1450px) {
     .burger {
         display: block;
     }
