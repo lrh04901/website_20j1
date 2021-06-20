@@ -25,7 +25,6 @@ class fileDBTool
             $c[$b[$keys[$i]]] = $values[$i];
         }
         $a[count($a)] = $c;
-        print_r($a);
         file_put_contents(FILE_DB_PATH . $tableName . "." . FILE_DB_POSTFIX, encryptTool::encode(json_encode($a), SECRET, true));
         return ["status" => "success"];
     }
