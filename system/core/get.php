@@ -6,13 +6,12 @@ include "redirect.php";
  */
 class get
 {
-    //Array ( [0] => title=更新站点 [1] => css=zui.min,zui.uploader.min,update [2] => js=zui.uploader.min,webuploader.min,update [3] => )
     /**
      * 加载指定页面
      * @param string $name 页面名称
      * @return void
      */
-    public static function load(string $name):void
+    public static function load(string $name): void
     {
         $html = file_get_contents(HTML_PATH . $name . ".html");
         $args = strstr($html, "\n", true);
@@ -57,48 +56,30 @@ class get
             core::loadErrorPage("无法加载", "当前页面存在一些问题，所以你暂时无法访问这个页面。");
         }
     }
-    /*public static function index()
-    {
-        self::oneKeyLoad("index");
-//        loadHead(L["INDEX_TITLE"], ["css" => [["index", "media=\"screen\""]],"js"=>["jquery"]]);
-//        loadBody("index");
-    }
 
-    public static function update()
-    {
-        self::oneKeyLoad("update");
-//        loadHead("更新站点", ["css" => ["zui.min", "zui.uploader.min", "update"], "js" => ["zui.uploader.min", "webuploader.min", "update"]]);
-//        loadBody("update");
-    }
-
-    public static function classIntroduce()
-    {
-        self::oneKeyLoad("classIntroduce");
-//        loadHead("胡杨班", ["css" => [["classIntroduce", "media=\"screen\""]]]);
-//        loadBody("classIntroduce");
-    }
-
-    public static function yule()
-    {
-        self::oneKeyLoad("yule");
-//        loadHead("娱乐", ["css" => [["yule", "media=\"screen\""]],"js"=>["jquery"]]);
-//        loadBody("yule");
-    }*/
-    /*
-        public static  function Page404()
-        {
-            core::loadHead("404 Not Found", ["css" => [["Page404", "media=\"screen\""]]]);
-            loadBody("Page404");
-        }*/
     /**
      * 设置语言
      * @return void
      */
-    public static function setLang():void
+    public static function setLang(): void
     {
         $lang = argsTool::get("lang");
         $from = argsTool::get("from");
         cookie::set("local_language", $lang);
         header("Location:./?/" . $from);
+    }
+
+    /**
+     * 判断是否登录
+     * @return void
+     */
+    public static function isLogin(): void
+    {
+        $isLogin = cookie::get("isLogin");
+        if ($isLogin === "yes") {
+            core::loadErrorPage("登录状态", "已登录");
+        } else {
+            core::loadErrorPage("登录状态", "未登录");
+        }
     }
 }
