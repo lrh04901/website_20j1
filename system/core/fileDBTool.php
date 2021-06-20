@@ -28,7 +28,8 @@ class fileDBTool
         return ["status" => "success"];
     }
 
-    public static function select(string $tableName,array $keys,array $where):array{
+    public static function select(string $tableName, array $keys, array $where): array
+    {
         $a = json_decode(encryptTool::decode(file_get_contents(FILE_DB_PATH . $tableName . ".xcdb"), SECRET, true), true);
         $data = array();
         $b = dbTool::getTableHead($a);
@@ -47,7 +48,8 @@ class fileDBTool
         return ["status" => "success", "data" => $data];
     }
 
-    public static function deleteRow(string $tableName,array $where):array{
+    public static function deleteRow(string $tableName, array $where): array
+    {
         if (!count($where)) {
             return ["status" => "fail", "reason" => "where参数不能为空数组，若要删除所有数据请指定where为[*]"];
         }
@@ -70,7 +72,8 @@ class fileDBTool
         return ["status" => "success"];
     }
 
-    public static function deleteTable(string $tableName):array{
+    public static function deleteTable(string $tableName): array
+    {
         if (file_exists(FILE_DB_PATH . $tableName . ".xcdb")) {
             if (unlink(FILE_DB_PATH . $tableName . ".xcdb")) {
                 $result = ["status" => "success"];
@@ -83,11 +86,13 @@ class fileDBTool
         return $result;
     }
 
-    public static function tableExist(string $tableName):bool{
-        return file_exists(FILE_DB_PATH . $tableName . ".xcdb");
+    public static function tableExist(string $tableName): bool
+    {
+        return file_exists(FILE_DB_PATH . $tableName . "." . FILE_DB_POSTFIX);
     }
 
-    public static function update(string $tableName,array $keys,array $values,array $where):array{
+    public static function update(string $tableName, array $keys, array $values, array $where): array
+    {
         $a = json_decode(encryptTool::decode(file_get_contents(FILE_DB_PATH . $tableName . ".xcdb"), SECRET, true), true);
         $h = self::getTableHead($a);
         for ($i = 1; $i < count($a); $i++) {
