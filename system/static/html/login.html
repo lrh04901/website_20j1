@@ -1,6 +1,4 @@
-<!--title={LOGIN_TITLE};css=login;js=jquery;-->
 <body>
-{nav}
 <div class="overall">
   <img src="" alt="login image">
   <div class="panel">
@@ -10,16 +8,17 @@
         <hr align="justify" color="cadetblue" width="80%">
       </div>
       <div class="convert">
-        <span id="login" class="active">{TEXT_LOGIN}</span><span>/</span><span id="signup">{TEXT_SIGNUP}</span>
+        <span id="login" class="active">登录</span><span>/</span><span id="signup">注册</span>
       </div>
       <form action="login.php" method="POST">
         <div id="email" class="input" placeholder='E-mail'><input type="text"></div>
-        <div class="input" placeholder='{TEXT_LOGIN_USERNAME}'><input type="text"></div>
-        <div class="input" placeholder='{TEXT_PASSWORD}'><input type="password"></div>
-        <div id="repeat" class="input" placeholder='{TEXT_CONFIRM_PASSWORD}'><input type="password"></div>
-        <a href="{LINK_forgetPassword}"><span>{TEXT_FORGET_PASSWORD}</span></a><br>
-        <a href="{LINK_/}" target="_self"><span>{TEXT_BACK_TO_HOME}</span></a>
-        <button type="submit">{TEXT_LOGIN}</button>
+        <div class="input" placeholder='用户名'><input type="text"></div>
+        <div class="input" placeholder='密码'><input type="password"></div>
+        <div id="repeat" class="input" placeholder='确认密码'><input type="password"></div>
+        <a href="#"><span>忘记密码</span></a><br>
+        <a href="" target="_self" ><span>English</span></a><br>
+        <a href="" target="_self"><span>返回首页</span></a>
+        <button type="submit">登录</button>
       </form>
     </div>
   </div>
