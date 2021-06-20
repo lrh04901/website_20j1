@@ -279,7 +279,7 @@ class core
     public static function debugMessage(string $label, string $message, bool $die = false): void
     {
         $time = date("m-d H:i");
-        echo "[$time $label] $message";
+        echo "[$time $label] $message<br>";
         if ($die)die();
     }
 }
