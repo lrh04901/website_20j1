@@ -94,6 +94,9 @@ class get
             core::loadErrorPage("拒绝访问","你没有权限进入当前页面");
             die();
         }
-        core::debugMessage("数据库控制","欢迎来到数据库控制");
+        core::debugMessage("数据库","欢迎来到数据库控制页面");
+        core::debugMessage("数据库","数据库类型：".dbTool::DBType());
+        core::debugMessage("数据库","数据表users".dbTool::tableExist("users")?"存在":"不存在");
+        core::debugMessage("数据库","创建数据表：".dbTool::createTable("users",["username","user","password","email","ban","banReason"])["status"]);
     }
 }
