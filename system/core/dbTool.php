@@ -154,9 +154,9 @@ class dbTool
     /**
      * 判断数据表是否存在
      * @param string $tableName 数据表名
-     * @return bool 返回一个布尔值，存在为true，不存在为false
+     * @return string 返回一个字符串，存在为yes，不存在为no
      */
-    public static function tableExist(string $tableName): bool
+    public static function tableExist(string $tableName): string
     {
         $result = [];
         switch (self::getDataBaseType()) {
