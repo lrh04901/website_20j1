@@ -13,13 +13,13 @@
         <span id="login" class="active">{TEXT_LOGIN}</span><span>/</span><span id="signup">{TEXT_SIGNUP}</span>
       </div>
       <form action="{LINK_login}" method="POST">
-        <div id="email" class="input" placeholder='E-mail'><input type="text"></div>
-        <div class="input" placeholder='{TEXT_LOGIN_USERNAME}'><input type="text"></div>
-        <div class="input" placeholder='{TEXT_LOGIN_PASSWORD}'><input type="password"></div>
-        <div id="repeat" class="input" placeholder='{TEXT_LOGIN_CONFIRM_PASSWORD}'><input type="password"></div>
+        <div id="email" class="input" placeholder='E-mail'><input id="input_email" type="email"></div>
+        <div class="input" placeholder='{TEXT_LOGIN_USERNAME}'><input id="input_user" type="text"></div>
+        <div class="input" placeholder='{TEXT_LOGIN_PASSWORD}'><input id="input_pwd" type="password"></div>
+        <div id="repeat" class="input" placeholder='{TEXT_LOGIN_CONFIRM_PASSWORD}'><input id="input_confirm_pwd" type="password"></div>
         <a href="{LINK_forgetPassword}"><span>{TEXT_FORGET_PASSWORD}</span></a><br>
         <a href="{LINK_/}" target="_self"><span>{TEXT_BACK_TO_HOME}</span></a>
-        <button type="submit">{TEXT_LOGIN}</button>
+        <button type="submit" formaction="javascript:;">{TEXT_LOGIN}</button>
       </form>
     </div>
   </div>
@@ -27,7 +27,54 @@
 
 
 {nav}
-</body>
+
+<script>
+  /**
+   * 登录控制部分 by SCH
+   */
+  $("button").click(function (){
+    //阻止提交和跳转，并进行异步操作
+    let email = $("#input_email").val();
+    let user = $("#input_user").val();
+    let pass = $("#input_pwd").val();
+    let confirm_pass = $("#input_confirm_pwd").val();
+    let action = $(this).text();
+    if (action === "{TEXT_LOGIN}"){
+      //登录
+      if (user&&pass){
+        $.post("{LINK_login}",{
+          user:user,
+          pass:pass
+        },function (text) {
+          let data = JSON.parse(text);
+          if (data.status === "success"){
+            alert("{TEXT_LOGIN_SUCCESS}");
+          }else if (data.status === "fail"){
+            if (data.reason === "database-error"){
+              alert("{TEXT_DATABASE_ERROR}");
+            }else if (data.reason === "user-not-exist"){
+              alert("{TEXT_USER_NOT_EXIST}");
+            }else if (data.reason === "password-wrong"){
+              alert("{TEXT_PASSWORD_WRONG}");
+            }else if (data.reason === "ban"){
+              alert("{TEXT_BAN}"+data.banReason);
+            }
+          }else {
+            alert("{TEXT_PROGRAM_EXCEPTION}");
+          }
+        });
+      }else {
+        alert("{TEXT_FORM_CANT_BE_EMPTY}");
+      }
+    }else if (action === "{TEXT_SIGNUP}"){
+      //注册
+    }else {
+      //程序异常
+      alert("{TEXT_PROGRAM_EXCEPTION}");
+    }
+    return false;
+  });
+</script>
 
 <script>
   $('#login').click(function(){
@@ -35,7 +82,7 @@
     $(this).addClass('active');
     $(this).parents('.details ').removeClass('signup');
     $(this).parents('.details ').addClass('login');
-    $('form button').text('登录');
+    $('form button').text('{TEXT_LOGIN');
   })
 
   $('#signup').click(function(){
@@ -43,7 +90,7 @@
     $(this).addClass('active');
     $(this).parents('.details ').removeClass('login');
     $(this).parents('.details ').addClass('signup');
-    $('form button').text('注册');
+    $('form button').text('{TEXT_SIGNUP}');
   })
 
   $('.input input').on('focus',function(){
@@ -88,4 +135,5 @@
     /*widthHr.style.width = 250px;*/
   },false);
 </script>
-</html>
+
+</body>
