@@ -96,10 +96,10 @@ class get
         }
         core::debugMessage("数据库","欢迎来到数据库控制页面");
         core::debugMessage("数据库","数据库类型：".dbTool::DBType());
-        core::debugMessage("数据库","删除数据表users：".json_encode(dbTool::deleteTable("users")));
+//        core::debugMessage("数据库","删除数据表users：".json_encode(dbTool::deleteTable("users")));
         core::debugMessage("数据库","数据表users".(dbTool::tableExist("users")=="yes"?"存在":"不存在"));
-        core::debugMessage("数据库","创建数据表：".dbTool::createTable("users",["username","name","password","email","ban","banReason"])["status"]);
-        core::debugMessage("数据库","插入数据：".dbTool::insert("users",["username","name","password","email","ban","banReason"],["sch","sch","123","sch@20j1.cn","",""])["status"]);
+//        core::debugMessage("数据库","创建数据表：".dbTool::createTable("users",["username","name","password","email","ban","banReason"])["status"]);
+//        core::debugMessage("数据库","插入数据：".dbTool::insert("users",["username","name","password","email","ban","banReason"],["sch","sch","123","sch@20j1.cn","",""])["status"]);
 //        core::debugMessage("数据库","删除数据：".dbTool::deleteRow("users",["username"=>"sch"])["status"]);
         core::debugMessage("数据库","读取数据：".json_encode(dbTool::select("users",["*"],["username"=>"sch"])));
     }
