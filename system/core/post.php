@@ -37,7 +37,30 @@ class post
     }
 
     public static function login():bool{
-        echo "Yes";
+        $user = argsTool::post("user");
+        $pass = argsTool::post("pass");
+//        echo $pass;
+        $result = dbTool::select("users",["*"],["username"=>$user]);
+//        echo $result["data"]["password"];
+//        print_r($result);
+        if ($result["status"]=="success"){
+            if ($result["data"]){
+                if ($result["data"][0]["password"]==$pass){
+                    if ($result["data"][0]["ban"]=="yes"){
+                        echo json_encode(["status"=>"fail","reason"=>"ban","banReason"=>$result["data"]["banReason"]]);
+                    }else{
+                        echo json_encode(["status"=>"success"]);
+                    }
+                }else{
+                    echo json_encode(["status"=>"fail","reason"=>"password-wrong"]);
+                }
+            }else{
+                echo json_encode(["status"=>"fail","reason"=>"user-not-exist"]);
+            }
+        }else{
+            echo json_encode(["status"=>"fail","reason"=>"database-error"]);
+        }
+//        echo json_encode($result);
         return true;
     }
 }
