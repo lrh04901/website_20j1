@@ -17,7 +17,8 @@
                 <div class="input" placeholder='{TEXT_LOGIN_USERNAME}'><input id="input_user" type="text"></div>
                 <div class="input" placeholder='{TEXT_LOGIN_PASSWORD}'><input id="input_pwd" type="password"></div>
                 <div id="repeat" class="input" placeholder='{TEXT_LOGIN_CONFIRM_PASSWORD}'><input id="input_confirm_pwd" type="password"></div>
-                <a href="{LINK_forgetPassword}"><span>{TEXT_FORGET_PASSWORD}</span></a><br>
+                <br>
+                <a href="{LINK_forgetPassword}" target="_self"><span>{TEXT_FORGET_PASSWORD}</span></a><br>
                 <a href="{LINK_/}" target="_self"><span>{TEXT_BACK_TO_HOME}</span></a>
                 <button type="submit" formaction="javascript:;">{TEXT_LOGIN}</button>
             </form>
@@ -34,7 +35,7 @@
      */
     $("button").click(function (){
         //阻止提交和跳转，并进行异步操作
-        let email = $("#input_email").val();
+        let mail = $("#input_email").val();
         let user = $("#input_user").val();
         let pass = $("#input_pwd").val();
         let confirm_pass = $("#input_confirm_pwd").val();
@@ -58,16 +59,58 @@
                             alert("{TEXT_PASSWORD_WRONG}");
                         }else if (data.reason === "ban"){
                             alert("{TEXT_BAN}"+data.banReason);
+                        }else {
+                            alert("{TEXT_PROGRAM_EXCEPTION}");
                         }
                     }else {
                         alert("{TEXT_PROGRAM_EXCEPTION}");
                     }
                 });
+            }else if (user) {
+                $("#input_pwd").focus();
             }else {
+                $("#input_user").focus();
                 alert("{TEXT_FORM_CANT_BE_EMPTY}");
             }
         }else if (action === "{TEXT_SIGNUP}"){
             //注册
+            if (email&&user&&pass&&confirm_pass){
+                if (pass===confirm_pass) {
+                    $.post("{LINK_signup}", {
+                        user:user,
+                        pass:pass,
+                        mail:mail
+                    }, function (text) {
+                        let data = JSON.parse(text);
+                        if (data.status === "success"){
+                            alert("{TEXT_SIGNUP_SUCCESS}");
+                        }else if (data.status === "fail"){
+                            if (data.reason === "user-exist"){
+                                alert("{TEXT_USER_EXIST}");
+                            }else if (data.reason === "mail-exist"){
+                                alert("{TEXT_MAIL_EXIST}");
+                            }else if (data.reason === "database-error"){
+                                alert("{TEXT_DATABASE_ERROR}");
+                            }else {
+                                alert("{TEXT_PROGRAM_EXCEPTION}");
+                            }
+                        }else {
+                            alert("{TEXT_PROGRAM_EXCEPTION}");
+                        }
+                    });
+                }else {
+                    alert("{TEXT_CONFIRM_PASS_DIFFERENT}");
+                }
+            }else if (mail&&user&&pass){
+                $("#input_confirm_pwd").focus();
+            }else if (mail&&user){
+                $("#input_pwd").focus();
+            }else if (mail){
+                $("#input_user").focus();
+            }else {
+                alert("{TEXT_FORM_CANT_BE_EMPTY}");
+                $("#input_email").focus();
+            }
         }else {
             //程序异常
             alert("{TEXT_PROGRAM_EXCEPTION}");
@@ -77,11 +120,16 @@
 </script>
 
 <script>
+    $(function (){//打开页面时自动设置焦点
+       $("#input_user").focus();
+    });
+
     $('#login').click(function(){
         $('.convert span').removeClass('active');
         $(this).addClass('active');
         $(this).parents('.details ').removeClass('signup');
         $(this).parents('.details ').addClass('login');
+        $("#input_user").focus();
         $('form button').text('{TEXT_LOGIN}');
     })
 
@@ -90,6 +138,7 @@
         $(this).addClass('active');
         $(this).parents('.details ').removeClass('login');
         $(this).parents('.details ').addClass('signup');
+        $("#input_email").focus();
         $('form button').text('{TEXT_SIGNUP}');
     })
 
