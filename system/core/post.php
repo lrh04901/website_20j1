@@ -63,4 +63,34 @@ class post
 //        echo json_encode($result);
         return true;
     }
+    public static function signup():bool{
+        $user = argsTool::post("user");
+        $pass = argsTool::post("pass");
+        $mail = argsTool::post("mail");
+        $r_a = dbTool::select("users",["*"],["username"=>$user]);
+        if ($r_a["status"]=="success"){
+            if ($r_a["data"]){
+                echo json_encode(["status"=>"fail","reason"=>"user-exist"]);
+            }else{
+                $r_b = dbTool::select("users",["*"],["email"=>$mail]);
+                if ($r_b["status"]=="success"){
+                    if ($r_b["data"]){
+                        echo json_encode(["status"=>"fail","reason"=>"mail-exist"]);
+                    }else{
+                        $r_b = dbTool::insert("users", ["username", "name", "password", "email", "ban", "banReason", "admin"], [$user, $user, $pass, $mail, "", "", ""]);
+                        if ($r_b["status"] == "success") {
+                            echo json_encode(["status" => "success"]);
+                        } else {
+                            echo json_encode(["status" => "fail", "reason" => "database-error"]);
+                        }
+                    }
+                }else{
+                    echo json_encode(["status"=>"fail","reason"=>"database-error"]);
+                }
+            }
+        }else{
+            echo json_encode(["status"=>"fail","reason"=>"database-error"]);
+        }
+        return true;
+    }
 }
