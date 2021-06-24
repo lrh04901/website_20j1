@@ -94,7 +94,7 @@ class dbTool
      * 从数据库中读取数据
      * @param string $tableName 数据表名
      * @param array $keys 需要读取的数据的键，全部数据使用["*"]
-     * @param array $where 查找条件
+     * @param array $where 查找条件，全部数据使用["*"]
      * @return array 返回数组，详情请阅读对应数据库模块的文档
      */
     public static function select(string $tableName, array $keys, array $where): array
@@ -187,6 +187,23 @@ class dbTool
                 break;
             case "mysql":
                 $result = mysqlTool::update($tableName,$keys,$values,$where);
+                break;
+        }
+        return $result;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getTables():array
+    {
+        $result = [];
+        switch (self::getDataBaseType()){
+            case "file":
+                $result = fileDBTool::getTables();
+                break;
+            case "mysql":
+                $result = mysqlTool::getTables();
                 break;
         }
         return $result;
