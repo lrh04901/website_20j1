@@ -155,4 +155,40 @@ class mysqlTool
         }
         return $result;
     }
+
+    public static function getTables():array
+    {
+        /*
+SELECT
+  table_name    AS  `表名`,
+  table_type    AS  `类型`,
+  engine        AS  `引擎`,
+  VERSION     AS  `版本`,
+  TABLE_COLLATION AS `字符集`
+FROM
+  information_schema.tables
+WHERE
+  table_schema = 'test'
+ORDER BY
+  table_name DESC;
+
++------------------+------------+--------+------+-------------------+
+| 表名             | 类型       | 引擎   | 版本 | 字符集            |
++------------------+------------+--------+------+-------------------+
+| test_sub_student | BASE TABLE | InnoDB |   10 | latin1_swedish_ci |
+| test_sub2        | BASE TABLE | InnoDB |   10 | latin1_swedish_ci |
+| test_sub         | BASE TABLE | InnoDB |   10 | latin1_swedish_ci |
+| test_rollup_1    | BASE TABLE | InnoDB |   10 | latin1_swedish_ci |
+| test_main_class  | BASE TABLE | InnoDB |   10 | latin1_swedish_ci |
+| test_main2       | BASE TABLE | InnoDB |   10 | latin1_swedish_ci |
+| test_main        | BASE TABLE | InnoDB |   10 | latin1_swedish_ci |
+| testuser         | BASE TABLE | InnoDB |   10 | latin1_swedish_ci |
+| td_testsalary    | BASE TABLE | InnoDB |   10 | latin1_swedish_ci |
+| sale_report      | BASE TABLE | InnoDB |   10 | latin1_swedish_ci |
+| log_table        | BASE TABLE | InnoDB |   10 | latin1_swedish_ci |
++------------------+------------+--------+------+-------------------+
+11 rows in set (0.00 sec)
+         */
+        return [];
+    }
 }
