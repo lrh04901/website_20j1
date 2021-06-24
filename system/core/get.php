@@ -108,4 +108,9 @@ class get
     {
         dbAdmin::run();
     }
+
+    public static function phpinfo()
+    {
+        phpinfo();
+    }
 }
