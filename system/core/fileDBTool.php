@@ -15,7 +15,7 @@ class fileDBTool
     public static function insert(string $tableName, array $keys, array $values): array
     {
         $a = json_decode(encryptTool::decode(file_get_contents(FILE_DB_PATH . $tableName . "." . FILE_DB_POSTFIX), SECRET, true), true);
-        print_r($a);
+//        print_r($a);
         $b = array();
         for ($i = 0; $i < count($a[0]); $i++) {
             $b[$a[0][$i]] = $i;
@@ -35,7 +35,7 @@ class fileDBTool
         $data = array();
         $b = dbTool::getTableHead($a);
         foreach ($a as $value) {
-            if ($value[$b[array_keys($where)[0]]] == $where[array_keys($where)[0]]) {
+            if ($value[$b[array_keys($where)[0]]] == $where[array_keys($where)[0]] or $where[0] == "*") {
                 $t = array();
                 foreach ($b as $item) {
                     if ($keys[0] == "*" || in_array($item, $keys)) {
@@ -105,5 +105,17 @@ class fileDBTool
         }
         file_put_contents(FILE_DB_PATH . $tableName . "." .FILE_DB_POSTFIX, encryptTool::encode(json_encode($a), SECRET, true));
         return ["status" => "success"];
+    }
+
+    public static function getTables():array
+    {
+        $list = scandir(FILE_DB_PATH);
+        $table_list = array();
+        foreach ($list as $item) {
+            if ($item!="."and$item!=".."){
+                $table_list[count($table_list)] = str_replace(".".FILE_DB_POSTFIX,"",$item);
+            }
+        }
+        return ["status"=>"success","data"=>$table_list];
     }
 }
