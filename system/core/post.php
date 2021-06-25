@@ -38,7 +38,7 @@ class post
 
     public static function login():bool{
         $user = argsTool::post("user");
-        $pass = argsTool::post("pass");
+        $pass = hash("sha256",argsTool::post("pass"));
 //        echo $pass;
         $result = dbTool::select("users",["*"],["username"=>$user]);
 //        echo $result["data"]["password"];
@@ -65,7 +65,7 @@ class post
     }
     public static function signup():bool{
         $user = argsTool::post("user");
-        $pass = argsTool::post("pass");
+        $pass = hash("sha256",argsTool::post("pass"));
         $mail = argsTool::post("mail");
         $r_a = dbTool::select("users",["*"],["username"=>$user]);
         if ($r_a["status"]=="success"){
