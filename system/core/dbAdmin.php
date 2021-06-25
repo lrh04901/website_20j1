@@ -52,7 +52,11 @@ let pwd = $('#pwd').val();location.href = './?/dbAdmin&p=login&pwd='+pwd;});});<
         }
     }
 
-    public static function main()
+    /**
+     * 数据库管理首页（查看数据表列表）
+     * @return void
+     */
+    public static function main():void
     {
         if (cookie::get("dbAdminLogin")!="yes")header("Location:".A."&p=index");
         $result = dbTool::getTables();
@@ -75,7 +79,11 @@ let pwd = $('#pwd').val();location.href = './?/dbAdmin&p=login&pwd='+pwd;});});<
         }
     }
 
-    public static function deleteTable()
+    /**
+     * 删除数据表
+     * @return void
+     */
+    public static function deleteTable():void
     {
         self::loadHead("删除数据表");
         $table = argsTool::get("table");
@@ -88,7 +96,11 @@ let pwd = $('#pwd').val();location.href = './?/dbAdmin&p=login&pwd='+pwd;});});<
         self::gotoWithTime(A."&p=main",1);
     }
 
-    public static function createTable()
+    /**
+     * 创建数据表
+     * @return void
+     */
+    public static function createTable():void
     {
         self::loadHead("创建数据表");
         $name = argsTool::get("table");
@@ -103,12 +115,23 @@ let pwd = $('#pwd').val();location.href = './?/dbAdmin&p=login&pwd='+pwd;});});<
         self::gotoWithTime(A."&p=main",1);
     }
 
-    public static function loadHead($title)
+    /**
+     * 加载头部代码
+     * @param string $title 页面标题
+     * @return void
+     */
+    public static function loadHead(string $title):void
     {
         echo "<head><title>$title</title><!--script src='".JS_PATH."vue.global.js'></script--><script src='".JS_PATH."jquery.min.js'></script><script src='".JS_PATH."zui.datatable.min.js'></script><script src='".JS_PATH."zui.min.js'></script><link rel='stylesheet' href='".CSS_PATH."zui.min.css'><link rel='stylesheet' href='".CSS_PATH."zui.datatable.min.css'></head>";
     }
 
-    private static function gotoWithTime($path, $time)
+    /**
+     * 延迟跳转
+     * @param string $path 跳转的地址
+     * @param int $time 等待时间（s）
+     * @return void
+     */
+    private static function gotoWithTime(string $path, int $time):void
     {
         header("Refresh:$time;url=$path");
     }
