@@ -6,7 +6,11 @@ const A = "./?/dbAdmin";
  */
 class dbAdmin
 {
-    public static function run()
+    /**
+     * 整个模块启动入口
+     * @return void
+     */
+    public static function run():void
     {
         $p = argsTool::get("p");
         if (!$p) $p = "index";
@@ -15,7 +19,11 @@ class dbAdmin
         call_user_func("self::$p");
     }
 
-    public static function index()
+    /**
+     * 数据库管理首页
+     * @return void
+     */
+    public static function index():void
     {
         if (cookie::get("dbAdminLogin")=="yes"){
             header("Location: ".A."&p=main");
@@ -27,7 +35,11 @@ class dbAdmin
 let pwd = $('#pwd').val();location.href = './?/dbAdmin&p=login&pwd='+pwd;});});</script></body>";
     }
 
-    public static function login()
+    /**
+     * 数据库管理页面登录
+     * @return void
+     */
+    public static function login():void
     {
         self::loadHead("登录");
         $pwd = argsTool::get("pwd");
@@ -49,22 +61,55 @@ let pwd = $('#pwd').val();location.href = './?/dbAdmin&p=login&pwd='+pwd;});});<
             $table_count = count($result["data"]);
             echo "<body style='background:#cccccccc;'><h1>当前数据库中有".$table_count."个数据表：</h1><h2>数据库类型：".dbTool::DBType()."</h2><table class='table datatable'><thead><th>数据表名</th><th>管理</th><th>删除</th></thead><tbody>";
             foreach ($result["data"] as $datum) {
-                echo "<td class='text-important'>$datum</td><td><a href='".A."&p=manageTable&table=".$datum."'>进入管理</a></td><td><a class='text-red' href='javascript:delete'>删除数据表</a></td>";
+                echo "<td class='text-important'>$datum</td><td><a href='".A."&p=manageTable&table=".$datum."'>进入管理</a></td><td><a class='text-red' href='javascript:deleteTable(\"".$datum."\");'>删除数据表</a></td></tr>";
             }
-            echo "</tbody></table><button id='create'>创建数据表</button><script>$(function() {
-              $('table.datatable').datatable();
-            });</script><script>function deleteTable(tableName){
-                location.href = '".A."' + '&p=delete&table=' + tableName;
-            }function create(){
-                
-            }</script>";
+            echo "</tbody></table><button id='create' class='btn btn-lg btn-primary'>创建数据表</button>
+            <div class='modal fade' id='deleteTableModal'><div class='modal-dialog'><div class='modal-content'><div class='modal-header'><button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>&times;</span><span class='sr-only'>关闭</span></button><h4>删除数据表</h4></div><div class='modal-body'><p>是否删除数据表：<b id='deleteTableName'></b></p></div><div class='modal-footer'><button type='button' class='btn btn-light' data-dismiss='modal'>取消</button><button type='button' class='btn btn-danger' id='deleteTableConfirm'>删除</button></div></div></div></div>
+            <div class='modal fade' id='createTableModal'><div class='modal-dialog'><div class='modal-content'><div class='modal-header'><button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>&times;</span><span class='sr-only'>关闭</span></button><h4>创建数据表</h4></div><div class='modal-body'><label for='createTableName'>数据表名：</label><input type='text' id='createTableName' class='form-control' name='createTableName' placeholder='数据表名'><label for='createTableCols'>数据表列(每一项用英文逗号分隔)：</label><input type='text' id='createTableCols' class='form-control' name='creareTableCols' placeholder='数据表列(每一项用英文逗号分隔)'></div><div class='modal-footer'><button type='button' class='btn btn-light' data-dismiss='modal'>取消</button><button type='button' class='btn btn-primary' id='createTableConfirm'>创建</button></div></div></div></div>
+            <script>$(function() { $('#deleteTableConfirm').click(function (){
+            location.href = '".A."' + '&p=deleteTable&table=' + $('#deleteTableName').text();});$('#createTableConfirm').click(function() { 
+            location.href = '".A."' + '&p=createTable&table=' + $('#createTableName').val() + '&cols=' + $('#createTableCols').val();});$('#create').click(function (){
+            $('#createTableModal').modal();});});</script><script>function deleteTable(tableName){ $('#deleteTableName').text(tableName);$('#deleteTableModal').modal();}</script>";
         }else{
             echo "<h1>数据库异常</h1>";
         }
     }
 
+    public static function deleteTable()
+    {
+        self::loadHead("删除数据表");
+        $table = argsTool::get("table");
+        $result = dbTool::deleteTable($table);
+        if ($result["status"]=="success"){
+            echo "<h1>成功</h1>";
+        }else{
+            echo "<h1>失败</h1>";
+        }
+        self::gotoWithTime(A."&p=main",1);
+    }
+
+    public static function createTable()
+    {
+        self::loadHead("创建数据表");
+        $name = argsTool::get("table");
+        $cols = argsTool::get("cols");
+        $cols_array = explode(",",$cols);
+        $result = dbTool::createTable($name,$cols_array);
+        if ($result["status"]=="success"){
+            echo "<h1>成功</h1>";
+        }else{
+            echo "<h1>失败</h1>";
+        }
+        self::gotoWithTime(A."&p=main",1);
+    }
+
     public static function loadHead($title)
     {
         echo "<head><title>$title</title><!--script src='".JS_PATH."vue.global.js'></script--><script src='".JS_PATH."jquery.min.js'></script><script src='".JS_PATH."zui.datatable.min.js'></script><script src='".JS_PATH."zui.min.js'></script><link rel='stylesheet' href='".CSS_PATH."zui.min.css'><link rel='stylesheet' href='".CSS_PATH."zui.datatable.min.css'></head>";
+    }
+
+    private static function gotoWithTime($path, $time)
+    {
+        header("Refresh:$time;url=$path");
     }
 }
