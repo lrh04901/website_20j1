@@ -28,6 +28,7 @@ class core
         self::loadComponent("uploader");//加载上传模块
         self::loadComponent("arrayTool");//加载数组模块
         self::loadComponent("dbAdmin");//加载数据库管理
+        include(CORE_PATH . "mail.phar");
         date_default_timezone_set("PRC");//设置时区
     }
 
@@ -112,7 +113,7 @@ class core
                 $component_path = "phar://core.phar/$name.php";
             }
         }
-        if (defined("DEBUG")&&DEBUG=="no"){
+        if (defined("DEBUG")&&DEBUG=="yes"){
             $component_path = "./system/core/dev/$name.php";
         }else{
             $component_path = "phar://core.phar/$name.php";
