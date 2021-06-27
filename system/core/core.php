@@ -1,5 +1,4 @@
 <?php
-include "redirect.php";
 
 /**
  * 核心模块，用于加载其余模块、加载网页等
@@ -12,11 +11,14 @@ class core
      */
     public static function initialize(): void
     {
+        include("./system/core/core.phar");
         self::loadComponent("define");//加载定义模块
-        self::loadComponent("get");//加载get请求模块
-        self::loadComponent("post");//加载post请求模块
+        define::run();
         self::loadComponent("cookie");//加载cookie模块
         self::loadComponent("language");//加载语言模块
+        language::run();
+        self::loadComponent("get");//加载get请求模块
+        self::loadComponent("post");//加载post请求模块
         self::loadComponent("argsTool");//加载参数模块
         self::loadComponent("encryptTool");//加载加密模块
         self::loadComponent("dbTool");//加载数据库模块
@@ -104,8 +106,18 @@ class core
         if (defined("CORE_PATH")) {
             $component_path = CORE_PATH . $name . ".php";
         } else {
-            $component_path = "system/core/" . $name . ".php";
+            if (file_exists("./system/core/define.php")) {
+                $component_path = "system/core/dev/$name.php";
+            }else{
+                $component_path = "phar://core.phar/$name.php";
+            }
         }
+        if (defined("DEBUG")&&DEBUG=="no"){
+            $component_path = "./system/core/dev/$name.php";
+        }else{
+            $component_path = "phar://core.phar/$name.php";
+        }
+//        echo $component_path."<br>";
         if (file_exists($component_path)) {
             include($component_path);
         } else {
