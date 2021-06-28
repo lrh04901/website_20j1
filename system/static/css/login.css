@@ -75,6 +75,21 @@ form .input{
     border-bottom: .1rem solid rgb(181,154,254);
 }
 
+.input #verify{
+    background-color: #0d3d88;
+    color: #fff;
+    border-radius: 20px;
+    width: 60px;
+    height: 25px;
+    position: relative;
+    top: -30px;
+    left: 150px;
+}
+
+.input #verify:hover{
+    cursor: pointer;
+}
+
 .input::after{
     content: attr(placeholder);
     position: absolute;

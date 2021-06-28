@@ -13,7 +13,7 @@
                 <span id="login" class="active">{TEXT_LOGIN}</span><span>/</span><span id="signup">{TEXT_SIGNUP}</span>
             </div>
             <form action="{LINK_login}" method="POST">
-                <div id="email" class="input" placeholder='E-mail'><input id="input_email" type="email"></div>
+                <div id="email" class="input" placeholder='E-mail'><input id="input_email" type="email" required="required"><input id="verify" type="button" value="验证"></div>
                 <div class="input" placeholder='{TEXT_LOGIN_USERNAME}'><input id="input_user" type="text"></div>
                 <div class="input" placeholder='{TEXT_LOGIN_PASSWORD}'><input id="input_pwd" type="password"></div>
                 <div id="repeat" class="input" placeholder='{TEXT_LOGIN_CONFIRM_PASSWORD}'><input id="input_confirm_pwd"
