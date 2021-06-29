@@ -23,7 +23,7 @@ body{
     box-shadow: 10px 10px 20px;
 }
 
-.yzk{
+/*.yzk{
     background: linear-gradient(to bottom, rgba(2, 170, 176, 0.7), #00CDAC);
     border-radius: 20px;
     width: 600px;
@@ -33,7 +33,7 @@ body{
     left: 480px;
     z-index: 1;
     transition: 0.2s ease-in;
-}
+}*/
 
 .yz_form{
     position: relative;
@@ -182,7 +182,8 @@ form .input{
 }
 
 .login .input#email,
-.login .input#repeat{
+.login .input#repeat,
+.login .input#captcha-code{
     /* display: none; */
     margin: 0;
     height: 0;

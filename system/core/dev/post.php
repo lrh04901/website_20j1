@@ -92,4 +92,41 @@ class post
         }
         return true;
     }
+
+    public static function sendCaptchaCode():bool
+    {
+        echo "send";
+        require "phar://mail.phar/PHPMailerAutoload.php";
+        $code = rand(1000,9999);
+        $address = argsTool::post("mail");
+        $config = json_decode(file_get_contents(CONFIG_PATH . "mail_config.json"),true);
+        $mail = new PHPMailer(false);
+        $mail->isSMTP();
+        $mail->Host = $config["mail_smtp"];
+        $mail->SMTPAuth = true;
+        $mail->Username = $config["mail_username"];
+        $mail->Password = $config["mail_password"];
+        try {
+            $mail->setFrom($config["mail_username"],L["INDEX_TITLE"]);
+        }catch (phpmailerException $e){}
+        $mail->addAddress($address);
+        $mail->CharSet = "UTF-8";
+        $mail->Subject = "验证码邮件";
+        $mail->Body = '<div style="width: 85%;height: 50%;padding: 15px;background-color: #3280fc;color: #FFFFFF;box-shadow: 10px 10px 5px grey;font-size: 25px">感谢您在20J1官网注册账号，您的验证码是<b><strong><i>'.$code.'</i></strong></b>，请立即注册，重新发送邮件验证码时该验证码将会失效。</div>';
+        $mail->AltBody = "验证码邮件";
+        try {
+            if ($mail->send()){
+                echo "发送成功";
+            }else{
+                echo "发送失败：".$mail->ErrorInfo;
+            }
+        }catch (phpmailerException $e){}
+        return true;
+    }
+
+    public static function dbAdmin(): bool
+    {
+        dbAdmin::run();
+        return true;
+    }
 }

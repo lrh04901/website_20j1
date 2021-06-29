@@ -1,7 +1,7 @@
 <!--title={LOGIN_TITLE};css=login(media="screen"),;js=jquery.min;-->
 <body>
 
-<div class="yzk">
+<div class="yzk" style="display: none">
     <h2 align="center">请输入验证码</h2>
     <div class="yz_form">
         <label id="l1">验证码：</label><input type="text" placeholder="请输入验证码" id="yzm">
@@ -24,11 +24,11 @@
                 <span id="login" class="active">{TEXT_LOGIN}</span><span>/</span><span id="signup">{TEXT_SIGNUP}</span>
             </div>
             <form action="{LINK_login}" method="POST">
-                <div id="email" class="input" placeholder='E-mail'><input id="input_email" type="email" required="required"><input id="verify" type="button" value="发送验证码"></div>
                 <div class="input" placeholder='{TEXT_LOGIN_USERNAME}'><input id="input_user" type="text"></div>
                 <div class="input" placeholder='{TEXT_LOGIN_PASSWORD}'><input id="input_pwd" type="password"></div>
-                <div id="repeat" class="input" placeholder='{TEXT_LOGIN_CONFIRM_PASSWORD}'><input id="input_confirm_pwd"
-                                                                                                  type="password"></div>
+                <div id="repeat" class="input" placeholder='{TEXT_LOGIN_CONFIRM_PASSWORD}'><input id="input_confirm_pwd" type="password"></div>
+                <div id="email" class="input" placeholder='E-mail'><input id="input_email" type="email" required="required"><input id="verify" type="button" value="发送验证码"></div>
+                <div id="captcha-code" class="input" placeholder="验证码"><input id="input_captcha_code"></div>
                 <br>
                 <a href="{LINK_forgetPassword}" target="_self"><span>{TEXT_FORGET_PASSWORD}</span></a><br>
                 <a href="{LINK_/}" target="_self"><span>{TEXT_BACK_TO_HOME}</span></a>
@@ -48,7 +48,7 @@
 {nav}
 
 
-<script type="text/javascript">
+<!--<script type="text/javascript">
     window.onload = function () {
         document.querySelector('.yzk').style.display = "none";
     }
@@ -73,7 +73,7 @@
     turnOff.addEventListener("click",function () {
         document.querySelector('.yzk').style.display = "none";
     },false)
-</script>
+</script>-->
 
 <script>
     /**
@@ -81,9 +81,10 @@
      */
     $("#main_btn").click(function () {
         //阻止提交和跳转，并进行异步操作
-        let mail = $("#input_email").val();
         let user = $("#input_user").val();
         let pass = $("#input_pwd").val();
+        let mail = $("#input_email").val();
+        let captcha_code = $("#input_captcha_code").val();
         let confirm_pass = $("#input_confirm_pwd").val();
         let action = $(this).text();
         if (action === "{TEXT_LOGIN}") {
@@ -121,9 +122,10 @@
             }
         } else if (action === "{TEXT_SIGNUP}") {
             //注册
-            if (email && user && pass && confirm_pass) {
+            if (user && pass && confirm_pass && mail && captcha_code) {
                 if (pass === confirm_pass) {
-                    $.post("{LINK_signup}", {
+                    console.log("signup");
+                    /*$.post("{LINK_signup}", {
                         user: user,
                         pass: pass,
                         mail: mail
@@ -144,11 +146,24 @@
                         } else {
                             myAlert("{TEXT_PROGRAM_EXCEPTION}");
                         }
-                    });
+                    });*/
                 } else {
                     myAlert("{TEXT_CONFIRM_PASS_DIFFERENT}");
                 }
-            } else if (mail && user && pass) {
+            }else if (user && pass && confirm_pass && mail){
+                $("#input_captcha_code").focus();
+            }else if (user && pass && confirm_pass){
+                $("#input_email").focus();
+            }else if (user && pass){
+                $("#input_confirm_pwd").focus();
+            }else if (user){
+                $("#input_pwd").focus();
+            }else {
+                myAlert("{TEXT_FORM_CANT_BE_EMPTY}",function () {
+                    $("#input_email").focus();
+                });
+            }
+            /* else if (mail && user && pass) {
                 $("#input_confirm_pwd").focus();
             } else if (mail && user) {
                 $("#input_pwd").focus();
@@ -158,12 +173,25 @@
                 alert("{TEXT_FORM_CANT_BE_EMPTY}",function () {
                     $("#input_email").focus();
                 });
-            }
+            }*/
         } else {
             //程序异常
-            alert("{TEXT_PROGRAM_EXCEPTION}");
+            myAlert("{TEXT_PROGRAM_EXCEPTION}");
         }
         return false;
+    });
+    $("#verify").click(function () {
+        let mail = $("#input_email").val();
+        if (mail){
+            $.post("{LINK_sendCaptchaCode}",{
+                mail:mail
+            },function (text) {
+                console.log(text);
+                myAlert(text);
+            });
+        }else {
+            $("#input_email").focus();
+        }
     });
     function myAlert(message,callback=null){
         $("#alert-message").text(message);
@@ -196,7 +224,7 @@
         $(this).addClass('active');
         $(this).parents('.details ').removeClass('login');
         $(this).parents('.details ').addClass('signup');
-        $("#input_email").focus();
+        $("#input_user").focus();
         $('form button').text('{TEXT_SIGNUP}');
     })
 

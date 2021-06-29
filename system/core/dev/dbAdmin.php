@@ -28,8 +28,12 @@ class dbAdmin
             header("Location: ".A."&p=main");
         }
         self::loadHead("数据库管理——首页");
-        echo "<body style='background:#cccccccc;'><h1 style='margin: 30px 10%'>dbAdmin 数据库管理器</h1><div style='margin: 30px 10%'><label for='password'>输入管理员密码：</label><input id='pwd' style='width: 65%' type='password' class='form-control'></div><button id='btn' style='margin: 10px 30%' class='btn btn-primary btn-lg'>登录</button><script>
+        echo "<body style='background:#cccccccc;'><h1 style='margin: 30px 10%'>dbAdmin 数据库管理器</h1><div style='margin: 30px 10%'><label for='password'>输入管理员密码：</label><input id='pwd' style='width: 65%' type='password' class='form-control' autofocus></div><button id='btn' style='margin: 10px 30%' class='btn btn-primary btn-lg'>登录</button><script>
     $(function (){
+        $('#pwd').keydown(function(e) {
+        if (e.keyCode===13)
+            $('#btn').click();
+        });
        $('#btn').click(function (){
 let pwd = $('#pwd').val();location.href = './?/dbAdmin&p=login&pwd='+pwd;});});</script></body>";
     }
@@ -45,10 +49,20 @@ let pwd = $('#pwd').val();location.href = './?/dbAdmin&p=login&pwd='+pwd;});});<
         if (encryptTool::decode(json_decode(file_get_contents(CONFIG_PATH."dbAdmin_pwd.json"))[0],$pwd,true)==$pwd){
             echo "<h1>登录成功</h1>";
             cookie::set("dbAdminLogin","yes");
-            header("Location: ".A."&p=main");
+            self::gotoWithTime(A."&p=main",1);
         }else{
-            echo "<h1>密码错误</h1>";
+            echo "<h1>密码错误，按任意键继续</h1><script>$(function() {
+              $(document).keydown(function() {
+                history.back();
+              });
+            });</script>";
         }
+    }
+
+    public static function logoff():void
+    {
+        cookie::delete("dbAdminLogin");
+        self::gotoWithTime(A);
     }
 
     /**
@@ -62,7 +76,7 @@ let pwd = $('#pwd').val();location.href = './?/dbAdmin&p=login&pwd='+pwd;});});<
         if ($result["status"]=="success") {
             self::loadHead("首页");
             $table_count = count($result["data"]);
-            echo "<body style='background:#cccccccc;'><h1>当前数据库中有".$table_count."个数据表：</h1><h2>数据库类型：".dbTool::DBType()."</h2><table class='table datatable'><thead><th>数据表名</th><th>管理</th><th>删除</th></thead><tbody>";
+            echo "<body style='background:#cccccccc;'><a href='".A."&p=logoff' style='position: absolute;right: 5%;color: green' class='btn btn-link'>安全退出</a><h1>当前数据库中有".$table_count."个数据表：</h1><h2>数据库类型：".dbTool::DBType()."</h2><table class='table datatable'><thead><th>数据表名</th><th>管理</th><th>删除</th></thead><tbody>";
             foreach ($result["data"] as $datum) {
                 echo "<td class='text-important'>$datum</td><td><a href='".A."&p=manageTable&table=".$datum."'>进入管理</a></td><td><a class='text-red' href='javascript:deleteTable(\"".$datum."\");'>删除数据表</a></td></tr>";
             }
@@ -123,7 +137,7 @@ let pwd = $('#pwd').val();location.href = './?/dbAdmin&p=login&pwd='+pwd;});});<
             $cols = array_keys($result_a["data"][0]);
 //            print_r($cols);
 //            echo count($result_a["data"]);
-            echo "<body style='background:#cccccccc;'><h1>管理数据表：<i>" . $tableName . "</i></h1><h2><a href='".A."&p=main'>返回</a></h2></body><table class='table datatable'><thead><tr>";
+            echo "<body style='background:#cccccccc;'><a href='".A."&p=logoff' style='position: absolute;right: 5%;color: green' class='btn btn-link'>安全退出</a><h1>管理数据表：<i>" . $tableName . "</i></h1><h2><a href='".A."&p=main'>返回</a></h2></body><table class='table datatable'><thead><tr>";
             foreach ($cols as $col) {
                 echo "<th>$col</th>";
             }
@@ -143,6 +157,7 @@ let pwd = $('#pwd').val();location.href = './?/dbAdmin&p=login&pwd='+pwd;});});<
 <div class='modal-dialog'>
 <div class='modal-content'>
 <div class='modal-header'>
+<div style='display: none' id='controlType'></div>
 <button class='close' data-dismiss='modal'><span aria-hidden='true'>&times;</span><span class='sr-only'>关闭</span></button>
 <h4 id='modal-title' class='modal-title'>标题</h4>
 </div>
@@ -159,11 +174,48 @@ let pwd = $('#pwd').val();location.href = './?/dbAdmin&p=login&pwd='+pwd;});});<
 </div>
 </div>
 </div>
+<form action='".A."&p=updateData' method='post' id='updateForm' style='display:none'><!--更新数据部分-->
+";
+            foreach ($cols as $col) {
+                echo "<input name='$col' id='update_form_$col'><input name='old_$col' id='update_form_old_$col'>";
+            }
+            echo "
+</form>
+<form action='".A."&p=insertData&table=".argsTool::get("table")."' method='post'  id='insertForm' style='display:none'><!--更新数据部分-->
+";
+//            echo "<input name='insert_table_name' value='".argsTool::get("table")."'>";
+            foreach ($cols as $col) {
+                echo "<input name='$col' id='insert_form_$col'>";
+            }
+            echo "
+<input type='submit' id='insert_form_submit'>
+</form>
 <script>
+window.addEventListener('popstate',function() {
+    
+},false);
 $('#insertData').click(function (){
     $('#modal-title').text('插入数据');
+    $('#controlType').text('insert');
     $('[name=\"modalInput\"]').val('');
     $('#myModal').modal();
+});
+$('#saveData').click(function() {
+    
+//console.log('click!!!');
+    let controlType = $('#controlType').text();
+    if (controlType==='insert'){
+    console.log('insert!!!');
+        //插入数据\n";
+            foreach ($cols as $col) {
+                echo "$('#insert_form_$col').val($('#input_$col').val());\n";
+            }
+            echo "
+        $('#insert_form_submit').click();
+//        console.log('submit!!!');
+    }else if (controlType==='edit'){
+        //编辑数据
+    }
 });
 function editData(id){
     console.log('edit:'+id);
@@ -177,6 +229,24 @@ function deleteData(id){
             echo "<h1>数据库异常</h1>";
         }
 //        print_r($result_a);
+    }
+
+    public static function insertData()
+    {
+        $table = argsTool::get("table");
+        $key = array_keys($_POST);
+        $value = [];
+        for($i = 0;$i < count($_POST);$i++){
+            $value[$i] = $_POST[$key[$i]];
+        }
+//        print_r($key);
+//        echo "<br>";
+//        print_r($value);
+        $result = dbTool::insert($table,$key,$value);
+        if ($result["status"]=="success"){
+            echo "<h1>数据插入成功！</h1><script>setTimeout(function (){history.back();},1000);</script>";
+        }
+//        echo "<body><script>setTimeout(function (){history.back();},1000);</script></body>";
     }
 
     /**
