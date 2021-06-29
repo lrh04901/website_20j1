@@ -1,6 +1,17 @@
 <!--title={LOGIN_TITLE};css=login(media="screen"),;js=jquery.min;-->
 <body>
 
+<div class="yzk">
+    <h2 align="center">请输入验证码</h2>
+    <div class="yz_form">
+        <label id="l1">验证码：</label><input type="text" placeholder="请输入验证码" id="yzm">
+    </div>
+    <div class="yz_btn">
+        <input type="submit" value="确定" id="y">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="button" value="取消" id="n">
+    </div>
+</div>
+
 <div class="overall">
     <img src="{IMG_login_jpg}" alt="login image">
     <div class="panel">
@@ -13,7 +24,7 @@
                 <span id="login" class="active">{TEXT_LOGIN}</span><span>/</span><span id="signup">{TEXT_SIGNUP}</span>
             </div>
             <form action="{LINK_login}" method="POST">
-                <div id="email" class="input" placeholder='E-mail'><input id="input_email" type="email" required="required"><input id="verify" type="button" value="验证"></div>
+                <div id="email" class="input" placeholder='E-mail'><input id="input_email" type="email" required="required"><input id="verify" type="button" value="发送验证码"></div>
                 <div class="input" placeholder='{TEXT_LOGIN_USERNAME}'><input id="input_user" type="text"></div>
                 <div class="input" placeholder='{TEXT_LOGIN_PASSWORD}'><input id="input_pwd" type="password"></div>
                 <div id="repeat" class="input" placeholder='{TEXT_LOGIN_CONFIRM_PASSWORD}'><input id="input_confirm_pwd"
@@ -35,6 +46,34 @@
 
 
 {nav}
+
+
+<script type="text/javascript">
+    window.onload = function () {
+        document.querySelector('.yzk').style.display = "none";
+    }
+    /*邮箱验证码*/
+    const  ver = document.querySelector('#verify');
+    const turnOff = document.querySelector('#n');
+    let  emailAdd = document.querySelector('#input_email');
+    let format = /^[a-zA-Z0-9_-]+@([a-zA-Z0-9]+\.)+(com|cn|net|org)$/;
+
+    ver.addEventListener("click",function () {
+        if (format.test(emailAdd.value)) {
+            alert("验证码已发送");
+        } else {
+            alert("提示\n\n请输入正确的邮箱地址");
+        }
+    },false);
+    ver.addEventListener("click",function () {
+        if (format.test(emailAdd.value)) {
+            document.querySelector('.yzk').style.display = "block";
+        }
+    },false)
+    turnOff.addEventListener("click",function () {
+        document.querySelector('.yzk').style.display = "none";
+    },false)
+</script>
 
 <script>
     /**
