@@ -249,7 +249,7 @@ class core
                     $left = false;
                     continue;
                 }
-                $args_list[$args_index] .= $t;
+                @$args_list[$args_index] .= $t;
             }
             if ($index === strlen($value)) {
                 break;
