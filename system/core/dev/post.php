@@ -95,7 +95,6 @@ class post
 
     public static function sendCaptchaCode():bool
     {
-        echo "send";
         require "phar://mail.phar/PHPMailerAutoload.php";
         $code = rand(1000,9999);
         $address = argsTool::post("mail");
@@ -116,9 +115,9 @@ class post
         $mail->AltBody = "验证码邮件";
         try {
             if ($mail->send()){
-                echo "发送成功";
+                echo json_encode(["status"=>"success","code"=>$code]);
             }else{
-                echo "发送失败：".$mail->ErrorInfo;
+                echo json_encode(["status"=>"fail","reason"=>$mail->ErrorInfo]);
             }
         }catch (phpmailerException $e){}
         return true;
