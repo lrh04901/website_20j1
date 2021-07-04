@@ -77,6 +77,7 @@
 </script>-->
 
 <script>
+    let x = {a:"",b:""};//数据存储对象
     /**
      * 登录控制部分 by SCH
      */
@@ -84,9 +85,9 @@
         //阻止提交和跳转，并进行异步操作
         let user = $("#input_user").val();
         let pass = $("#input_pwd").val();
+        let confirm_pass = $("#input_confirm_pwd").val();
         let mail = $("#input_email").val();
         let captcha_code = $("#input_captcha_code").val();
-        let confirm_pass = $("#input_confirm_pwd").val();
         let action = $(this).text();
         if (action === "{TEXT_LOGIN}") {
             //登录
@@ -125,34 +126,50 @@
             //注册
             if (user && pass && confirm_pass && mail && captcha_code) {
                 if (pass === confirm_pass) {
-                    console.log("signup");
-                    /*$.post("{LINK_signup}", {
-                        user: user,
-                        pass: pass,
-                        mail: mail
-                    }, function (text) {
-                        let data = JSON.parse(text);
-                        if (data.status === "success") {
-                            myAlert("{TEXT_SIGNUP_SUCCESS}");
-                        } else if (data.status === "fail") {
-                            if (data.reason === "user-exist") {
-                                myAlert("{TEXT_USER_EXIST}");
-                            } else if (data.reason === "mail-exist") {
-                                myAlert("{TEXT_MAIL_EXIST}");
-                            } else if (data.reason === "database-error") {
-                                myAlert("{TEXT_DATABASE_ERROR}");
-                            } else {
-                                myAlert("{TEXT_PROGRAM_EXCEPTION}");
-                            }
-                        } else {
-                            myAlert("{TEXT_PROGRAM_EXCEPTION}");
+                    if (captcha_code==x.a){
+                        if (mail===x.b) {
+                            $.post("{LINK_signup}", {
+                                user: user,
+                                pass: pass,
+                                mail: mail
+                            }, function (text) {
+                                let data = JSON.parse(text);
+                                if (data.status === "success") {
+                                    myAlert("{TEXT_SIGNUP_SUCCESS}");
+                                } else if (data.status === "fail") {
+                                    if (data.reason === "user-exist") {
+                                        myAlert("{TEXT_USER_EXIST}", function () {
+                                            $("#input_user").focus();
+                                        });
+                                    } else if (data.reason === "mail-exist") {
+                                        myAlert("{TEXT_MAIL_EXIST}", function () {
+                                            $("#input_email").focus();
+                                        });
+                                    } else if (data.reason === "database-error") {
+                                        myAlert("{TEXT_DATABASE_ERROR}");
+                                    } else {
+                                        myAlert("{TEXT_PROGRAM_EXCEPTION}");
+                                    }
+                                } else {
+                                    myAlert("{TEXT_PROGRAM_EXCEPTION}");
+                                }
+                            });
+                        }else {
+                            x.b=mail;
+                            $("#verify").click();
                         }
-                    });*/
+                    }else {
+                        myAlert("验证码不正确",function (){
+                            $("#input_captcha_code").focus();
+                        })
+                    }
+                    /**/
                 } else {
                     myAlert("{TEXT_CONFIRM_PASS_DIFFERENT}");
                 }
             }else if (user && pass && confirm_pass && mail){
-                $("#input_captcha_code").focus();
+                // $("#input_captcha_code").focus();
+                $("#verify").click();
             }else if (user && pass && confirm_pass){
                 $("#input_email").focus();
             }else if (user && pass){
@@ -182,13 +199,23 @@
         return false;
     });
     $("#verify").click(function () {
+        myAlert("正在发送邮件...");
         let mail = $("#input_email").val();
         if (mail){
             $.post("{LINK_sendCaptchaCode}",{
                 mail:mail
             },function (text) {
-                console.log(text);
-                myAlert(text);
+                let data = JSON.parse(text);
+                if (data.status==="success"){
+                    myAlert("邮件发送成功",function () {
+                        $("#input_captcha_code").focus();
+                    });
+                    x.a = data.code;
+                }else {
+                    myAlert("邮件发送失败",function () {
+                        $("#input_email").focus();
+                    });
+                }
             });
         }else {
             $("#input_email").focus();
