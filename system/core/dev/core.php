@@ -11,6 +11,7 @@ class core
      */
     public static function initialize(): void
     {
+//        echo "[Debug Info]<br>";
         include("./system/core/core.phar");
         self::loadComponent("define");//加载定义模块
         define::run();
@@ -30,6 +31,19 @@ class core
         self::loadComponent("dbAdmin");//加载数据库管理
         include(CORE_PATH . "mail.phar");
         date_default_timezone_set("PRC");//设置时区
+//        echo "PATH defined : ". (defined("PATH")?"yes":"no")."<br>";
+//        echo "PATH = ".PATH."<br>";
+//        echo "HTML_PATH = ".HTML_PATH."<br>";
+//        echo "visit path = " . self::getPath()."<br>";
+//        $path = self::getPath();
+//        $path = substr($path,1);
+//        if (!$path){
+//            $path="index";
+//        }
+//        echo "$"."path = $path<br>";
+//        $html_data = file_get_contents(HTML_PATH.$path.".html");
+//        echo "read data ：" . ($html_data?"success":"fail")."<br>";
+//        echo "file exist ：".(file_exists(HTML_PATH.$path.".html")?"yes":"no");
     }
 
     /**
@@ -44,7 +58,7 @@ class core
             $path = "index";
         }
         if ($rm == "get") {
-            if (file_exists(HTML_PATH . $path . ".html")) {
+            if (file_get_contents(HTML_PATH . $path . ".html")) {
                 get::load($path);
                 /*if (!call_user_func($rm."::".$path)){
     //                get::oneKeyLoad($path);
@@ -104,7 +118,17 @@ class core
      */
     public static function loadComponent(string $name): void
     {
-        if (defined("CORE_PATH")) {
+        if (file_exists("debug")){//调试模式
+            if (defined("CORE_PATH")){//已经加载define.php
+                $component_path = CORE_PATH . "dev/$name.php";
+            }else{
+                $component_path = "system/core/dev/$name.php";
+            }
+        }else{
+            $component_path = "phar://core.phar/$name.php";
+        }
+
+        /*if (defined("CORE_PATH")) {
             $component_path = CORE_PATH . $name . ".php";
         } else {
             if (file_exists("./system/core/define.php")) {
@@ -117,10 +141,12 @@ class core
             $component_path = "./system/core/dev/$name.php";
         }else{
             $component_path = "phar://core.phar/$name.php";
-        }
+        }*/
 //        echo $component_path."<br>";
+//        echo "loading <mark>$name</mark> component...";
         if (file_exists($component_path)) {
             include($component_path);
+//            echo "<mark>$name</mark> component load successful!<br>";
         } else {
             self::loadErrorPage("网站加载失败", "<b style='color: red'>没有找到组件：" . $name . "</b>");
             die();
