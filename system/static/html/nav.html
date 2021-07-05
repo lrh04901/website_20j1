@@ -1,5 +1,5 @@
 <nav>
-  <div class="nav-h"><a target="_self" href="{LINK_/}">{TEXT_MAIN_TITLE}</a></div>
+  <div class="nav-h" id="nav-h" v-html="url"></div>
   <ul class="nav-list" type="none">
     <li>
       <a href="{LINK_/}">{TEXT_HOME}</a>
@@ -76,6 +76,20 @@
     text-decoration: none;
   }
 </style>
+
+<script src="../js/vue.js"></script>
+<script>
+  const navH = new Vue({
+    el: '#nav-h',
+    data: {
+      message: 'null',
+      url: '<a target="_self" href="{LINK_/}">{TEXT_MAIN_TITLE}</a>'
+    },
+    /*methods: {
+
+    }*/
+  })
+</script>
 
 <script>
   const myHover = document.querySelector('.lang');
