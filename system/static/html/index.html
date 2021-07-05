@@ -2,122 +2,128 @@
 <body>
 
 <!--===============body================-->
-    <main aria-labelledby="main-title" class="home">
-        <header class="introduce"><img src="{IMG_j1logo_jpg}" alt="20计1-logo">
-            <h1>
-                <span id="text" data-text='["20计1", "一个充满智慧的班级", "一个充满正能量的班级"]'></span>
-                <span class="mark"></span>
-            </h1><br><br>
-            <p class="main-text" style="text-align: center">
-                {TEXT_INDEX_TITLE}
-            </p><br><br>
-            <p class="main-button"><a href="{LINK_isLogin}" class="nav-link action-button">
-                {TEXT_ENTER_OUR_CLASS}</a></p><br><br><br><br>
-        </header>
-        <hr><br><br>
-        <div class="article" id="btp">
-            <div class="feature">
-                <br><h2>test</h2>
-                <p>{{message}}</p>
-            </div><br>
-            <div class="feature">
-                <br><h2>test</h2>
-                <p>{{message}}</p>
-            </div><br>
-            <div class="feature"> 
-                <br><h2>test</h2>
-                <p>{{message}}</p>
-            </div><br>
-        </div>
-    </main>
+<main aria-labelledby="main-title" class="home">
+  <header class="introduce"><img src="{IMG_j1logo_jpg}" alt="20计1-logo">
+    <h1>
+      <span id="text" data-text='["20计1", "一个充满智慧的班级", "一个充满正能量的班级"]'></span>
+      <span class="mark"></span>
+    </h1><br><br>
+    <p class="main-text" style="text-align: center">
+      {TEXT_INDEX_TITLE}
+    </p><br><br>
+    <p class="main-button"><a href="{LINK_isLogin}" class="nav-link action-button">
+      {TEXT_ENTER_OUR_CLASS}</a></p><br><br><br><br>
+  </header>
+  <hr>
+  <br><br>
+  <div class="article" id="btp">
+    <div class="feature">
+      <br>
+      <h2>test</h2>
+      <p>{{message}}</p>
+    </div>
+    <br>
+    <div class="feature">
+      <br>
+      <h2>test</h2>
+      <p>{{message}}</p>
+    </div>
+    <br>
+    <div class="feature">
+      <br>
+      <h2>test</h2>
+      <p>{{message}}</p>
+    </div>
+    <br>
+  </div>
+</main>
 
 <!--===========header===========-->
-    {nav}
+{nav}
 <!--=========================================================================================================-->
-<script src="{JS_vue_js}" charset="utf-8"></script>
 <script>
-    const btmP = new Vue({
-        el: '#btp',
-        data: {
-            message: '测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试'
-        }
-    })
-</script>
-
-<script type="text/javascript">
-    console.log("打字效果");
-    console.log("制作人:20计1 25 陆睿涵");
-    const textEl = document.querySelector("#text");
-    const texts = JSON.parse(
-        textEl.getAttribute("data-text")
-    );
-
-    let index = 0;
-    let charIndex = 0;
-    let delta = 500;
-    let start = null;
-    let isDeleting = false;
-
-    function type(time) {
-        window.requestAnimationFrame(type);
-        if (!start) start = time;
-        let progress = time - start;
-        if (progress > delta) {
-            let text = texts[index];
-            if (!isDeleting) {
-                textEl.innerHTML = text.slice(
-                    0,
-                    ++charIndex
-                );
-                delta = 500 - Math.random() * 400;
-            } else {
-                textEl.innerHTML = text.slice(
-                    0,
-                    charIndex--
-                );
-            }
-
-            start = time;
-
-            if (charIndex === text.length) {
-                isDeleting = true;
-                delta = 200;
-                start = time + 1200;
-            }
-
-            if (charIndex < 0) {
-                isDeleting = false;
-                start = time + 200;
-                index = ++index % texts.length;
-            }
-        }
+  const btmP = new Vue({
+    el: '#btp',
+    data: {
+      message: '测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试'
     }
+  })
+</script>
 
+<script type="text/javascript">
+  console.log("打字效果");
+  console.log("制作人:20计1 25 陆睿涵");
+  const textEl = document.querySelector("#text");
+  const texts = JSON.parse(
+      textEl.getAttribute("data-text")
+  );
+
+  let index = 0;
+  let charIndex = 0;
+  let delta = 500;
+  let start = null;
+  let isDeleting = false;
+
+  function type(time) {
     window.requestAnimationFrame(type);
+    if (!start) start = time;
+    let progress = time - start;
+    if (progress > delta) {
+      let text = texts[index];
+      if (!isDeleting) {
+        textEl.innerHTML = text.slice(
+            0,
+            ++charIndex
+        );
+        delta = 500 - Math.random() * 400;
+      } else {
+        textEl.innerHTML = text.slice(
+            0,
+            charIndex--
+        );
+      }
+
+      start = time;
+
+      if (charIndex === text.length) {
+        isDeleting = true;
+        delta = 200;
+        start = time + 1200;
+      }
+
+      if (charIndex < 0) {
+        isDeleting = false;
+        start = time + 200;
+        index = ++index % texts.length;
+      }
+    }
+  }
+
+  window.requestAnimationFrame(type);
 
 </script>
 
 <script type="text/javascript">
-    console.log("菜单按钮事件");
-    console.log("制作人:20计1 25 陆睿涵");
-    let burger = document.querySelector(".burger");
-    let navMenu = document.querySelector(".nav-list");
-    let navMenuItems = document.querySelectorAll(".nav-list li");
-    let widthHr = document.querySelector(".triangle");
-    // console.info(burger);
-    burger.addEventListener("click", function ()  {
-        burger.classList.toggle("active");
-        navMenu.classList.toggle("open");
-        navMenuItems.forEach((item, index) => {
-            if (item.style.animation) {
-                item.style.animation = "";
-            } else {
-                item.style.animation = `0.3s ease-in slideIn forwards ${index *
-                0.1 +
-                0.3}s`;
-            }
-        });
-        /*widthHr.style.width = 250px;*/
-    },false);
+  console.log("菜单按钮事件");
+  console.log("制作人:20计1 25 陆睿涵");
+  let burger = document.querySelector(".burger");
+  let navMenu = document.querySelector(".nav-list");
+  let navMenuItems = document.querySelectorAll(".nav-list li");
+  let widthHr = document.querySelector(".triangle");
+  // console.info(burger);
+  burger.addEventListener("click", function () {
+    burger.classList.toggle("active");
+    navMenu.classList.toggle("open");
+    navMenuItems.forEach((item, index) => {
+      if (item.style.animation) {
+        item.style.animation = "";
+      } else {
+        item.style.animation = `0.3s ease-in slideIn forwards ${index *
+        0.1 +
+        0.3}s`;
+      }
+    });
+    /*widthHr.style.width = 250px;*/
+  }, false);
 </script>
 </body>

@@ -1,33 +1,33 @@
 <!-- title=更新站点;css=zui.min,zui.uploader.min,update;js=zui.uploader.min,webuploader.min,update,jquery; -->
 <body>
 <div class="container-fluid text-center bg-primary">
-    <br>
-    <h1>更新站点</h1>
-    <h3 class="small">快速更新当前站点</h3>
-    <br>
+  <br>
+  <h1>更新站点</h1>
+  <h3 class="small">快速更新当前站点</h3>
+  <br>
 </div>
 <div class="container">
-    <br>
-    <div id="progress">
-        <div id="finish" style="width: 0%;" progress="0"></div>
-    </div>
-    <br>
-    <div id="form">
-        <input type="file" name="file" id="file"><br>
-        <input type="button" value="停止" id="stop">
-    </div>
+  <br>
+  <div id="progress">
+    <div id="finish" style="width: 0%;" progress="0"></div>
+  </div>
+  <br>
+  <div id="form">
+    <input type="file" name="file" id="file"><br>
+    <input type="button" value="停止" id="stop">
+  </div>
 </div>
 <script>
-    let upload = new Upload();
-    $("#file").change(function () {
-        upload.uploadFile(this);
-        a = this;
-        console.log(this);
-    });
-    $("#stop").click(function () {
-        this.value = "停止中";
-        upload.stop();
-        this.value = "已停止";
-    });
+  let upload = new Upload();
+  $("#file").change(function () {
+    upload.uploadFile(this);
+    a = this;
+    console.log(this);
+  });
+  $("#stop").click(function () {
+    this.value = "停止中";
+    upload.stop();
+    this.value = "已停止";
+  });
 </script>
 </body>
