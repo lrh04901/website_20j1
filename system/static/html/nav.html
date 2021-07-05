@@ -39,6 +39,14 @@
   </ul>
 </div>
 <style>
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity 2s
+  }
+
+  .fade-enter, .fade-leave-to {
+    opacity: 0
+  }
+
   #language_choose_box{
     border-radius: 20px;
   }
@@ -78,17 +86,29 @@
 </style>
 
 <script src="../js/vue.js"></script>
+<!--=======================================nav左侧大标题==========================================-->
 <script>
   const navH = new Vue({
     el: '#nav-h',
     data: {
       message: 'null',
-      url: '<a target="_self" href="{LINK_/}">{TEXT_MAIN_TITLE}</a>'
+      url: '<a target="_self" href="{LINK_/}">{TEXT_MAIN_TITLE}</a>',
     },
-    /*methods: {
-
-    }*/
+    methods: {
+     /* mouseOver: function(){
+        this.navHoverStyle = 'color: rgb(46,127,175)';
+        this.navHoverStyle = 'transition: 0.3s';
+      },
+      mouseLeave: function () {
+        this.navHoverStyle = '';
+      },*/
+    }
   })
+</script>
+
+<!--===============================================右侧无序列表==========================================-->
+<script>
+
 </script>
 
 <script>

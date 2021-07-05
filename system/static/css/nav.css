@@ -12,19 +12,17 @@ nav{
     background-color: rgba(153, 153, 153, 0.9);
 }
 
-.nav-h a{
+#nav-h a{
     font-size: 30px;
     font-weight: 600;
     color: #ffffff;
     flex: 1;
     text-decoration: none;
-    color: #000;
-    transition: 0.2s ease-in-out;
+    transition: 1s;
 }
 
-.nav-h a:hover{
-    cursor: pointer;
-    color: #fff;
+#nav-h a:hover{
+    color: #f4fce3;
 }
 
 .nav-h a:visited{
