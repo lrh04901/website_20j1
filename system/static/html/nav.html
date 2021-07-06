@@ -1,6 +1,6 @@
 <nav>
   <div class="nav-h" id="nav-h" v-html="url"></div>
-  <ul class="nav-list" type="none">
+  <ul class="nav-list" type="none" id="navList">
     <li>
       <a href="{LINK_/}">{TEXT_HOME}</a>
     </li>
@@ -108,7 +108,13 @@
 
 <!--===============================================右侧无序列表==========================================-->
 <script>
-
+  const navList = new Vue({
+    el: '#navList',
+    data: {
+      message: '',
+      list: [],
+    }
+  })
 </script>
 
 <script>
