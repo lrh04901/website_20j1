@@ -1,7 +1,8 @@
 <nav>
   <div class="nav-h" id="nav-h" v-html="url"></div>
   <ul class="nav-list" type="none" id="navList">
-    <li>
+    <li v-for="(urls,i) in url" v-html="url[i]">{{urls}}</li>
+    <!--<li>
       <a href="{LINK_/}">{TEXT_HOME}</a>
     </li>
     <li>
@@ -18,7 +19,7 @@
     </li>
     <li>
       <a id="language_choose_button" href="javascript:;">{TEXT_LANGUAGE_NAME}</a>
-    </li>
+    </li>-->
   </ul>
   <div class="burger">
     <div class="top-line"></div>
@@ -112,11 +113,20 @@
     el: '#navList',
     data: {
       message: '',
-      list: [],
+      //右侧导航栏地址
+      url: [
+            '<a href="{LINK_/}">{TEXT_HOME}</a>',
+            '<a href="{LINK_classIntroduce}">{TEXT_INTRODUCE}</a>',
+            '<a href="{LINK_Page404}">{TEXT_YOUTH_LEAGUE_ACTIVE}</a>',
+            '<a href="{LINK_Page404}">text</a>',
+            '<a href="{LINK_yule}">{TEXT_ENTERTAINMENT}</a>',
+            '<a id="language_choose_button" href="javascript:;">{TEXT_LANGUAGE_NAME}</a>',
+      ],
     }
   })
 </script>
 
+<!--==========================================语言选择栏==========================================-->
 <script>
   const myHover = document.querySelector('.lang');
   myHover.addEventListener("click",function () {
