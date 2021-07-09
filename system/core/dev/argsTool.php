@@ -1,5 +1,4 @@
 <?php
-include "redirect.php";
 
 /**
  * 参数处理模块，根据不同请求方法获取参数

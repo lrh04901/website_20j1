@@ -1,5 +1,4 @@
 <?php
-include "redirect.php";
 
 /**
  * 数组处理模块

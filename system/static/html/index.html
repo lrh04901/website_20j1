@@ -15,24 +15,33 @@
                 {TEXT_ENTER_OUR_CLASS}</a></p><br><br><br><br>
         </header>
         <hr><br><br>
-        <div class="article">
+        <div class="article" id="btp">
             <div class="feature">
                 <br><h2>test</h2>
-                <p>测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试</p>
+                <p>{{message}}</p>
             </div><br>
             <div class="feature">
                 <br><h2>test</h2>
-                <p>测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试</p>
+                <p>{{message}}</p>
             </div><br>
             <div class="feature"> 
                 <br><h2>test</h2>
-                <p>测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试</p>
+                <p>{{message}}</p>
             </div><br>
         </div>
     </main>
 
 <!--===========header===========-->
     {nav}
+<!--=========================================================================================================-->
+<script>
+    const btmP = new Vue({
+        el: '#btp',
+        data: {
+            message: '测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试'
+        }
+    })
+</script>
 
 <script type="text/javascript">
     console.log("打字效果");

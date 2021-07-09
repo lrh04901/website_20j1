@@ -1,5 +1,4 @@
 <?php
-include "redirect.php";
 
 /**
  * 文件处理模块

@@ -1,93 +1,302 @@
-<!--title={LOGIN_TITLE};css=login(media="screen");js=jquery.min;-->
+<!--title={LOGIN_TITLE};css=login(media="screen"),;js=jquery.min;-->
 <body>
 
-<div class="overall">
-  <img src="{IMG_login_jpg}" alt="login image">
-  <div class="panel">
-    <div class="details login">
-      <div class="title">
-        <span>用户登录</span>
-        <hr align="justify" color="cadetblue" width="80%">
-      </div>
-      <div class="convert">
-        <span id="login" class="active">{TEXT_LOGIN}</span><span>/</span><span id="signup">{TEXT_SIGNUP}</span>
-      </div>
-      <form action="{LINK_login}" method="POST">
-        <div id="email" class="input" placeholder='E-mail'><input type="text"></div>
-        <div class="input" placeholder='{TEXT_LOGIN_USERNAME}'><input type="text"></div>
-        <div class="input" placeholder='{TEXT_LOGIN_PASSWORD}'><input type="password"></div>
-        <div id="repeat" class="input" placeholder='{TEXT_LOGIN_CONFIRM_PASSWORD}'><input type="password"></div>
-        <a href="{LINK_forgetPassword}"><span>{TEXT_FORGET_PASSWORD}</span></a><br>
-        <a href="{LINK_/}" target="_self"><span>{TEXT_BACK_TO_HOME}</span></a>
-        <button type="submit">{TEXT_LOGIN}</button>
-      </form>
+<div class="yzk" style="display: none">
+    <h2 align="center">请输入验证码</h2>
+    <div class="yz_form">
+        <label id="l1">验证码：</label><input type="text" placeholder="请输入验证码" id="yzm">
     </div>
-  </div>
+    <div class="yz_btn">
+        <input type="submit" value="确定" id="y">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="button" value="取消" id="n">
+    </div>
+</div>
+
+<div class="overall">
+    <img src="{IMG_login_jpg}" alt="login image">
+    <div class="panel">
+        <div class="details login">
+            <div class="title">
+                <span>用户登录</span>
+                <hr align="justify" color="cadetblue" width="80%">
+            </div>
+            <div class="convert">
+                <span id="login" class="active">{TEXT_LOGIN}</span><span>/</span><span id="signup">{TEXT_SIGNUP}</span>
+            </div>
+            <form action="{LINK_login}" method="POST">
+                <div class="input" placeholder='{TEXT_LOGIN_USERNAME}'><input id="input_user" type="text"></div>
+                <div class="input" placeholder='{TEXT_LOGIN_PASSWORD}'><input id="input_pwd" type="password"></div>
+                <div id="repeat" class="input" placeholder='{TEXT_LOGIN_CONFIRM_PASSWORD}'><input id="input_confirm_pwd" type="password"></div>
+                <div id="email" class="input" placeholder='E-mail'><input id="input_email" type="email" required="required"><input id="verify" type="button" value="发送验证码"></div>
+                <div id="captcha-code" class="input" placeholder="验证码"><input id="input_captcha_code"></div>
+                <br>
+                <a href="{LINK_forgetPassword}" target="_self"><span>{TEXT_FORGET_PASSWORD}</span></a><br>
+                <a href="{LINK_/}" target="_self"><span>{TEXT_BACK_TO_HOME}</span></a>
+                <button id="main_btn" type="submit" formaction="javascript:;">{TEXT_LOGIN}</button>
+            </form>
+        </div>
+        <div id="alert" style="display:none;position: fixed;top: 0;bottom: 0;left: 0;right: 0;background:#cccccc99;z-index: 100">
+            <div style="position:fixed;width: 30%;height: 20%;background:lightblue;top: 40%;left: 35%;border-radius: 15px;box-shadow: 1px 2px 4px 1px #666,-1px -2px 4px 1px #777;">
+                <h5 style="margin: 10%;overflow: hidden;text-overflow: ellipsis;font-size: 14px;text-shadow: 1px 1px 1px 1px #ccc;font-weight: lighter" id="alert-message"></h5>
+                <button id="alert-button" style="position: absolute;right: 10%;bottom: 10%;border-radius: 5px;width: 20%;height: 30%;border-color: #00E4FF;background:radial-gradient(deepskyblue,lightskyblue);color: ghostwhite;font-size: 13px;text-shadow: 1px 1px 1px 1px #ccc;">
+                    {TEXT_ALERT_BUTTON_OK}</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 
 {nav}
-</body>
+
+
+<!--<script type="text/javascript">
+    window.onload = function () {
+        document.querySelector('.yzk').style.display = "none";
+    }
+    /*邮箱验证码*/
+    const  ver = document.querySelector('#verify');
+    const turnOff = document.querySelector('#n');
+    let  emailAdd = document.querySelector('#input_email');
+    let format = /^[a-zA-Z0-9_-]+@([a-zA-Z0-9]+\.)+(com|cn|net|org)$/;
+
+    ver.addEventListener("click",function () {
+        if (format.test(emailAdd.value)) {
+            alert("验证码已发送");
+        } else {
+            alert("提示\n\n请输入正确的邮箱地址");
+        }
+    },false);
+    ver.addEventListener("click",function () {
+        if (format.test(emailAdd.value)) {
+            document.querySelector('.yzk').style.display = "block";
+        }
+    },false)
+    turnOff.addEventListener("click",function () {
+        document.querySelector('.yzk').style.display = "none";
+    },false)
+</script>-->
 
 <script>
-  $('#login').click(function(){
-    $('.convert span').removeClass('active');
-    $(this).addClass('active');
-    $(this).parents('.details ').removeClass('signup');
-    $(this).parents('.details ').addClass('login');
-    $('form button').text('登录');
-  })
-
-  $('#signup').click(function(){
-    $('.convert span').removeClass('active');
-    $(this).addClass('active');
-    $(this).parents('.details ').removeClass('login');
-    $(this).parents('.details ').addClass('signup');
-    $('form button').text('注册');
-  })
-
-  $('.input input').on('focus',function(){
-    $(this).parent().addClass('focus');
-  })
-
-  $('.input input').on('blur',function(){
-    if($(this).val() === '')
-      $(this).parent().removeClass('focus');
-  })
-
-  $('.show_pass').click(function(){
-    let pass_type = $('input.password').attr('type');
-    if (pass_type === 'password' ){
-      $('input.password').attr('type', 'text');
-      $('.show_pass').removeClass('glyphicon-eye-open').addClass('glyphicon-eye-close');
-    }else{
-      $('input.password').attr('type', 'password');
-      $('.show_pass').removeClass('glyphicon-eye-close').addClass('glyphicon-eye-open');
+    let x = {a:"",b:""};//数据存储对象
+    /**
+     * 登录控制部分 by SCH
+     */
+    $("#main_btn").click(function () {
+        //阻止提交和跳转，并进行异步操作
+        let user = $("#input_user").val();
+        let pass = $("#input_pwd").val();
+        let confirm_pass = $("#input_confirm_pwd").val();
+        let mail = $("#input_email").val();
+        let captcha_code = $("#input_captcha_code").val();
+        let action = $(this).text();
+        if (action === "{TEXT_LOGIN}") {
+            //登录
+            if (user && pass) {
+                $.post("{LINK_login}", {
+                    user: user,
+                    pass: pass
+                }, function (text) {
+                    let data = JSON.parse(text);
+                    if (data.status === "success") {
+                        myAlert("{TEXT_LOGIN_SUCCESS}");
+                    } else if (data.status === "fail") {
+                        if (data.reason === "database-error") {
+                            myAlert("{TEXT_DATABASE_ERROR}");
+                        } else if (data.reason === "user-not-exist") {
+                            myAlert("{TEXT_USER_NOT_EXIST}");
+                        } else if (data.reason === "password-wrong") {
+                            myAlert("{TEXT_PASSWORD_WRONG}");
+                        } else if (data.reason === "ban") {
+                            myAlert("{TEXT_BAN}" + data.banReason);
+                        } else {
+                            myAlert("{TEXT_PROGRAM_EXCEPTION}");
+                        }
+                    } else {
+                        myAlert("{TEXT_PROGRAM_EXCEPTION}");
+                    }
+                });
+            } else if (user) {
+                $("#input_pwd").focus();
+            } else {
+                myAlert("{TEXT_FORM_CANT_BE_EMPTY}",function () {
+                    $("#input_user").focus();
+                });
+            }
+        } else if (action === "{TEXT_SIGNUP}") {
+            //注册
+            if (user && pass && confirm_pass && mail && captcha_code) {
+                if (pass === confirm_pass) {
+                    if (captcha_code==x.a){
+                        if (mail===x.b) {
+                            $.post("{LINK_signup}", {
+                                user: user,
+                                pass: pass,
+                                mail: mail
+                            }, function (text) {
+                                let data = JSON.parse(text);
+                                if (data.status === "success") {
+                                    myAlert("{TEXT_SIGNUP_SUCCESS}");
+                                } else if (data.status === "fail") {
+                                    if (data.reason === "user-exist") {
+                                        myAlert("{TEXT_USER_EXIST}", function () {
+                                            $("#input_user").focus();
+                                        });
+                                    } else if (data.reason === "mail-exist") {
+                                        myAlert("{TEXT_MAIL_EXIST}", function () {
+                                            $("#input_email").focus();
+                                        });
+                                    } else if (data.reason === "database-error") {
+                                        myAlert("{TEXT_DATABASE_ERROR}");
+                                    } else {
+                                        myAlert("{TEXT_PROGRAM_EXCEPTION}");
+                                    }
+                                } else {
+                                    myAlert("{TEXT_PROGRAM_EXCEPTION}");
+                                }
+                            });
+                        }else {
+                            x.b=mail;
+                            $("#verify").click();
+                        }
+                    }else {
+                        myAlert("验证码不正确",function (){
+                            $("#input_captcha_code").focus();
+                        })
+                    }
+                    /**/
+                } else {
+                    myAlert("{TEXT_CONFIRM_PASS_DIFFERENT}");
+                }
+            }else if (user && pass && confirm_pass && mail){
+                // $("#input_captcha_code").focus();
+                $("#verify").click();
+            }else if (user && pass && confirm_pass){
+                $("#input_email").focus();
+            }else if (user && pass){
+                $("#input_confirm_pwd").focus();
+            }else if (user){
+                $("#input_pwd").focus();
+            }else {
+                myAlert("{TEXT_FORM_CANT_BE_EMPTY}",function () {
+                    $("#input_email").focus();
+                });
+            }
+            /* else if (mail && user && pass) {
+                $("#input_confirm_pwd").focus();
+            } else if (mail && user) {
+                $("#input_pwd").focus();
+            } else if (mail) {
+                $("#input_user").focus();
+            } else {
+                alert("{TEXT_FORM_CANT_BE_EMPTY}",function () {
+                    $("#input_email").focus();
+                });
+            }*/
+        } else {
+            //程序异常
+            myAlert("{TEXT_PROGRAM_EXCEPTION}");
+        }
+        return false;
+    });
+    $("#verify").click(function () {
+        myAlert("正在发送邮件...");
+        let mail = $("#input_email").val();
+        if (mail){
+            $.post("{LINK_sendCaptchaCode}",{
+                mail:mail
+            },function (text) {
+                let data = JSON.parse(text);
+                if (data.status==="success"){
+                    myAlert("邮件发送成功",function () {
+                        $("#input_captcha_code").focus();
+                    });
+                    x.a = data.code;
+                }else {
+                    myAlert("邮件发送失败",function () {
+                        $("#input_email").focus();
+                    });
+                }
+            });
+        }else {
+            $("#input_email").focus();
+        }
+    });
+    function myAlert(message,callback=null){
+        $("#alert-message").text(message);
+        $("#alert").fadeIn();
+        $("#alert-button").focus().click(function () {
+            $("#alert").fadeOut();
+            if (callback){
+                callback();
+            }
+        });
     }
-  })
+</script>
+
+<script>
+    $(function () {//打开页面时自动设置焦点
+        $("#input_user").focus();
+    });
+
+    $('#login').click(function () {
+        $('.convert span').removeClass('active');
+        $(this).addClass('active');
+        $(this).parents('.details ').removeClass('signup');
+        $(this).parents('.details ').addClass('login');
+        $("#input_user").focus();
+        $('form button').text('{TEXT_LOGIN}');
+    })
+
+    $('#signup').click(function () {
+        $('.convert span').removeClass('active');
+        $(this).addClass('active');
+        $(this).parents('.details ').removeClass('login');
+        $(this).parents('.details ').addClass('signup');
+        $("#input_user").focus();
+        $('form button').text('{TEXT_SIGNUP}');
+    })
+
+    $('.input input').on('focus', function () {
+        $(this).parent().addClass('focus');
+    }).on('blur', function () {
+        if ($(this).val() === '')
+            $(this).parent().removeClass('focus');
+    })
+
+    $('.show_pass').click(function () {
+        let pass_type = $('input.password').attr('type');
+        if (pass_type === 'password') {
+            $('input.password').attr('type', 'text');
+            $('.show_pass').removeClass('glyphicon-eye-open').addClass('glyphicon-eye-close');
+        } else {
+            $('input.password').attr('type', 'password');
+            $('.show_pass').removeClass('glyphicon-eye-close').addClass('glyphicon-eye-open');
+        }
+    })
 </script>
 
 <script type="text/javascript">
-  console.log("菜单按钮事件");
-  console.log("制作人:20计1 25 陆睿涵");
-  let burger = document.querySelector(".burger");
-  let navMenu = document.querySelector(".nav-list");
-  let navMenuItems = document.querySelectorAll(".nav-list li");
-  let widthHr = document.querySelector(".triangle");
-  // console.info(burger);
-  burger.addEventListener("click", function ()  {
-    burger.classList.toggle("active");
-    navMenu.classList.toggle("open");
-    navMenuItems.forEach((item, index) => {
-      if (item.style.animation) {
-        item.style.animation = "";
-      } else {
-        item.style.animation = `0.3s ease-in slideIn forwards ${index *
-        0.1 +
-        0.3}s`;
-      }
-    });
-    /*widthHr.style.width = 250px;*/
-  },false);
+    console.log("菜单按钮事件");
+    console.log("制作人:20计1 25 陆睿涵");
+    let burger = document.querySelector(".burger");
+    let navMenu = document.querySelector(".nav-list");
+    let navMenuItems = document.querySelectorAll(".nav-list li");
+    let widthHr = document.querySelector(".triangle");
+    // console.info(burger);
+    burger.addEventListener("click", function () {
+        burger.classList.toggle("active");
+        navMenu.classList.toggle("open");
+        navMenuItems.forEach((item, index) => {
+            if (item.style.animation) {
+                item.style.animation = "";
+            } else {
+                item.style.animation = `0.3s ease-in slideIn forwards ${index *
+                0.1 +
+                0.3}s`;
+            }
+        });
+        /*widthHr.style.width = 250px;*/
+    }, false);
 </script>
-</html>
+
+</body>

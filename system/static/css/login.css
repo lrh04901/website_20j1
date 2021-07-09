@@ -23,6 +23,79 @@ body{
     box-shadow: 10px 10px 20px;
 }
 
+/*.yzk{
+    background: linear-gradient(to bottom, rgba(2, 170, 176, 0.7), #00CDAC);
+    border-radius: 20px;
+    width: 600px;
+    height: 300px;
+    position: absolute;
+    top: 320px;
+    left: 480px;
+    z-index: 1;
+    transition: 0.2s ease-in;
+}*/
+
+.yz_form{
+    position: relative;
+    top: 100px;
+    left: 100px;
+    letter-spacing: 10px;
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+#yzm{
+    background-color: transparent;
+    outline: none;
+    width: 250px;
+    border: none;
+    border-bottom: 2px solid rgb(77,109,106);
+    content: attr(placeholder);
+    font-size: 15px;
+}
+
+.yzk h2{
+    position: relative;
+    top: 30px;
+}
+
+.yz_btn{
+    position: relative;
+    top: 140px;
+    left: 180px;
+}
+
+#y{
+    background-color: #ff5500;
+    width: 90px;
+    height: 40px;
+    border-radius: 20px;
+    border: none;
+    box-shadow: 5px 5px 10px 2px #1b716c;
+    transition: 0.3s ease-in-out;
+    font-family: "Microsoft YaHei UI Light";
+    font-size: 15px;
+}
+
+#n:hover,
+#y:hover{
+    background-color: #ff5a54;
+    transform: scale(1.2);
+    color: white;
+}
+
+#n{
+    background-color: #ffffff;
+    width: 90px;
+    height: 40px;
+    border-radius: 20px;
+    border: none;
+    box-shadow: 5px 5px 10px 2px #1b716c;
+    transition: 0.3s ease-in-out;
+    font-family: "Microsoft YaHei UI Light";
+    font-size: 15px;
+}
+
 .title span{
     color: black;
     font-size: 30px;
@@ -75,6 +148,24 @@ form .input{
     border-bottom: .1rem solid rgb(181,154,254);
 }
 
+.input #verify{
+    background-color: #0d3d88;
+    color: #fff;
+    border-radius: 20px;
+    width: 80px;
+    height: 25px;
+    position: relative;
+    top: -30px;
+    left: 143px;
+    transition: 0.5s;
+}
+
+.input #verify:hover{
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    background-color: #0c5460;
+}
+
 .input::after{
     content: attr(placeholder);
     position: absolute;
@@ -91,7 +182,8 @@ form .input{
 }
 
 .login .input#email,
-.login .input#repeat{
+.login .input#repeat,
+.login .input#captcha-code{
     /* display: none; */
     margin: 0;
     height: 0;
@@ -135,6 +227,7 @@ nav{
     padding: 0 5vw;
     height: 80px;
     background-color: rgba(217, 207, 207, 0.9);
+    z-index: 2;
 }
 
 .nav-h a{

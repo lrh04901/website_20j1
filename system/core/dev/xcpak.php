@@ -1,5 +1,4 @@
 <?php
-include "redirect.php";
 
 /**
  * 数据包处理模块

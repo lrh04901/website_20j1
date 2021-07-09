@@ -1,5 +1,4 @@
 <?php
-include "redirect.php";
 
 /**
  * Cookie处理模块，将一些数据存储至浏览器中

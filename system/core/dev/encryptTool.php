@@ -1,5 +1,4 @@
 <?php
-include "redirect.php";
 
 /**
  * 加密模块

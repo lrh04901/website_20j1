@@ -1,5 +1,4 @@
 <?php
-include "redirect.php";
 
 class uploader
 {
