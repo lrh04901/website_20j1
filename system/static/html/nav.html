@@ -1,7 +1,8 @@
 <nav>
-  <div class="nav-h"><a target="_self" href="{LINK_/}">{TEXT_MAIN_TITLE}</a></div>
-  <ul class="nav-list" type="none">
-    <li>
+  <div class="nav-h" id="nav-h" v-html="url"></div>
+  <ul class="nav-list" type="none" id="navList">
+    <li v-for="(urls,i) in url" v-html="url[i]">{{urls}}</li>
+    <!--<li>
       <a href="{LINK_/}">{TEXT_HOME}</a>
     </li>
     <li>
@@ -18,7 +19,7 @@
     </li>
     <li>
       <a id="language_choose_button" href="javascript:;">{TEXT_LANGUAGE_NAME}</a>
-    </li>
+    </li>-->
   </ul>
   <div class="burger">
     <div class="top-line"></div>
@@ -39,6 +40,14 @@
   </ul>
 </div>
 <style>
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity 2s
+  }
+
+  .fade-enter, .fade-leave-to {
+    opacity: 0
+  }
+
   #language_choose_box{
     border-radius: 20px;
   }
@@ -77,6 +86,47 @@
   }
 </style>
 
+<script src="../js/vue.js"></script>
+<!--=======================================nav左侧大标题==========================================-->
+<script>
+  const navH = new Vue({
+    el: '#nav-h',
+    data: {
+      message: 'null',
+      url: '<a target="_self" href="{LINK_/}">{TEXT_MAIN_TITLE}</a>',
+    },
+    methods: {
+     /* mouseOver: function(){
+        this.navHoverStyle = 'color: rgb(46,127,175)';
+        this.navHoverStyle = 'transition: 0.3s';
+      },
+      mouseLeave: function () {
+        this.navHoverStyle = '';
+      },*/
+    }
+  })
+</script>
+
+<!--===============================================右侧无序列表==========================================-->
+<script>
+  const navList = new Vue({
+    el: '#navList',
+    data: {
+      message: '',
+      //右侧导航栏地址
+      url: [
+            '<a href="{LINK_/}">{TEXT_HOME}</a>',
+            '<a href="{LINK_classIntroduce}">{TEXT_INTRODUCE}</a>',
+            '<a href="{LINK_Page404}">{TEXT_YOUTH_LEAGUE_ACTIVE}</a>',
+            '<a href="{LINK_Page404}">text</a>',
+            '<a href="{LINK_yule}">{TEXT_ENTERTAINMENT}</a>',
+            '<a id="language_choose_button" href="javascript:;">{TEXT_LANGUAGE_NAME}</a>',
+      ],
+    }
+  })
+</script>
+
+<!--==========================================语言选择栏==========================================-->
 <script>
   const myHover = document.querySelector('.lang');
   myHover.addEventListener("click",function () {
