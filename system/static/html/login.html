@@ -1,7 +1,7 @@
 <!--title={LOGIN_TITLE};css=login(media="screen"),;js=jquery.min;-->
 <body>
 
-<div class="yzk" style="display: none">
+<!--<div class="yzk" style="display: none">
     <h2 align="center">请输入验证码</h2>
     <div class="yz_form">
         <label id="l1">验证码：</label><input type="text" placeholder="请输入验证码" id="yzm">
@@ -10,7 +10,7 @@
         <input type="submit" value="确定" id="y">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <input type="button" value="取消" id="n">
     </div>
-</div>
+</div>-->
 
 <div class="overall">
     <img src="{IMG_login_jpg}" alt="login image">
@@ -50,12 +50,9 @@
 
 
 <!--<script type="text/javascript">
-    window.onload = function () {
-        document.querySelector('.yzk').style.display = "none";
-    }
     /*邮箱验证码*/
     const  ver = document.querySelector('#verify');
-    const turnOff = document.querySelector('#n');
+    //const turnOff = document.querySelector('#n');
     let  emailAdd = document.querySelector('#input_email');
     let format = /^[a-zA-Z0-9_-]+@([a-zA-Z0-9]+\.)+(com|cn|net|org)$/;
 
@@ -66,20 +63,20 @@
             alert("提示\n\n请输入正确的邮箱地址");
         }
     },false);
-    ver.addEventListener("click",function () {
+    /*ver.addEventListener("click",function () {
         if (format.test(emailAdd.value)) {
             document.querySelector('.yzk').style.display = "block";
         }
     },false)
     turnOff.addEventListener("click",function () {
         document.querySelector('.yzk').style.display = "none";
-    },false)
+    },false)*/
 </script>-->
 
 <script>
     let x = {a:"",b:""};//数据存储对象
     /**
-     * 登录控制部分 by SCH
+     * 登录控制部分 by SCH && LRH
      */
     $("#main_btn").click(function () {
         //阻止提交和跳转，并进行异步操作
@@ -199,7 +196,19 @@
         return false;
     });
     $("#verify").click(function () {
-        myAlert("正在发送邮件...");
+        const  ver = document.querySelector('#verify');
+        //const turnOff = document.querySelector('#n');
+        let  emailAdd = document.querySelector('#input_email');
+        let format = /^[a-zA-Z0-9_-]+@([a-zA-Z0-9]+\.)+(com|cn|net|org)$/;
+
+        ver.addEventListener("click",function () {
+            if (format.test(emailAdd.value)) {
+                myAlert("正在发送邮件...");
+            } else {
+                alert("提示\n\n请输入正确的邮箱地址");
+            }
+        },false);
+/*=====================================以上步骤验证邮箱格式==========================================*/
         let mail = $("#input_email").val();
         if (mail){
             $.post("{LINK_sendCaptchaCode}",{
@@ -231,6 +240,18 @@
             }
         });
     }
+</script>
+
+<script>
+    const butn1 = document.getElementById('signup');
+    const butn2 = document.getElementById('login');
+    const movePanel = document.querySelector('.panel');
+    butn1.addEventListener("click",function () {
+        movePanel.style.margin = '5rem 0 0';
+    },false);
+    butn2.addEventListener("click",function () {
+        movePanel.style.margin = '10rem 0 0';
+    },false);
 </script>
 
 <script>
