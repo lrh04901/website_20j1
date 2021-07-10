@@ -119,11 +119,7 @@ class core
     public static function loadComponent(string $name): void
     {
         if (file_exists("debug")){//调试模式
-            if (defined("CORE_PATH")){//已经加载define.php
-                $component_path = CORE_PATH . "dev/$name.php";
-            }else{
-                $component_path = "system/core/dev/$name.php";
-            }
+            $component_path = "src/core/$name.php";
         }else{
             $component_path = "phar://core.phar/$name.php";
         }

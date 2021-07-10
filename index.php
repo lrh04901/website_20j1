@@ -1,7 +1,7 @@
 <?php
 if (file_exists("debug")){
-    if (file_exists("system/core/dev/core.php")) {
-        include("system/core/dev/core.php");
+    if (file_exists("src/core/core.php")) {
+        include("src/core/core.php");
     }else{
         die(base64_decode("PGgyIHN0eWxlPSdwb3NpdGlvbjogZml4ZWQ7bGVmdDogMjAlO3RvcDogMzAlOyc+5b2T5YmN54mI5pys5Li65Y+R6KGM54mI77yM5peg5rOV5L2/55So6LCD6K+V5qCH6K6wPGJyPueVtuWJjeeJiOacrOeCuueZvOihjOeJiOacrO+8jOeEoeazleS9v+eUqOiqv+ippuaomeiomDxicj5EZWJ1ZyBmbGFnIGNhbm5vdCBiZSB1c2VkIGJlY2F1c2UgdGhlIGN1cnJlbnQgdmVyc2lvbiBpcyBhIHJlbGVhc2U8YnI+54++5Zyo44Gu44OQ44O844K444On44Oz44Gv44Oq44Oq44O844K554mI44Gn44GZ44Gu44Gn44CB44OH44OQ44OD44Kw44OV44Op44Kw44Gv5L2/44GI44G+44Gb44KT44CCPGJyPu2YhOyerCDrsoQg7KCEIOydgCDrsJztlokg7YyQIOycvOuhnCDrlJQg67KEIOq5hSDrp4jtgawg66W8IOyCrOyaqSDtlaAg7IiYIOyXhuyKteuLiOuLpC48L2gyPg=="));
     }
