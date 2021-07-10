@@ -29,6 +29,8 @@ class core
         self::loadComponent("uploader");//加载上传模块
         self::loadComponent("arrayTool");//加载数组模块
         self::loadComponent("dbAdmin");//加载数据库管理
+        self::loadComponent("phpIniTool");//加载PHP配置文件模块
+        self::loadComponent("zipTool");//加载zip模块
         include(CORE_PATH . "mail.phar");
         date_default_timezone_set("PRC");//设置时区
 //        echo "PATH defined : ". (defined("PATH")?"yes":"no")."<br>";
