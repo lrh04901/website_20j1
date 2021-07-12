@@ -14,15 +14,9 @@ class core
 //        echo "[Debug Info]<br>";
         include("./system/core/core.phar");
         self::loadComponent("define");//加载定义模块
-        define::run();
-        if (json_decode(file_get_contents(CONFIG_PATH."sys_config.json"),true)["enable_https"]){
-            if ($_SERVER["SERVER_PORT"]=="80"){
-                header("Location:https://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]);
-            }
-        }
+        if (json_decode(file_get_contents(CONFIG_PATH."sys_config.json"),true)["enable_https"]) if ($_SERVER["SERVER_PORT"]=="80") header("Location:https://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]);
         self::loadComponent("cookie");//加载cookie模块
         self::loadComponent("language");//加载语言模块
-        language::run();
         self::loadComponent("get");//加载get请求模块
         self::loadComponent("post");//加载post请求模块
         self::loadComponent("argsTool");//加载参数模块
