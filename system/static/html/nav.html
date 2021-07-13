@@ -1,25 +1,7 @@
 <nav>
-  <div class="nav-h" id="nav-h" v-html="url"></div>
+  <div class="nav-h" id="nav-h" v-html="url" v-cloak></div>
   <ul class="nav-list" type="none" id="navList">
-    <li v-for="(urls,i) in url" v-html="url[i]">{{urls}}</li>
-    <!--<li>
-      <a href="{LINK_/}">{TEXT_HOME}</a>
-    </li>
-    <li>
-      <a href="{LINK_classIntroduce}">{TEXT_INTRODUCE}</a>
-    </li>
-    <li>
-      <a href="{LINK_Page404}">{TEXT_YOUTH_LEAGUE_ACTIVE}</a>
-    </li>
-    <li>
-      <a href="{LINK_Page404}">text</a>
-    </li>
-    <li>
-      <a href="{LINK_yule}">{TEXT_ENTERTAINMENT}</a>
-    </li>
-    <li>
-      <a id="language_choose_button" href="javascript:;">{TEXT_LANGUAGE_NAME}</a>
-    </li>-->
+    <li v-for="(urls,i) in url" v-html="url[i]" v-cloak>{{urls}}</li>
   </ul>
   <div class="burger">
     <div class="top-line"></div>
@@ -40,6 +22,10 @@
   </ul>
 </div>
 <style>
+  [v-cloak]{
+    display: none;
+  }
+
   .fade-enter-active, .fade-leave-active {
     transition: opacity 2s
   }
@@ -89,41 +75,43 @@
 <script src="../js/vue.js"></script>
 <!--=======================================nav左侧大标题==========================================-->
 <script>
-  const navH = new Vue({
-    el: '#nav-h',
-    data: {
-      message: 'null',
-      url: '<a target="_self" href="{LINK_/}">{TEXT_MAIN_TITLE}</a>',
-    },
-    methods: {
-     /* mouseOver: function(){
-        this.navHoverStyle = 'color: rgb(46,127,175)';
-        this.navHoverStyle = 'transition: 0.3s';
+  setTimeout(function () {
+    const navH = new Vue({
+      el: '#nav-h',
+      data: {
+        message: 'null',
+        url: '<a target="_self" href="{LINK_/}">{TEXT_MAIN_TITLE}</a>',
       },
-      mouseLeave: function () {
-        this.navHoverStyle = '';
-      },*/
-    }
-  })
+      methods: {
+        /* mouseOver: function(){
+           this.navHoverStyle = 'color: rgb(46,127,175)';
+           this.navHoverStyle = 'transition: 0.3s';
+         },
+         mouseLeave: function () {
+           this.navHoverStyle = '';
+         },*/
+      }
+    })
+  }, 10);
 </script>
 
 <!--===============================================右侧无序列表==========================================-->
 <script>
-  const navList = new Vue({
-    el: '#navList',
-    data: {
-      message: '',
-      //右侧导航栏地址
-      url: [
-            '<a href="{LINK_/}">{TEXT_HOME}</a>',
-            '<a href="{LINK_classIntroduce}">{TEXT_INTRODUCE}</a>',
-            '<a href="{LINK_Page404}">{TEXT_YOUTH_LEAGUE_ACTIVE}</a>',
-            '<a href="{LINK_Page404}">text</a>',
-            '<a href="{LINK_yule}">{TEXT_ENTERTAINMENT}</a>',
-            '<a id="language_choose_button" href="javascript:;">{TEXT_LANGUAGE_NAME}</a>',
-      ],
-    }
-  })
+    const navList = new Vue({
+      el: '#navList',
+      data: {
+        message: '',
+        //右侧导航栏地址
+        url: [
+          '<a href="{LINK_/}">{TEXT_HOME}</a>',
+          '<a href="{LINK_classIntroduce}">{TEXT_INTRODUCE}</a>',
+          '<a href="{LINK_Page404}">{TEXT_YOUTH_LEAGUE_ACTIVE}</a>',
+          '<a href="{LINK_yule}">{TEXT_ENTERTAINMENT}</a>',
+          '<a href="{LINK_Page404}">text</a>',
+          '<a id="language_choose_button" href="javascript:;">{TEXT_LANGUAGE_NAME}</a>',
+        ],
+      }
+    })
 </script>
 
 <!--==========================================语言选择栏==========================================-->

@@ -94,8 +94,18 @@
                     pass: pass
                 }, function (text) {
                     let data = JSON.parse(text);
+                    let tm = 3;
                     if (data.status === "success") {
                         myAlert("{TEXT_LOGIN_SUCCESS}");
+                        function myTime() {
+                            if (tm + 1 > 0) {
+                                myAlert("loading");
+                                tm--;
+                                setTimeout("myTime()", 1000);
+                            } else {
+                                location.href = "{LINK_/}";
+                            }
+                        }
                     } else if (data.status === "fail") {
                         if (data.reason === "database-error") {
                             myAlert("{TEXT_DATABASE_ERROR}");
