@@ -98,7 +98,7 @@
 <script>
     // $("table.datatable").datatable();
     $("td").click(function () {
-        if ($(this).attr("name") !== "blank_td" && $(this).attr("class") !== "shsl") {
+        if ($(this).attr("name") !== "blank_td" && $(this).attr("name") !== "shsl") {
             if ($(this).text() === "X") {
                 $(this).text($(this).attr("dataBackupText")).attr({dataBackupText: ""}).css({
                     backgroundColor: "white",
