@@ -162,7 +162,7 @@
                                 }
                             });
                         }else {
-                            x.b=mail;
+                            // x.b=mail;
                             $("#verify").click();
                         }
                     }else {
@@ -230,6 +230,7 @@
                         $("#input_captcha_code").focus();
                     });
                     x.a = data.code;
+                    x.b = mail;
                 }else {
                     myAlert("邮件发送失败",function () {
                         $("#input_email").focus();
