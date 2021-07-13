@@ -6,25 +6,122 @@
     <button class="btn btn-primary btn-lg">生成</button>
     <br><br>
 </div>
-<table class="table datatable">
-    <thead>
-    <tr>
-        <th></th>
-        <th>1</th>
-        <th>2</th>
-        <th></th>
-        <th>3</th>
-        <th>4</th>
-        <th></th>
-        <th>5</th>
-        <th>6</th>
-        <th></th>
-        <th>7</th>
-        <th>8</th>
-    </tr>
-    </thead>
-    <tbody></tbody>
-</table>
+<div class="table-responsive">
+    <table class="table table-bordered text-center">
+        <tbody>
+        <tr>
+            <td class="shsl" name="tt1"></td>
+            <td class="shsl" name="tt2">1</td>
+            <td class="shsl" name="tt2">2</td>
+            <td class="shsl" name="tt1"></td>
+            <td class="shsl" name="tt2">3</td>
+            <td class="shsl" name="tt2">4</td>
+            <td class="shsl" name="tt1"></td>
+            <td class="shsl" name="tt2">5</td>
+            <td class="shsl" name="tt2">6</td>
+            <td class="shsl" name="tt1"></td>
+            <td class="shsl" name="tt2">7</td>
+            <td class="shsl" name="tt2">8</td>
+        </tr>
+        <tr>
+            <td class="shsl">1</td>
+            <td id="a11">A</td>
+            <td id="a12">A</td>
+            <td></td>
+            <td id="a13">A</td>
+            <td id="a14">A</td>
+            <td></td>
+            <td id="a15">A</td>
+            <td id="a16">A</td>
+            <td></td>
+            <td id="a17">A</td>
+            <td id="a18">A</td>
+        </tr>
+        <tr>
+            <td class="shsl">2</td>
+            <td id="a21">A</td>
+            <td id="a22">A</td>
+            <td></td>
+            <td id="a23">A</td>
+            <td id="a24">A</td>
+            <td></td>
+            <td id="a25">A</td>
+            <td id="a26">A</td>
+            <td></td>
+            <td id="a27">A</td>
+            <td id="a28">A</td>
+        </tr>
+        <tr>
+            <td class="shsl">3</td>
+            <td id="a31">A</td>
+            <td id="a32">A</td>
+            <td></td>
+            <td id="a33">A</td>
+            <td id="a34">A</td>
+            <td></td>
+            <td id="a35">A</td>
+            <td id="a36">A</td>
+            <td></td>
+            <td id="a37">A</td>
+            <td id="a38">A</td>
+        </tr>
+        <tr>
+            <td class="shsl">4</td>
+            <td id="a41">A</td>
+            <td id="a42">A</td>
+            <td></td>
+            <td id="a43">A</td>
+            <td id="a44">A</td>
+            <td></td>
+            <td id="a45">A</td>
+            <td id="a46">A</td>
+            <td></td>
+            <td id="a47">A</td>
+            <td id="a48">A</td>
+        </tr>
+        <tr>
+            <td class="shsl">5</td>
+            <td id="a51">A</td>
+            <td id="a52">A</td>
+            <td></td>
+            <td id="a53">A</td>
+            <td id="a54">A</td>
+            <td></td>
+            <td id="a55">A</td>
+            <td id="a56">A</td>
+            <td></td>
+            <td id="a57">A</td>
+            <td id="a58">A</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 <script>
-    $("table.datatable").datatable();
+    // $("table.datatable").datatable();
+    $("td").click(function () {
+        console.log(this);
+        if ($(this).text() === "X") {
+            $(this).text($(this).attr("dataBackupText")).attr({dataBackupText: ""});
+        } else {
+            $(this).attr({dataBackupText: $(this).text()}).text("X");
+        }
+    });
 </script>
+<style>
+    th {
+        text-align: center;
+    }
+
+    td[name="tt1"] {
+        width: 5%;
+    }
+
+    td[name="tt2"] {
+        width: 10%;
+    }
+
+    .shsl {
+        /*  首行首列  */
+        background-color: lightgray;
+    }
+</style>
