@@ -3,125 +3,137 @@
 <div class="container-fluid bg-primary text-center">
     <br>
     <h1>座位表生成</h1>
+    <h2>点击指定位置，在变为红底黑×时表示禁用指定座位</h2>
     <button class="btn btn-primary btn-lg">生成</button>
     <br><br>
 </div>
-<div class="table-responsive">
-    <table class="table table-bordered text-center">
-        <tbody>
-        <tr>
-            <td class="shsl" name="tt1"></td>
-            <td class="shsl" name="tt2">1</td>
-            <td class="shsl" name="tt2">2</td>
-            <td class="shsl" name="tt1"></td>
-            <td class="shsl" name="tt2">3</td>
-            <td class="shsl" name="tt2">4</td>
-            <td class="shsl" name="tt1"></td>
-            <td class="shsl" name="tt2">5</td>
-            <td class="shsl" name="tt2">6</td>
-            <td class="shsl" name="tt1"></td>
-            <td class="shsl" name="tt2">7</td>
-            <td class="shsl" name="tt2">8</td>
-        </tr>
-        <tr>
-            <td class="shsl">1</td>
-            <td id="a11">A</td>
-            <td id="a12">A</td>
-            <td></td>
-            <td id="a13">A</td>
-            <td id="a14">A</td>
-            <td></td>
-            <td id="a15">A</td>
-            <td id="a16">A</td>
-            <td></td>
-            <td id="a17">A</td>
-            <td id="a18">A</td>
-        </tr>
-        <tr>
-            <td class="shsl">2</td>
-            <td id="a21">A</td>
-            <td id="a22">A</td>
-            <td></td>
-            <td id="a23">A</td>
-            <td id="a24">A</td>
-            <td></td>
-            <td id="a25">A</td>
-            <td id="a26">A</td>
-            <td></td>
-            <td id="a27">A</td>
-            <td id="a28">A</td>
-        </tr>
-        <tr>
-            <td class="shsl">3</td>
-            <td id="a31">A</td>
-            <td id="a32">A</td>
-            <td></td>
-            <td id="a33">A</td>
-            <td id="a34">A</td>
-            <td></td>
-            <td id="a35">A</td>
-            <td id="a36">A</td>
-            <td></td>
-            <td id="a37">A</td>
-            <td id="a38">A</td>
-        </tr>
-        <tr>
-            <td class="shsl">4</td>
-            <td id="a41">A</td>
-            <td id="a42">A</td>
-            <td></td>
-            <td id="a43">A</td>
-            <td id="a44">A</td>
-            <td></td>
-            <td id="a45">A</td>
-            <td id="a46">A</td>
-            <td></td>
-            <td id="a47">A</td>
-            <td id="a48">A</td>
-        </tr>
-        <tr>
-            <td class="shsl">5</td>
-            <td id="a51">A</td>
-            <td id="a52">A</td>
-            <td></td>
-            <td id="a53">A</td>
-            <td id="a54">A</td>
-            <td></td>
-            <td id="a55">A</td>
-            <td id="a56">A</td>
-            <td></td>
-            <td id="a57">A</td>
-            <td id="a58">A</td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+<table class="text-center">
+    <tbody>
+    <tr>
+        <td name="shsl">5</td>
+        <td name="seat" id="a15">1-5</td>
+        <td name="seat" id="a25">2-5</td>
+        <td name="blank_td"></td>
+        <td name="seat" id="a35">3-5</td>
+        <td name="seat" id="a45">4-5</td>
+        <td name="blank_td"></td>
+        <td name="seat" id="a55">5-5</td>
+        <td name="seat" id="a65">6-5</td>
+        <td name="blank_td"></td>
+        <td name="seat" id="a75">7-5</td>
+        <td name="seat" id="a85">8-5</td>
+    </tr>
+    <tr>
+        <td name="shsl">4</td>
+        <td id="a14" name="seat">1-4</td>
+        <td id="a24" name="seat">2-4</td>
+        <td name="blank_td"></td>
+        <td id="a34" name="seat">3-4</td>
+        <td id="a44" name="seat">4-4</td>
+        <td name="blank_td"></td>
+        <td id="a54" name="seat">5-4</td>
+        <td id="a64" name="seat">6-4</td>
+        <td name="blank_td"></td>
+        <td id="a74" name="seat">7-4</td>
+        <td id="a84" name="seat">8-4</td>
+    </tr>
+    <tr>
+        <td name="shsl">3</td>
+        <td id="a13" name="seat">1-3</td>
+        <td id="a23" name="seat">2-3</td>
+        <td name="blank_td"></td>
+        <td id="a33" name="seat">3-3</td>
+        <td id="a43" name="seat">4-3</td>
+        <td name="blank_td"></td>
+        <td id="a53" name="seat">5-3</td>
+        <td id="a63" name="seat">6-3</td>
+        <td name="blank_td"></td>
+        <td id="a73" name="seat">7-3</td>
+        <td id="a83" name="seat">8-3</td>
+    </tr>
+    <tr>
+        <td name="shsl">2</td>
+        <td id="a12" name="seat">1-2</td>
+        <td id="a22" name="seat">2-2</td>
+        <td name="blank_td"></td>
+        <td id="a32" name="seat">3-2</td>
+        <td id="a42" name="seat">4-2</td>
+        <td name="blank_td"></td>
+        <td id="a52" name="seat">5-2</td>
+        <td id="a62" name="seat">6-2</td>
+        <td name="blank_td"></td>
+        <td id="a72" name="seat">7-2</td>
+        <td id="a82" name="seat">8-2</td>
+    </tr>
+    <tr>
+        <td name="shsl">1</td>
+        <td id="a11" name="seat">1-1</td>
+        <td id="a21" name="seat">2-1</td>
+        <td name="blank_td"></td>
+        <td id="a31" name="seat">3-1</td>
+        <td id="a41" name="seat">4-1</td>
+        <td name="blank_td"></td>
+        <td id="a51" name="seat">5-1</td>
+        <td id="a61" name="seat">6-1</td>
+        <td name="blank_td"></td>
+        <td id="a71" name="seat">7-1</td>
+        <td id="a81" name="seat">8-1</td>
+    </tr>
+    <tr>
+        <td name="shsl"></td>
+        <td name="shsl">1</td>
+        <td name="shsl">2</td>
+        <td name="shsl"></td>
+        <td name="shsl">3</td>
+        <td name="shsl">4</td>
+        <td name="shsl"></td>
+        <td name="shsl">5</td>
+        <td name="shsl">6</td>
+        <td name="shsl"></td>
+        <td name="shsl">7</td>
+        <td name="shsl">8</td>
+    </tr>
+    </tbody>
+</table>
 <script>
     // $("table.datatable").datatable();
     $("td").click(function () {
-        console.log(this);
-        if ($(this).text() === "X") {
-            $(this).text($(this).attr("dataBackupText")).attr({dataBackupText: ""});
-        } else {
-            $(this).attr({dataBackupText: $(this).text()}).text("X");
+        if ($(this).attr("name") !== "blank_td" && $(this).attr("class") !== "shsl") {
+            if ($(this).text() === "X") {
+                $(this).text($(this).attr("dataBackupText")).attr({dataBackupText: ""}).css({
+                    backgroundColor: "white",
+                    border: "1px solid #ccc"
+                });
+            } else {
+                $(this).attr({dataBackupText: $(this).text()}).text("X").css({backgroundColor: "red"});
+            }
         }
     });
 </script>
 <style>
-    th {
-        text-align: center;
+    td {
+        border: 1px solid #ccc;
+        height: 40px;
     }
 
-    td[name="tt1"] {
-        width: 5%;
+    td[name="seat"] {
+        width: 100px;
     }
 
-    td[name="tt2"] {
-        width: 10%;
+    td[name="blank_td"] {
+        background-color: #eee;
     }
 
-    .shsl {
+    td[name="shsl"] {
         /*  首行首列  */
         background-color: lightgray;
+    }
+
+    td[name="blank_td"], td[name="shsl"] {
+        width: 50px;
+    }
+
+    table {
+        width: 100%;
     }
 </style>
