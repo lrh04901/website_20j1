@@ -151,7 +151,7 @@ class get
      * 项目控制台
      * @return void
      */
-    public static function projCtrl():void
+    public static function projCtrl(): void
     {
         $secret = argsTool::get("password");
         if (hash("sha256", $secret) == "63cc084612161460d763510777475c58fa6cf87b05e51a9774526e527a6e0a09" or cookie::get("allow_visit_proj_ctrl") == "yes") {
@@ -169,24 +169,24 @@ class get
         } elseif ($c == "build") {
             echo "<head><title>编译项目</title><link rel='stylesheet' href='system/static/css/zui.min.css'></head>";
             echo "<h2>正在编译项目...</h2>";
-            $a = scandir(PATH."src/");
+            $a = scandir(PATH . "src/");
             $readonly = phpIniTool::get("phar.readonly");
-            if ($readonly=="On"){
-                die("<h2>当前无法编译项目，请手动将<mark>".phpIniTool::path()."</mark>中的phar.readonly属性修改为Off</h2>");
+            if ($readonly == "On") {
+                die("<h2>当前无法编译项目，请手动将<mark>" . phpIniTool::path() . "</mark>中的phar.readonly属性修改为Off</h2>");
             }
             foreach ($a as $item) {
-                if ($item!="."and$item!=".."){
-                    if (file_exists(CORE_PATH."$item.phar")){
-                        unlink(CORE_PATH."$item.phar");
+                if ($item != "." and $item != "..") {
+                    if (file_exists(CORE_PATH . "$item.phar")) {
+                        unlink(CORE_PATH . "$item.phar");
                     }
-                    if (file_exists("src/$item/index.php")){
+                    if (file_exists("src/$item/index.php")) {
                         unlink("src/$item/index.php");
                     }
                     touch("src/$item/index.php");
-                    file_put_contents("src/$item/index.php",base64_decode("PD9waHAKLyrljaDkvY3mlofku7YqLw=="));
-                    $phar = new Phar(CORE_PATH."$item.phar",0,"$item.phar");
+                    file_put_contents("src/$item/index.php", base64_decode("PD9waHAKLyrljaDkvY3mlofku7YqLw=="));
+                    $phar = new Phar(CORE_PATH . "$item.phar", 0, "$item.phar");
                     $phar->buildFromDirectory("src/$item");
-                    $phar->setStub(Phar::createDefaultStub("index.php","index.php"));
+                    $phar->setStub(Phar::createDefaultStub("index.php", "index.php"));
                     $phar->compressFiles(Phar::GZ);
                     unlink("src/$item/index.php");
                     echo "<h2>$item 部分已编译完成 -> $item.phar</h2>";
@@ -199,11 +199,65 @@ class get
             zipTool::pack(["system", "config", "index.php"], "pack.zip");
             echo "<h2>打包完成，压缩包：pack.zip</h2>";
             echo "<a href='./?/projCtrl' class='btn btn-link btn-lg'>返回</a>";
-        }elseif ($c == "exit"){
+        } elseif ($c == "exit") {
             cookie::delete("allow_visit_proj_ctrl");
             header("Location:./?/");
         } else {
             header("Location:./?/projCtrl");
         }
+    }
+
+    public static function urls()
+    {
+        echo "<head><title>链接导航</title><link rel='icon' href='system/static/img/j1logo.jpg'><link rel='stylesheet' href='system/static/css/zui.min.css'><link rel='stylesheet' href='system/static/css/zui.datatable.min.css'><script src='system/static/js/jquery.min.js'></script><script src='system/static/js/zui.min.js'></script><script src='system/static/js/zui.datatable.min.js'></script></head>";
+        echo "<body><h1>当前站点的链接</h1><table class='table datatable'><thead><tr><th>名称</th><th>页面类型</th><th>页面状态</th><th>页面标题</th><th>操作</th></tr></thead><tbody>";
+        $list = scandir(HTML_PATH);
+        foreach ($list as $item) {
+            if ($item != "." and $item != "..") {
+                $data = file_get_contents(HTML_PATH . $item);
+                $firstLine = explode("\n", $data)[0];
+                $firstLine = str_replace("<!--", "", str_replace("-->", "", $firstLine));
+                $link_name = str_replace(".html", "", $item);
+                $data_array = explode(";", $firstLine);
+                $link_type = "";
+                if (explode("=", $data_array[0])[0] == "title") {
+                    $link_type = "基本页面";
+                } else if (explode("=", $data_array[0])[0] == "function") {
+                    $link_type = "映射页面";
+                }else{
+                    $link_type = "引用页面";
+                }
+                $link_status = "";
+                if ($item == "head.html") {
+                    $link_status = "无法访问头部页面";
+                }else if ($item=="urls.html") {
+                    $link_status = "当前页面";
+                }else if ($link_type=="引用页面"){
+                    $link_status  ="无法访问引用页面";
+                }else{
+                    $link_status = "正常";
+                }
+                $link_title = "";
+                if ($link_type=="基本页面"){
+                    $link_title=explode("=", $data_array[0])[1];
+                    if(substr($link_title,0,1)=="{"and substr($link_title,strlen($link_title)-1)=="}"){
+                        $x = substr($link_title,1,strlen($link_title)-2);
+                        $link_title = L[$x];
+                    }
+                }else if ($link_type=="映射页面"){
+                    $link_title=explode("=", $data_array[1])[1];
+                }else{
+                    $link_title="引用页面：$link_name";
+                }
+                $link_data = "";
+                if ($link_status=="正常"){
+                    $link_data = "<a href='./?/".$link_name."' class='btn btn-link btn-sm'>访问</a>";
+                }else{
+                    $link_data = "<a class='btn btn-link btn-sm' disabled>访问</a>";
+                }
+                echo "<tr><td>$link_name</td><td>$link_type</td><td>$link_status</td><td>$link_title</td><td>$link_data</td></tr>";
+            }
+        }
+        echo "</tbody></table><script>$('table.datatable').datatable();</script></body>";
     }
 }
