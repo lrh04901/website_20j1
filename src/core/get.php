@@ -260,4 +260,29 @@ class get
         }
         echo "</tbody></table><script>$('table.datatable').datatable();</script></body>";
     }
+
+    public static function excel()
+    {
+        require "phar://phpExcel.phar/PHPExcel.php";
+        $excelObj = new PHPExcel();
+        $excelObj->getProperties()
+            ->setCreator("帅哥SCH")
+            ->setLastModifiedBy("帅哥SCH")
+            ->setTitle("测试Excel文档")
+            ->setSubject("测试Excel文档")
+            ->setDescription("测试文档")
+            ->setKeywords("测试")
+            ->setCategory("Test");
+        $excelObj->setActiveSheetIndex(0)
+            ->setCellValue('A1','hello')
+            ->setCellValue('A2',12)
+            ->setCellValue('A3',25)
+            ->setCellValue('A4',true)
+            ->setCellValue('A5','=SUM(A2:A3)');
+        $excelObj->setActiveSheetIndex(0);
+        ob_end_clean();
+        $writerObj = PHPExcel_IOFactory::createWriter($excelObj,'Excel5');
+        $writerObj->save(DATA_PATH."test.xls");
+        echo "<head><title>Excel测试页面</title></head><body><h1>Excel测试页面</h1><p>文件创建成功</p></body>";
+    }
 }
