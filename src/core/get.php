@@ -285,4 +285,9 @@ class get
         $writerObj->save(DATA_PATH."test.xls");
         echo "<head><title>Excel测试页面</title></head><body><h1>Excel测试页面</h1><p>文件创建成功</p></body>";
     }
+
+    public static function word()
+    {
+        echo "<head><title>Word测试页面</title></head><body><h1>Word测试页面</h1></body>";
+    }
 }
