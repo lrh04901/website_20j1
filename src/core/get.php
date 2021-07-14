@@ -171,7 +171,7 @@ class get
             echo "<h2>正在编译项目...</h2>";
             $a = scandir(PATH . "src/");
             $readonly = phpIniTool::get("phar.readonly");
-            if ($readonly == "On") {
+            if ($readonly != "Off") {
                 die("<h2>当前无法编译项目，请手动将<mark>" . phpIniTool::path() . "</mark>中的phar.readonly属性修改为Off</h2>");
             }
             foreach ($a as $item) {
