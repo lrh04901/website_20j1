@@ -185,7 +185,7 @@
                 $("#input_pwd").focus();
             }else {
                 myAlert("{TEXT_FORM_CANT_BE_EMPTY}",function () {
-                    $("#input_email").focus();
+                    $("#input_user").focus();
                 });
             }
             /* else if (mail && user && pass) {
@@ -215,7 +215,7 @@
             if (format.test(emailAdd.value)) {
                 myAlert("正在发送邮件...");
             } else {
-                alert("提示\n\n请输入正确的邮箱地址");
+                myAlert("请输入正确的邮箱地址");
             }
         },false);
 /*=====================================以上步骤验证邮箱格式==========================================*/

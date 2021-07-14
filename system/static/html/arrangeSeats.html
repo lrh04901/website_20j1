@@ -1,30 +1,160 @@
 <!--title=座位表生成;css=zui.min,zui.datatable.min;js=zui.min,zui.datatable.min;-->
-<br>
 <div class="container-fluid bg-primary text-center">
     <br>
     <h1>座位表生成</h1>
-    <button class="btn btn-primary btn-lg">生成</button>
+    <h2>点击指定位置，在变为红底黑×时表示禁用指定座位</h2>
+    <button class="btn btn-primary btn-lg" id="gen">生成</button>
     <br><br>
 </div>
-<table class="table datatable">
-    <thead>
+<table class="text-center">
+    <tbody>
     <tr>
-        <th></th>
-        <th>1</th>
-        <th>2</th>
-        <th></th>
-        <th>3</th>
-        <th>4</th>
-        <th></th>
-        <th>5</th>
-        <th>6</th>
-        <th></th>
-        <th>7</th>
-        <th>8</th>
+        <td name="shsl">5</td>
+        <td name="seat" id="a15">1-5</td>
+        <td name="seat" id="a25">2-5</td>
+        <td name="blank_td"></td>
+        <td name="seat" id="a35">3-5</td>
+        <td name="seat" id="a45">4-5</td>
+        <td name="blank_td"></td>
+        <td name="seat" id="a55">5-5</td>
+        <td name="seat" id="a65">6-5</td>
+        <td name="blank_td"></td>
+        <td name="seat" id="a75">7-5</td>
+        <td name="seat" id="a85">8-5</td>
     </tr>
-    </thead>
-    <tbody></tbody>
+    <tr>
+        <td name="shsl">4</td>
+        <td id="a14" name="seat">1-4</td>
+        <td id="a24" name="seat">2-4</td>
+        <td name="blank_td"></td>
+        <td id="a34" name="seat">3-4</td>
+        <td id="a44" name="seat">4-4</td>
+        <td name="blank_td"></td>
+        <td id="a54" name="seat">5-4</td>
+        <td id="a64" name="seat">6-4</td>
+        <td name="blank_td"></td>
+        <td id="a74" name="seat">7-4</td>
+        <td id="a84" name="seat">8-4</td>
+    </tr>
+    <tr>
+        <td name="shsl">3</td>
+        <td id="a13" name="seat">1-3</td>
+        <td id="a23" name="seat">2-3</td>
+        <td name="blank_td"></td>
+        <td id="a33" name="seat">3-3</td>
+        <td id="a43" name="seat">4-3</td>
+        <td name="blank_td"></td>
+        <td id="a53" name="seat">5-3</td>
+        <td id="a63" name="seat">6-3</td>
+        <td name="blank_td"></td>
+        <td id="a73" name="seat">7-3</td>
+        <td id="a83" name="seat">8-3</td>
+    </tr>
+    <tr>
+        <td name="shsl">2</td>
+        <td id="a12" name="seat">1-2</td>
+        <td id="a22" name="seat">2-2</td>
+        <td name="blank_td"></td>
+        <td id="a32" name="seat">3-2</td>
+        <td id="a42" name="seat">4-2</td>
+        <td name="blank_td"></td>
+        <td id="a52" name="seat">5-2</td>
+        <td id="a62" name="seat">6-2</td>
+        <td name="blank_td"></td>
+        <td id="a72" name="seat">7-2</td>
+        <td id="a82" name="seat">8-2</td>
+    </tr>
+    <tr>
+        <td name="shsl">1</td>
+        <td id="a11" name="seat">1-1</td>
+        <td id="a21" name="seat">2-1</td>
+        <td name="blank_td"></td>
+        <td id="a31" name="seat">3-1</td>
+        <td id="a41" name="seat">4-1</td>
+        <td name="blank_td"></td>
+        <td id="a51" name="seat">5-1</td>
+        <td id="a61" name="seat">6-1</td>
+        <td name="blank_td"></td>
+        <td id="a71" name="seat">7-1</td>
+        <td id="a81" name="seat">8-1</td>
+    </tr>
+    <tr>
+        <td name="shsl"></td>
+        <td name="shsl">1</td>
+        <td name="shsl">2</td>
+        <td name="shsl"></td>
+        <td name="shsl">3</td>
+        <td name="shsl">4</td>
+        <td name="shsl"></td>
+        <td name="shsl">5</td>
+        <td name="shsl">6</td>
+        <td name="shsl"></td>
+        <td name="shsl">7</td>
+        <td name="shsl">8</td>
+    </tr>
+    </tbody>
 </table>
 <script>
-    $("table.datatable").datatable();
+    $(function () {
+        $('td[name="seat"]').text("");
+        $("td").click(function () {
+            if ($(this).attr("name") !== "blank_td" && $(this).attr("name") !== "shsl") {
+                if ($(this).text() === "X") {
+                    $(this).text($(this).attr("dataBackupText")).attr({dataBackupText: ""}).css({
+                        backgroundColor: "white",
+                        border: "1px solid #ccc"
+                    });
+                } else {
+                    $(this).attr({dataBackupText: $(this).text()}).text("X").css({backgroundColor: "red"});
+                }
+            }
+        });
+        $("#gen").click(function () {
+            let y = $('td[name="seat"]');
+            for (let i = 0;i<y.length;i++){
+                if ($(y[i]).text()!=="X"){
+                    $(y[i]).text("");
+                }
+            }
+            let data='["1 \u5c60\u6768\u5c27 ","2 \u5468\u6d0b ","3 \u67f3\u5cf0 ","4 \u5de6\u4f59\u676d ","5 \u5321\u542f\u9633 ","6 \u738b\u4f73\u5b9d ","7 \u5f20\u777f\u6770 ","8 \u6d2a\u8302\u6e90 ","9 \u94b1\u51ef\u6587 ","10 \u4e01\u94b0\u85fb ","11 \u65af\u6668\u6d69 ","12 \u8303\u7490\u5c91 ","13 \u4efb\u6bc5 ","14 \u6768\u6668 ","15 \u8d75\u8c6b\u73ba ","16 \u65b9\u6768 ","17 \u8d75\u665f\u6069 ","18 \u845b\u6631\u8f69 ","19 \u6c88\u5929\u4e50 ","20 \u5b8b\u5bb6\u8c6a ","21 \u79e6\u52a0\u52a0 ","22 \u5415\u5f18\u6ce2 ","23 \u4f59\u90a6\u9f99 ","24 \u6c88\u79b9\u742a ","25 \u9646\u777f\u6db5 ","26 \u5434\u5b87\u51e1 ","27 \u94f6\u6f47\u9704 ","28 \u6bdb\u946b\u7426 ","29 \u80e1\u5723\u6d9b ","30 \u79e6\u80e1\u5929 ","31 \u65bd\u653f ","32 \u5f20\u8d85 ","33 \u9ec4\u5b87\u7fd4 ","34 \u7ae5\u53f6\u8c6a ","35 \u53f6\u6653\u9e23 "]';
+            let data_json = JSON.parse(data);
+            for (let i = 0;i<data_json.length;i++) {
+                while (true){
+                    let a = Math.round(Math.random()*39);
+                    let seat = $($('td[name="seat"]')[a]);
+                    if (seat.text()===""){
+                        seat.text(data_json[i]);
+                        break;
+                    }
+                }
+            }
+        });
+    });
 </script>
+<style>
+    td {
+        border: 1px solid #ccc;
+        height: 40px;
+    }
+
+    td[name="seat"] {
+        width: 100px;
+    }
+
+    td[name="blank_td"] {
+        background-color: #eee;
+    }
+
+    td[name="shsl"] {
+        /*  首行首列  */
+        background-color: lightgray;
+    }
+
+    td[name="blank_td"], td[name="shsl"] {
+        width: 50px;
+    }
+
+    table {
+        width: 100%;
+    }
+</style>
