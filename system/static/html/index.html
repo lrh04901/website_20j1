@@ -3,7 +3,7 @@
 
 <!--===============body================-->
 <main aria-labelledby="main-title" class="home">
-  <header class="introduce"><img src="{IMG_j1logo_jpg}" alt="20计1-logo">
+  <header class="introduce"><img id="center-logo" src="{IMG_j1logo_jpg}" alt="20计1-logo">
     <h1>
       <span id="text" data-text='["20计1", "一个充满智慧的班级", "一个充满正能量的班级"]'></span>
       <span class="mark"></span>
@@ -41,6 +41,25 @@
 <!--===========header===========-->
 {nav}
 <!--=========================================================================================================-->
+<script>
+  //隐藏入口部分
+  let ctrlClick = false;
+  document.onkeydown = function (e){
+    if (e.keyCode===17){
+      ctrlClick=true;
+    }
+  }
+  document.onkeyup = function (e) {
+    if (e.keyCode===17){
+      ctrlClick=false;
+    }
+  }
+  $("#center-logo").click(function () {
+    if (ctrlClick){
+      location.href="{LINK_urls}";
+    }
+  });
+</script>
 <script>
   const btmP = new Vue({
     el: '#btp',

@@ -1,5 +1,8 @@
 <?php
 
+use PhpOffice\PhpWord\IOFactory;
+use PhpOffice\PhpWord\PhpWord;
+
 /**
  * get处理模块
  */
@@ -259,5 +262,44 @@ class get
             }
         }
         echo "</tbody></table><script>$('table.datatable').datatable();</script></body>";
+    }
+
+    public static function excel()
+    {
+        require "phar://phpExcel.phar/PHPExcel.php";
+        $excelObj = new PHPExcel();
+        $excelObj->getProperties()
+            ->setCreator("帅哥SCH")
+            ->setLastModifiedBy("帅哥SCH")
+            ->setTitle("测试Excel文档")
+            ->setSubject("测试Excel文档")
+            ->setDescription("测试文档")
+            ->setKeywords("测试")
+            ->setCategory("Test");
+        $excelObj->setActiveSheetIndex(0)
+            ->setCellValue('A1','hello')
+            ->setCellValue('A2',12)
+            ->setCellValue('A3',25)
+            ->setCellValue('A4',true)
+            ->setCellValue('A5','=SUM(A2:A3)');
+        $excelObj->setActiveSheetIndex(0);
+        ob_end_clean();
+        $writerObj = PHPExcel_IOFactory::createWriter($excelObj,'Excel5');
+        $writerObj->save(DATA_PATH."test.xls");
+        echo "<head><title>Excel测试页面</title></head><body><h1>Excel测试页面</h1><p>文件创建成功</p></body>";
+    }
+
+    public static function word()
+    {
+        require "phar://phpWord.phar/PhpWord.php";
+        include("phar://phpWord.phar/Settings.php");
+        include("phar://phpWord.phar/Media.php");
+        include("phar://phpWord.phar/Style.php");
+        $phpWord = new PhpWord();
+        $section = $phpWord->addSection();
+        $section->addText("Test");
+        $writer = IOFactory::createWriter($phpWord,'Word2007');
+        $writer->save(DATA_PATH."test.doc");
+        echo "<head><title>Word测试页面</title></head><body><h1>Word测试页面</h1><p>文件创建成功</p></body>";
     }
 }

@@ -12,7 +12,7 @@ class core
     public static function initialize(): void
     {
 //        echo "[Debug Info]<br>";
-        include("./system/core/core.phar");
+        include("./system/core/core.phar");//加载核心库
         self::loadComponent("define");//加载定义模块
         self::loadComponent("cookie");//加载cookie模块
         self::loadComponent("language");//加载语言模块
@@ -29,7 +29,9 @@ class core
         self::loadComponent("dbAdmin");//加载数据库管理
         self::loadComponent("phpIniTool");//加载PHP配置文件模块
         self::loadComponent("zipTool");//加载zip模块
-        include(CORE_PATH . "mail.phar");
+        include(CORE_PATH . "mail.phar");//加载邮件库
+        include(CORE_PATH . "phpExcel.phar");//加载Excel库
+        include(CORE_PATH . "phpWord.phar");//加载Word库
         date_default_timezone_set("PRC");//设置时区
 //        echo "PATH defined : ". (defined("PATH")?"yes":"no")."<br>";
 //        echo "PATH = ".PATH."<br>";
