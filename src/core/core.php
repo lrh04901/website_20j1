@@ -31,6 +31,7 @@ class core
         self::loadComponent("zipTool");//加载zip模块
         include(CORE_PATH . "mail.phar");//加载邮件库
         include(CORE_PATH . "phpExcel.phar");//加载Excel库
+        include(CORE_PATH . "phpWord.phar");//加载Word库
         date_default_timezone_set("PRC");//设置时区
 //        echo "PATH defined : ". (defined("PATH")?"yes":"no")."<br>";
 //        echo "PATH = ".PATH."<br>";
