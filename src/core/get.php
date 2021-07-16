@@ -1,5 +1,8 @@
 <?php
 
+use PhpOffice\PhpWord\IOFactory;
+use PhpOffice\PhpWord\PhpWord;
+
 /**
  * get处理模块
  */
@@ -288,6 +291,15 @@ class get
 
     public static function word()
     {
-        echo "<head><title>Word测试页面</title></head><body><h1>Word测试页面</h1></body>";
+        require "phar://phpWord.phar/PhpWord.php";
+        include("phar://phpWord.phar/Settings.php");
+        include("phar://phpWord.phar/Media.php");
+        include("phar://phpWord.phar/Style.php");
+        $phpWord = new PhpWord();
+        $section = $phpWord->addSection();
+        $section->addText("Test");
+        $writer = IOFactory::createWriter($phpWord,'Word2007');
+        $writer->save(DATA_PATH."test.doc");
+        echo "<head><title>Word测试页面</title></head><body><h1>Word测试页面</h1><p>文件创建成功</p></body>";
     }
 }
