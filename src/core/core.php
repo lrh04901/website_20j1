@@ -187,6 +187,7 @@ class core
         }
         $value = str_replace("{extraFile}", $extraFileText, $value);
         $value = self::link_process($value);
+        echo  "<html lang='".LOCAL_LANGUAGE."'>";
         echo $value;
     }
 
