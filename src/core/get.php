@@ -276,12 +276,14 @@ class get
             ->setDescription("测试文档")
             ->setKeywords("测试")
             ->setCategory("Test");
+        ob_end_clean();
         $excelObj->setActiveSheetIndex(0)
             ->setCellValue('A1','hello')
             ->setCellValue('A2',12)
             ->setCellValue('A3',25)
             ->setCellValue('A4',true)
-            ->setCellValue('A5','=SUM(A2:A3)');
+            ->setCellValue('A5','=SUM(A2:A3)')
+            ->setCellValue('A6','测试');
         $excelObj->setActiveSheetIndex(0);
         ob_end_clean();
         $writerObj = PHPExcel_IOFactory::createWriter($excelObj,'Excel5');
@@ -301,5 +303,15 @@ class get
         $writer = IOFactory::createWriter($phpWord,'Word2007');
         $writer->save(DATA_PATH."test.doc");
         echo "<head><title>Word测试页面</title></head><body><h1>Word测试页面</h1><p>文件创建成功</p></body>";
+    }
+
+    public static function dev()
+    {
+        echo "<mark>$"."_SERVER</mark>=";
+        print_r($_SERVER);
+        echo "<br>";
+        echo "<mark>Host</mark>=".$_SERVER['HTTP_HOST']."<br>";
+        echo "<mark>URI</mark>=".$_SERVER["REQUEST_URI"]."<br>";
+        echo "<mark>? position</mark>=".strstr($_SERVER["REQUEST_URI"],"?",true);
     }
 }
