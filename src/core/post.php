@@ -135,6 +135,12 @@ class post
      */
     public static function arrangeSeats():bool
     {
+        if (!is_dir(DATA_PATH)){
+            if (is_file(DATA_PATH)){
+                unlink(DATA_PATH);
+            }
+            mkdir(DATA_PATH);
+        }
 //        print_r($_POST);
         require "phar://phpExcel.phar/PHPExcel.php";
         $width = 12;
