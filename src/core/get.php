@@ -168,7 +168,7 @@ class get
         }
         $c = argsTool::get("c");
         if ($c == "null") {
-            echo "<head><title>项目控制台</title><script src='system/static/js/jquery.min.js'></script><link rel='stylesheet' href='system/static/css/zui.min.css'></head><body><h1>项目控制台</h1><h2>在这里，你可以对这个项目进行一些控制，例如编译、打包</h2><button class='btn btn-link btn-lg' href='javascript:' id='build'> 编译项目</button><button class='btn btn-link btn-lg' href='javascript:' id='pack'>打包项目</button><button class='btn btn-link btn-lg' id='exit'>离开控制台</button><script>$('#build').click(function (){if (confirm('确定编译此项目？')){location.href = './?/projCtrl&c=build';}});$('#pack').click(function() {if (confirm('确定打包此项目？')){location.href = './?/projCtrl&c=pack'}});$('#exit').click(function() {if (confirm('确定离开控制台？')){location.href = './?/projCtrl&c=exit'}});</script></body>";
+            echo "<head><title>项目控制台</title><script src='system/static/js/jquery.min.js'></script><link rel='stylesheet' href='system/static/css/zui.min.css'></head><body><h1>项目控制台</h1><h2>在这里，你可以对这个项目进行一些控制，例如编译、打包</h2><button class='btn btn-link btn-lg' href='javascript:' id='build'> 编译项目</button><button class='btn btn-link btn-lg' href='javascript:' id='pack'>打包项目</button><button class='btn btn-link btn-lg' href='javascript:' id='clean'>清理/data目录</button><button class='btn btn-link btn-lg' id='exit'>离开控制台</button><script>$('#build').click(function (){if (confirm('确定编译此项目？')){location.href = './?/projCtrl&c=build';}});$('#pack').click(function() {if (confirm('确定打包此项目？')){location.href = './?/projCtrl&c=pack'}});$('#exit').click(function() {if (confirm('确定离开控制台？')){location.href = './?/projCtrl&c=exit'}});$('#clean').click(function(){if (confirm('确定清理/data目录？')){location.href='./?/projCtrl&c=clean'}});</script></body>";
         } elseif ($c == "build") {
             echo "<head><title>编译项目</title><link rel='stylesheet' href='system/static/css/zui.min.css'></head>";
             echo "<h2>正在编译项目...</h2>";
@@ -205,9 +205,20 @@ class get
         } elseif ($c == "exit") {
             cookie::delete("allow_visit_proj_ctrl");
             header("Location:./?/");
-        } else {
-            header("Location:./?/projCtrl");
-        }
+        } elseif($c=="clean"){
+            echo "<head><title>清理/data目录</title><link rel='stylesheet' href='system/static/css/zui.min.css'></head><h2>正在清理/data目录</h2>";
+            foreach (scandir(DATA_PATH) as $file) {
+                if ($file!="."and$file!=".."){
+                    if(unlink(DATA_PATH.$file)){
+                        echo "<h2>".DATA_PATH.$file."删除成功</h2>";
+                    }else{
+                        echo "<h2>".DATA_PATH.$file."删除失败</h2>";
+
+                    }
+                }
+            }
+            echo "<h2>清理完成</h2><a href='./?/projCtrl' class='btn btn-link btn-lg'>返回</a>";
+        }else {header("Location:./?/projCtrl");}
     }
 
     public static function urls()
