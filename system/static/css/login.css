@@ -77,6 +77,14 @@ body{
     font-size: 15px;
 }
 
+#login:hover{
+    cursor: pointer;
+}
+
+#signup:hover{
+    cursor: pointer;
+}
+
 #n:hover,
 #y:hover{
     background-color: #ff5a54;
