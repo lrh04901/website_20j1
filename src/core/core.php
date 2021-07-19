@@ -187,6 +187,7 @@ class core
         }
         $value = str_replace("{extraFile}", $extraFileText, $value);
         $value = self::link_process($value);
+        echo  "<html lang='".LOCAL_LANGUAGE."'>";
         echo $value;
     }
 
@@ -257,6 +258,13 @@ class core
             $key = array_keys(L)[$i];
             $value = str_replace("{TEXT_" . $key . "}", L[$key], $value);
         }
+        $language_list = json_decode(file_get_contents(LANG_PATH."languages.json"));
+        $language_list_data = "";
+        foreach ($language_list as $language) {
+            $language_name = explode("=",explode("\n",str_replace("\r","",file_get_contents(LANG_PATH.$language.".lang")))[0])[1];
+            $language_list_data.='<li><a data-language="'.$language.'" class="lang">'.$language_name.'</a></li>';
+        }
+        $value = str_replace("{language_list}",$language_list_data,$value);
         while (true) {
             $t = substr($value, $index, 1);
             $index++;
