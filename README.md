@@ -79,6 +79,7 @@
             - zh-tw.lang `繁体中文语言文件`
         - media `媒体文件路径`
             - .gitkeep  `空目录的占位文件`
+* .editorconfig `规范代码风格文件`
 * index.php `首页文件`
 * ***README.md*** `自述文件`
 * run.bat `调试时运行脚本`
