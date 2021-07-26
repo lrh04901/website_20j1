@@ -1,7 +1,7 @@
 <nav>
   <div class="nav-h" id="nav-h" v-html="url" v-cloak></div>
   <ul class="nav-list" type="none" id="navList">
-    <li v-for="(urls,i) in url" v-html="url[i]" v-cloak>{{urls}}</li>
+    <li v-for="(urls,i) in url" v-html="url[i]" v-cloak :key="urls">{{urls}}</li>
   </ul>
   <div class="burger">
     <div class="top-line"></div>
@@ -108,9 +108,9 @@
           '<a href="{LINK_classIntroduce}">{TEXT_INTRODUCE}</a>',
           '<a href="{LINK_Page404}">{TEXT_YOUTH_LEAGUE_ACTIVE}</a>',
           '<a href="{LINK_yule}">{TEXT_ENTERTAINMENT}</a>',
-          '<a href="{LINK_Page404}">text</a>',
           '<a id="language_choose_button" href="javascript:;">{TEXT_LANGUAGE_NAME}</a>',
         ],
+
       }
     })
 </script>
