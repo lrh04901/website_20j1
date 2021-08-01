@@ -1,21 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-  </head>
-  <body>
-    <div class="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4">
-      <div class="flex-shrink-0">
-        <img class="h-12 w-12" src="./favicon.svg" alt="ChitChat Logo">
-      </div>
-      <div>
-        <div class="text-xl font-medium text-black">ChitChat</div>
-        <p class="text-gray-500">You have a new message!</p>
-      </div>
-    </div>
-    <script type="module" src="/main.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite App</title>
+</head>
+<body>
+<!--引入Vue组件-->
+<div id="app"></div>
+<!--通过node.js引入tailwindcss && Vue-->
+<script type="module" src="/src/main.js"></script>
+</body>
 </html>
