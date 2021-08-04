@@ -14,8 +14,6 @@ class encryptTool
      */
     public static function encode(string $string, string $secret, bool $return = false): string
     {
-
-
         $a = base64_encode($string);//转换为base64文本
         $b = str_split($a);//将base64文本拆开
         $c = "";//空变量用于存储第一阶段的数据
