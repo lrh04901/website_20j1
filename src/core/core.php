@@ -178,10 +178,15 @@ class core
                 for ($i = 0; $i < count($css); $i++) {
                     $t = $css[$i];
                     if (is_string($t)) {
-                        echo "<link href='" . CSS_PATH . $t . ".css' rel='stylesheet' type='text/css'>";
+                        $extraFileText .= "<link href='" . CSS_PATH . $t . ".css' rel='stylesheet' type='text/css'>";
                     } elseif (is_array($t)) {
-                        echo "<link href='" . CSS_PATH . $t[0] . ".css' rel='stylesheet' type='text/css' " . $t[1] . ">";
+                        $extraFileText .= "<link href='" . CSS_PATH . $t[0] . ".css' rel='stylesheet' type='text/css' " . $t[1] . ">";
                     }
+                }
+            }
+            if (isset($extraFile["mobile"])){
+                if ($extraFile["mobile"]=="yes"){
+                    $extraFileText .= '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">';
                 }
             }
         }
