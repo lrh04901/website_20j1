@@ -47,6 +47,7 @@ class core
 //        $html_data = file_get_contents(HTML_PATH.$path.".html");
 //        echo "read data ：" . ($html_data?"success":"fail")."<br>";
 //        echo "file exist ：".(file_exists(HTML_PATH.$path.".html")?"yes":"no");
+        include(PATH."autoexec.php");
     }
 
     /**
