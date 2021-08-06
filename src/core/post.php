@@ -216,4 +216,44 @@ class post
         $y_array = ['5','4','3','2','1'];
         return $x_array[$x].$y_array[$y];
     }
+
+    public static function scj():bool
+    {
+        if (!file_exists(FILE_DB_PATH."bdfy.cache")){
+            touch(FILE_DB_PATH."bdfy.cache");
+            file_put_contents(FILE_DB_PATH."bdfy.cache",encryptTool::encode(json_encode([]),SECRET,true));
+        }
+        $text = argsTool::post("text");
+        $cache = json_decode(encryptTool::decode(file_get_contents(FILE_DB_PATH."bdfy.cache"),SECRET,true),true);
+        if (isset($cache[$text])){
+            die($cache[$text]);
+        }
+        $lang = ["slo","fin","rom","zh"];
+        $new_text = $text;
+        foreach ($lang as $item) {
+            $new_text = self::scj_a($new_text,$item);
+        }
+        echo $new_text;
+        $cache[$text] = $new_text;
+        file_put_contents(FILE_DB_PATH."bdfy.cache",encryptTool::encode(json_encode($cache),SECRET,true));
+        return true;
+    }
+
+    private static function scj_a(string $text,string $to):string
+    {
+        sleep(1);
+        $url = "https://fanyi-api.baidu.com/api/trans/vip/translate";
+        $q = $text;
+        $appid = "20170224000039830";
+        $salt = "sch20040925";
+        $sign = hash("md5","$appid$q${salt}OrTd1_2SL1Vu7cEqzV5e");
+        $data = file_get_contents(str_replace(" ","%20","$url?q=$q&from=auto&to=$to&appid=$appid&salt=$salt&sign=$sign"));
+        $json = json_decode($data,true);
+        if (isset($json["trans_result"])){
+            return $json["trans_result"][0]["dst"];
+        }else{
+            echo $data;
+            return "翻译失败".$json["error_code"]."<br>";
+        }
+    }
 }
