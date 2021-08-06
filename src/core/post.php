@@ -219,12 +219,12 @@ class post
 
     public static function scj():bool
     {
-        if (!file_exists(FILE_DB_PATH."bdfy.cache")){
-            touch(FILE_DB_PATH."bdfy.cache");
-            file_put_contents(FILE_DB_PATH."bdfy.cache",encryptTool::encode(json_encode([]),SECRET,true));
+        if (!file_exists(FILE_DB_PATH."scj.cache")){
+            touch(FILE_DB_PATH."scj.cache");
+            file_put_contents(FILE_DB_PATH."scj.cache",encryptTool::encode(json_encode([]),SECRET,true));
         }
         $text = argsTool::post("text");
-        $cache = json_decode(encryptTool::decode(file_get_contents(FILE_DB_PATH."bdfy.cache"),SECRET,true),true);
+        $cache = json_decode(encryptTool::decode(file_get_contents(FILE_DB_PATH."scj.cache"),SECRET,true),true);
         if (isset($cache[$text])){
             die($cache[$text]);
         }
@@ -235,7 +235,7 @@ class post
         }
         echo $new_text;
         $cache[$text] = $new_text;
-        file_put_contents(FILE_DB_PATH."bdfy.cache",encryptTool::encode(json_encode($cache),SECRET,true));
+        file_put_contents(FILE_DB_PATH."scj.cache",encryptTool::encode(json_encode($cache),SECRET,true));
         return true;
     }
 
