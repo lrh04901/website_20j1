@@ -15,5 +15,6 @@ define("FONT_PATH", STATIC_PATH . "fonts/");
 define("CONFIG_PATH", PATH . "config/");
 define("FILE_DB_PATH", SYSTEM_PATH . "data/");
 define("DATA_PATH", PATH . "data/");
+define("CACHE_PATH",SYSTEM_PATH."cache/");
 define("SECRET", "20J1YYDS");
 define("FILE_DB_POSTFIX", "db");
