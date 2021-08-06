@@ -219,12 +219,12 @@ class post
 
     public static function scj():bool
     {
-        if (!file_exists(FILE_DB_PATH."scj.cache")){
-            touch(FILE_DB_PATH."scj.cache");
-            file_put_contents(FILE_DB_PATH."scj.cache",encryptTool::encode(json_encode([]),SECRET,true));
+        if (!file_exists(CACHE_PATH."scj.cache")){
+            touch(CACHE_PATH."scj.cache");
+            file_put_contents(CACHE_PATH."scj.cache",encryptTool::encode(json_encode([]),SECRET,true));
         }
         $text = argsTool::post("text");
-        $cache = json_decode(encryptTool::decode(file_get_contents(FILE_DB_PATH."scj.cache"),SECRET,true),true);
+        $cache = json_decode(encryptTool::decode(file_get_contents(CACHE_PATH."scj.cache"),SECRET,true),true);
         if (isset($cache[$text])){
             die($cache[$text]);
         }
@@ -234,8 +234,12 @@ class post
             $new_text = self::scj_a($new_text,$item);
         }
         echo $new_text;
+        @$a = explode("：",$new_text);
+        if ($a[0]=="翻译失败"){
+            die();
+        }
         $cache[$text] = $new_text;
-        file_put_contents(FILE_DB_PATH."scj.cache",encryptTool::encode(json_encode($cache),SECRET,true));
+        file_put_contents(CACHE_PATH."scj.cache",encryptTool::encode(json_encode($cache),SECRET,true));
         return true;
     }
 
@@ -244,16 +248,18 @@ class post
         sleep(1);
         $url = "https://fanyi-api.baidu.com/api/trans/vip/translate";
         $q = $text;
-        $appid = "20170224000039830";
+        $config = json_decode(encryptTool::decode(json_decode(file_get_contents(CONFIG_PATH."bdfy_config.json"),true)["data"],SECRET,true),true);
+        $appid = $config["appid"];
+        $secret = $config["secret"];
         $salt = "sch20040925";
-        $sign = hash("md5","$appid$q${salt}OrTd1_2SL1Vu7cEqzV5e");
+        $sign = hash("md5","$appid$q${salt}$secret");
         $data = file_get_contents(str_replace(" ","%20","$url?q=$q&from=auto&to=$to&appid=$appid&salt=$salt&sign=$sign"));
         $json = json_decode($data,true);
         if (isset($json["trans_result"])){
             return $json["trans_result"][0]["dst"];
         }else{
             echo $data;
-            return "翻译失败".$json["error_code"]."<br>";
+            return "翻译失败：".$json["error_code"]."<br>";
         }
     }
 }
