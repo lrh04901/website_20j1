@@ -46,7 +46,15 @@ class get
                         $js[count($js)] = $item;
                     }
                 }
-                core::loadHead($title, ["css" => $css, "js" => $js]);
+                $mobile = "no";
+                foreach (explode(";", explode("=", $args_array[3])[1]) as $item) {
+                    if ($item){
+                        if ($item=="yes"){
+                            $mobile = "yes";
+                        }
+                    }
+                }
+                core::loadHead($title, ["css" => $css, "js" => $js,"mobile"=>$mobile]);
                 core::loadBodyByText($html);
             } else {
                 if (explode("=", $args_array[0])[0] == "function") {
