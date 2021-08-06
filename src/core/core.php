@@ -29,6 +29,7 @@ class core
         self::loadComponent("dbAdmin");//加载数据库管理
         self::loadComponent("phpIniTool");//加载PHP配置文件模块
         self::loadComponent("zipTool");//加载zip模块
+        self::loadComponent("configTool");//加载配置文件模块
         include(CORE_PATH . "mail.phar");//加载邮件库
         include(CORE_PATH . "phpExcel.phar");//加载Excel库
         include(CORE_PATH . "phpWord.phar");//加载Word库
