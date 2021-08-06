@@ -207,7 +207,7 @@ class get
         } elseif ($c == "pack") {
             echo "<head><title>打包项目</title><link rel='stylesheet' href='system/static/css/zui.min.css'></head>";
             echo "<h2>正在打包项目...</h2>";
-            zipTool::pack(["system", "config", "index.php"], "pack.zip");
+            zipTool::pack(["system", "config", "index.php","autoexec.php"], "pack.zip");
             echo "<h2>打包完成，压缩包：pack.zip</h2>";
             echo "<a href='./?/projCtrl' class='btn btn-link btn-lg'>返回</a>";
         } elseif ($c == "exit") {
