@@ -29,6 +29,7 @@ class core
         self::loadComponent("dbAdmin");//加载数据库管理
         self::loadComponent("phpIniTool");//加载PHP配置文件模块
         self::loadComponent("zipTool");//加载zip模块
+        self::loadComponent("configTool");//加载配置文件模块
         include(CORE_PATH . "mail.phar");//加载邮件库
         include(CORE_PATH . "phpExcel.phar");//加载Excel库
         include(CORE_PATH . "phpWord.phar");//加载Word库
@@ -46,6 +47,7 @@ class core
 //        $html_data = file_get_contents(HTML_PATH.$path.".html");
 //        echo "read data ：" . ($html_data?"success":"fail")."<br>";
 //        echo "file exist ：".(file_exists(HTML_PATH.$path.".html")?"yes":"no");
+        include(PATH."autoexec.php");
     }
 
     /**
@@ -60,7 +62,7 @@ class core
             $path = "index";
         }
         if ($rm == "get") {
-            if (file_get_contents(HTML_PATH . $path . ".html")) {
+            if (@file_get_contents(HTML_PATH . $path . ".html")) {
                 get::load($path);
                 /*if (!call_user_func($rm."::".$path)){
     //                get::oneKeyLoad($path);
@@ -178,10 +180,15 @@ class core
                 for ($i = 0; $i < count($css); $i++) {
                     $t = $css[$i];
                     if (is_string($t)) {
-                        echo "<link href='" . CSS_PATH . $t . ".css' rel='stylesheet' type='text/css'>";
+                        $extraFileText .= "<link href='" . CSS_PATH . $t . ".css' rel='stylesheet' type='text/css'>";
                     } elseif (is_array($t)) {
-                        echo "<link href='" . CSS_PATH . $t[0] . ".css' rel='stylesheet' type='text/css' " . $t[1] . ">";
+                        $extraFileText .= "<link href='" . CSS_PATH . $t[0] . ".css' rel='stylesheet' type='text/css' " . $t[1] . ">";
                     }
+                }
+            }
+            if (isset($extraFile["mobile"])){
+                if ($extraFile["mobile"]=="yes"){
+                    $extraFileText .= '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">';
                 }
             }
         }

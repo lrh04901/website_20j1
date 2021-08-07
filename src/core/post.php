@@ -216,4 +216,59 @@ class post
         $y_array = ['5','4','3','2','1'];
         return $x_array[$x].$y_array[$y];
     }
+
+    public static function scj():bool
+    {
+//        if (!file_exists(CACHE_PATH."scj.cache")){
+//            touch(CACHE_PATH."scj.cache");
+//            file_put_contents(CACHE_PATH."scj.cache",encryptTool::encode(json_encode([]),SECRET,true));
+//        }
+        $text = argsTool::post("text");
+        $cache = json_decode(encryptTool::decode(file_get_contents(CACHE_PATH."scj.cache"),SECRET,true),true);
+        if (@$cache[$text]){
+            die($cache[$text]);
+        }
+        $lang = ["slo","fin","rom","zh"];
+        $new_text = $text;
+        foreach ($lang as $item) {
+            $new_text = self::scj_a($new_text,$item);
+        }
+        echo $new_text;
+        @$a = explode("：",$new_text);
+        if ($a[0]=="翻译失败"){
+            die();
+        }
+        $cache[$text] = $new_text;
+        file_put_contents(CACHE_PATH."scj.cache",encryptTool::encode(json_encode($cache),SECRET,true));
+        return true;
+    }
+
+    private static function scj_a(string $text,string $to):string
+    {
+        sleep(1);
+        $ssl = json_decode(file_get_contents(CONFIG_PATH."bdfy_config.json"),true)["ssl"];
+        $url = "https://fanyi-api.baidu.com/api/trans/vip/translate";
+        if ($ssl=="no"){
+            $url = str_replace("https","http",$url);
+        }
+        $q = $text;
+        $config = json_decode(encryptTool::decode(json_decode(file_get_contents(CONFIG_PATH."bdfy_config.json"),true)["data"],SECRET,true),true);
+//        $config = json_decode(configTool::getConfig("bdfy_config")["data"],true);
+//        if (@$config[0]=="config_not_exist"){
+//            die("翻译失败：配置文件不存在");
+//        }
+        $appid = $config["appid"];
+        $secret = $config["secret"];
+//        echo "appid=$appid,secret=$secret";
+        $salt = SECRET;
+        $sign = hash("md5","$appid$q${salt}$secret");
+        $data = file_get_contents(str_replace(" ","%20","$url?q=$q&from=auto&to=$to&appid=$appid&salt=$salt&sign=$sign"));
+        $json = json_decode($data,true);
+        if (isset($json["trans_result"])){
+            return $json["trans_result"][0]["dst"];
+        }else{
+            echo $data;
+            return "翻译失败：".$json["error_code"]."<br>";
+        }
+    }
 }

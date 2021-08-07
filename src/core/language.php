@@ -28,7 +28,7 @@ foreach (explode("\n", str_replace("\n\n", "\n", str_replace("\r", "\n", file_ge
         break;//注释行不处理
     }
     $a = explode("=", $item);//将每一行的数据进行分割
-    $language[$a[0]] = $a[1];//将每一行的数据存入数组
+    @$language[$a[0]] = $a[1];//将每一行的数据存入数组
     unset($item);//归还内存
 }
 define("L", $language);//定义语言数据到全局常量

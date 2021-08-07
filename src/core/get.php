@@ -46,7 +46,15 @@ class get
                         $js[count($js)] = $item;
                     }
                 }
-                core::loadHead($title, ["css" => $css, "js" => $js]);
+                $mobile = "no";
+                foreach (explode(";", explode("=", $args_array[3])[1]) as $item) {
+                    if ($item){
+                        if ($item=="yes"){
+                            $mobile = "yes";
+                        }
+                    }
+                }
+                core::loadHead($title, ["css" => $css, "js" => $js,"mobile"=>$mobile]);
                 core::loadBodyByText($html);
             } else {
                 if (explode("=", $args_array[0])[0] == "function") {
@@ -199,7 +207,7 @@ class get
         } elseif ($c == "pack") {
             echo "<head><title>打包项目</title><link rel='stylesheet' href='system/static/css/zui.min.css'></head>";
             echo "<h2>正在打包项目...</h2>";
-            zipTool::pack(["system", "config", "index.php"], "pack.zip");
+            zipTool::pack(["system", "config", "index.php","autoexec.php"], "pack.zip");
             echo "<h2>打包完成，压缩包：pack.zip</h2>";
             echo "<a href='./?/projCtrl' class='btn btn-link btn-lg'>返回</a>";
         } elseif ($c == "exit") {
@@ -224,7 +232,7 @@ class get
     public static function urls()
     {
         echo "<head><title>链接导航</title><link rel='icon' href='system/static/img/j1logo.jpg'><link rel='stylesheet' href='system/static/css/zui.min.css'><link rel='stylesheet' href='system/static/css/zui.datatable.min.css'><script src='system/static/js/jquery.min.js'></script><script src='system/static/js/zui.min.js'></script><script src='system/static/js/zui.datatable.min.js'></script></head>";
-        echo "<body><h1>当前站点的链接</h1><table class='table datatable'><thead><tr><th>名称</th><th>页面类型</th><th>页面状态</th><th>页面标题</th><th>操作</th></tr></thead><tbody>";
+        echo "<body><h1>当前站点的链接</h1><table class='table datatable'><thead><tr><th>名称</th><th>页面类型</th><th>页面状态</th><th>页面标题</th><th>手机端优化</th><th>操作</th></tr></thead><tbody>";
         $list = scandir(HTML_PATH);
         foreach ($list as $item) {
             if ($item != "." and $item != "..") {
@@ -243,13 +251,13 @@ class get
                 }
                 $link_status = "";
                 if ($item == "head.html") {
-                    $link_status = "无法访问头部页面";
+                    $link_status = "<td class='text-danger'>无法访问头部页面</td>";
                 }else if ($item=="urls.html") {
-                    $link_status = "当前页面";
+                    $link_status = "<td class='text-primary'><b>当前页面</b></td>";
                 }else if ($link_type=="引用页面"){
-                    $link_status  ="无法访问引用页面";
+                    $link_status  ="<td class='text-danger'>无法访问引用页面</td>";
                 }else{
-                    $link_status = "正常";
+                    $link_status = "<td class='text-green'>正常</td>";
                 }
                 $link_title = "";
                 if ($link_type=="基本页面"){
@@ -264,12 +272,20 @@ class get
                     $link_title="引用页面：$link_name";
                 }
                 $link_data = "";
-                if ($link_status=="正常"){
+                if ($link_status=="<td class='text-green'>正常</td>"){
                     $link_data = "<a href='./?/".$link_name."' class='btn btn-link btn-sm'>访问</a>";
                 }else{
                     $link_data = "<a class='btn btn-link btn-sm' disabled>访问</a>";
                 }
-                echo "<tr><td>$link_name</td><td>$link_type</td><td>$link_status</td><td>$link_title</td><td>$link_data</td></tr>";
+                $mobile = "<td class='text-gray'>否</td>";
+                if ($link_type=="基本页面"){
+                    if (explode("=",$data_array[3])[0]=="mobile"){
+                        if (explode("=",$data_array[3])[1]=="yes"){
+                            $mobile = "<td class='text-green'>是</td>";
+                        }
+                    }
+                }
+                echo "<tr><td>$link_name</td><td>$link_type</td>$link_status<td>$link_title</td>$mobile<td>$link_data</td></tr>";
             }
         }
         echo "</tbody></table><script>$('table.datatable').datatable();</script></body>";

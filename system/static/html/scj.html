@@ -1,0 +1,27 @@
+<!--title=翻译生草机;css=zui.min;js=zui.min,jquery;mobile=yes;-->
+<div class="container-fluid load-indicator" id="main" data-loading="生草中">
+    <h1>翻译生草机</h1>
+    <div class="input-control">
+        <label for="from_text"></label>
+        <textarea name="from_text" id="from_text" type="text" class="form-control" style="width: 60%;height: 200px"
+                  placeholder="输入原文"></textarea>
+    </div>
+    <button class="btn btn-link btn-lg">开始生草</button>
+    <div class="input-control">
+        <label for="new_text"></label>
+        <textarea name="new_text" id="new_text" type="text" class="form-control" style="width: 60%;height: 200px"
+                  placeholder="得到的内容" disabled></textarea>
+    </div>
+</div>
+<script>
+    $("button").click(function (){
+        let text = $("#from_text").val();
+        $("#main").addClass("loading");
+        $.post("{LINK_scj}",{
+            text:text
+        },function (text) {
+            $("#new_text").val(text);
+            $("#main").removeClass("loading");
+        })
+    });
+</script>
