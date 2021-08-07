@@ -246,7 +246,11 @@ class post
     private static function scj_a(string $text,string $to):string
     {
         sleep(1);
+        $ssl = json_decode(file_get_contents(CONFIG_PATH."bdfy_config.json"),true)["ssl"];
         $url = "https://fanyi-api.baidu.com/api/trans/vip/translate";
+        if ($ssl=="no"){
+            $url = str_replace("https","http",$url);
+        }
         $q = $text;
         $config = json_decode(encryptTool::decode(json_decode(file_get_contents(CONFIG_PATH."bdfy_config.json"),true)["data"],SECRET,true),true);
 //        $config = json_decode(configTool::getConfig("bdfy_config")["data"],true);
