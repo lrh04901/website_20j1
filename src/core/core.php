@@ -62,7 +62,7 @@ class core
             $path = "index";
         }
         if ($rm == "get") {
-            if (file_get_contents(HTML_PATH . $path . ".html")) {
+            if (@file_get_contents(HTML_PATH . $path . ".html")) {
                 get::load($path);
                 /*if (!call_user_func($rm."::".$path)){
     //                get::oneKeyLoad($path);
