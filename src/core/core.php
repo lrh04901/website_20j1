@@ -148,7 +148,7 @@ class core
             include($component_path);
 //            echo "<mark>$name</mark> component load successful!<br>";
         } else {
-            self::loadErrorPage("网站加载失败", "<b style='color: red'>没有找到组件：" . $name . "</b>");
+            self::loadErrorPage("网站加载失败", "<b style='color: red'>没有找到模块：" . $name . "</b>");
             die();
         }
     }
@@ -300,7 +300,15 @@ class core
                 $value = str_replace("{" . $item . "}", IMG_PATH . $x[1] . "." . $x[2], $value);
             } elseif ($x[0] === "LINK") {
                 $path = substr($x[1], 0, 1) === "/" ? $x[1] : "/" . $x[1];
-                $value = str_replace("{" . $item . "}", "./?" . $path, $value);
+                $rewrite = json_decode(file_get_contents(CONFIG_PATH."global_config.json"),true)["rewrite"]=="yes";
+                if ($path=="/index"){
+                    $path = "/";
+                }
+                if ($rewrite){//是否开启伪静态
+                    $value = str_replace("{" . $item . "}",$path,$value);
+                }else {
+                    $value = str_replace("{" . $item . "}", "./?" . $path, $value);
+                }
             } elseif ($x[0] === "JS") {
                 $value = str_replace("{" . $item . "}", JS_PATH . $x[1] . ".js", $value);
             } elseif ($x[0] === "MEDIA") {
