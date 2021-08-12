@@ -89,7 +89,7 @@ class get
         if ($isLogin === "yes") {
             core::loadErrorPage("登录状态", "已登录");
         } else {
-            core::loadErrorPage("登录状态", "未登录,<a href='./?/login'>去登录</a>。");
+            core::loadErrorPage("登录状态", '未登录,<a href="'.core::link_process("{LINK_login}").'">去登录</a>。');
         }
     }
 
@@ -231,7 +231,7 @@ class get
 
     public static function urls()
     {
-        echo "<head><title>链接导航</title><link rel='icon' href='system/static/img/j1logo.jpg'><link rel='stylesheet' href='system/static/css/zui.min.css'><link rel='stylesheet' href='system/static/css/zui.datatable.min.css'><script src='system/static/js/jquery.min.js'></script><script src='system/static/js/zui.min.js'></script><script src='system/static/js/zui.datatable.min.js'></script></head>";
+        echo "<head><title>链接导航</title><link rel='icon' href='".IMG_PATH."j1logo.jpg'><link rel='stylesheet' href='".CSS_PATH."zui.min.css'><link rel='stylesheet' href='".CSS_PATH."zui.datatable.min.css'><script src='".JS_PATH."jquery.min.js'></script><script src='".JS_PATH."zui.min.js'></script><script src='".JS_PATH."zui.datatable.min.js'></script></head>";
         echo "<body><h1>当前站点的链接</h1><table class='table datatable'><thead><tr><th>名称</th><th>页面类型</th><th>页面状态</th><th>页面标题</th><th>手机端优化</th><th>操作</th></tr></thead><tbody>";
         $list = scandir(HTML_PATH);
         foreach ($list as $item) {
@@ -273,7 +273,8 @@ class get
                 }
                 $link_data = "";
                 if ($link_status=="<td class='text-green'>正常</td>"){
-                    $link_data = "<a href='./?/".$link_name."' class='btn btn-link btn-sm'>访问</a>";
+                    $link = core::link_process("{LINK_$link_name}");
+                    $link_data = "<a href='".$link."' class='btn btn-link btn-sm'>访问</a>";
                 }else{
                     $link_data = "<a class='btn btn-link btn-sm' disabled>访问</a>";
                 }
