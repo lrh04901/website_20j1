@@ -7,6 +7,7 @@ foreach ($language_list as $item) {//读取语言支持文件
     //读取每个语言的名称
 }
 $local_language = cookie::get("local_language");//读取当前设置的语言
+core::debugMessage("语言模块","当前语言：$local_language");
 if (!$local_language) {
     $h_a_l = $_SERVER["HTTP_ACCEPT_LANGUAGE"];
     $h_a_l_1 = array();
