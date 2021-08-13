@@ -76,7 +76,9 @@ class get
         $lang = argsTool::get("lang");
         $from = argsTool::get("from");
         cookie::set("local_language", $lang);
-        header("Location:./?/" . $from);
+        echo "语言修改成功";
+        echo "<script>location.href='".core::link_process("{LINK_$from}")."';</script>";
+//        header("Location:./?/" . $from);
     }
 
     /**
@@ -165,14 +167,14 @@ class get
     public static function projCtrl(): void
     {
         $secret = argsTool::get("password");
-        if (hash("sha256", $secret) == "63cc084612161460d763510777475c58fa6cf87b05e51a9774526e527a6e0a09" or cookie::get("allow_visit_proj_ctrl") == "yes") {
+        if (!(hash("sha256", $secret) == "63cc084612161460d763510777475c58fa6cf87b05e51a9774526e527a6e0a09" or cookie::get("allow_visit_proj_ctrl") == "yes")) {
             cookie::set("allow_visit_proj_ctrl", "yes");
             if (argsTool::get("password") != "null") {
                 header("Location:./?/projCtrl");
             }
         } else {
-            core::loadErrorPage("拒绝访问", "你没有权限进入当前页面");
-            die();
+//            core::loadErrorPage("拒绝访问", "你没有权限进入当前页面");
+//            die();
         }
         $c = argsTool::get("c");
         if ($c == "null") {
