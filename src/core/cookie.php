@@ -13,7 +13,19 @@ class cookie
      */
     static function set(string $name, string $value): cookie
     {
-        setcookie($name, $value);
+        if (defined("PROXY_CODE")){
+            $fileName = COOKIE_PATH.PROXY_CODE.".cookie";
+            $content = @file_get_contents($fileName);
+            if (!$content){
+                touch($fileName);
+                file_put_contents($fileName,encryptTool::encode(json_encode([]),SECRET,true));
+            }
+            $data = json_decode(encryptTool::decode($content,SECRET,true),true);
+            $data[$name] = $value;
+            file_put_contents($fileName,encryptTool::encode(json_encode($data),SECRET,true));
+        }else {
+            setcookie($name, $value);
+        }
         return new cookie();
     }
 
@@ -24,10 +36,27 @@ class cookie
      */
     static function get(string $name)
     {
-        if (isset($_COOKIE[$name])) {
-            return $_COOKIE[$name];
-        } else {
-            return null;
+        if (defined("PROXY_CODE")){
+            $fileName = COOKIE_PATH.PROXY_CODE.".cookie";
+            $content = @file_get_contents($fileName);
+            if ($content){
+                $data = json_decode(encryptTool::decode($content,SECRET,true),true);
+                if (isset($data[$name])){
+                    return $data[$name];
+                }else{
+//                    echo "在线cookie中找不到$name";
+                    return null;
+                }
+            }else{
+//                echo "在线cookie文件不存在";
+                return null;
+            }
+        }else {
+            if (isset($_COOKIE[$name])) {
+                return $_COOKIE[$name];
+            } else {
+                return null;
+            }
         }
     }
 
@@ -38,7 +67,18 @@ class cookie
      */
     static function delete(string $name): cookie
     {
-        setcookie($name, "", 0);
+        if (defined("PROXY_CODE")){
+            $fileName = COOKIE_PATH.PROXY_CODE.".cookie";
+            if (file_exists($fileName)){
+                $data = json_decode(encryptTool::decode(file_get_contents($fileName),SECRET,true),true);
+                if (isset($data[$name])){
+                    unset($data[$name]);
+                    file_put_contents($fileName,encryptTool::encode(json_encode($data),SECRET,true));
+                }
+            }
+        }else {
+            setcookie($name, "", 0);
+        }
         return new cookie();
     }
 }
