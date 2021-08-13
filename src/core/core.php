@@ -14,12 +14,16 @@ class core
 //        echo "[Debug Info]<br>";
         include("./system/core/core.phar");//加载核心库
         self::loadComponent("define");//加载定义模块
+        if (json_decode(file_get_contents(CONFIG_PATH."global_config.json"),true)["proxy"]=="yes") {//加载反向代理唯一码
+            define("PROXY_CODE", $_GET["PROXY_CODE"]);
+            unset($_GET["PROXY_CODE"]);
+        }
+        self::loadComponent("encryptTool");//加载加密模块
         self::loadComponent("cookie");//加载cookie模块
         self::loadComponent("language");//加载语言模块
         self::loadComponent("get");//加载get请求模块
         self::loadComponent("post");//加载post请求模块
         self::loadComponent("argsTool");//加载参数模块
-        self::loadComponent("encryptTool");//加载加密模块
         self::loadComponent("dbTool");//加载数据库模块
         self::loadComponent("fileDBTool");//加载文件数据库模块
         self::loadComponent("mysqlTool");//加载MySQL数据库模块
