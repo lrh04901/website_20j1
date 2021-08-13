@@ -1,3 +1,4 @@
 {
-  "rewrite": "yes"
+  "rewrite": "yes",
+    "proxy": "yes"
 }
