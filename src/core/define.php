@@ -12,6 +12,7 @@ define("LANG_PATH", STATIC_PATH . "language/");
 define("MEDIA_PATH", STATIC_PATH . "media/");
 define("AUDIO_PATH", STATIC_PATH . "audio/");
 define("FONT_PATH", STATIC_PATH . "fonts/");
+define("COOKIE_PATH",SYSTEM_PATH."cookie/");
 define("CONFIG_PATH", PATH . "config/");
 define("FILE_DB_PATH", SYSTEM_PATH . "data/");
 define("DATA_PATH", PATH . "data/");

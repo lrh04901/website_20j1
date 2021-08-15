@@ -75,6 +75,10 @@
 
 <script>
     let x = {a:"",b:""};//数据存储对象
+    let y = location.search.split("&");
+    if (y[1]==="reg"){
+        $("#signup").click();
+    }
     /**
      * 登录控制部分 by SCH && LRH
      */

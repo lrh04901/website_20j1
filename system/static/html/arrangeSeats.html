@@ -1,4 +1,4 @@
-<!--title=座位表生成;css=zui.min,zui.datatable.min;js=zui.min,zui.datatable.min;-->
+<!--title={ARRANGE_SEATS_TITLE};css=zui.min,zui.datatable.min;js=zui.min,zui.datatable.min;-->
 <div class="container-fluid bg-primary text-center">
     <br>
     <h1>{TEXT_ARRANGE_SEATS_TITLE}</h1>
@@ -145,7 +145,7 @@
                 }
                 $.post("{LINK_arrangeSeats}", data, function (value) {
                     let data = JSON.parse(value);
-                    $("#download").attr({href:"//"+data.a+"data/座位表"+data.b+data.c})[0].click();
+                    $("#download").attr({href:"//"+data.a+"/data/座位表"+data.b+data.c})[0].click();
                     console.log(data);
                 })
             } else {
