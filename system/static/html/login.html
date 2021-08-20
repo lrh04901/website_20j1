@@ -215,12 +215,12 @@
         let  emailAdd = document.querySelector('#input_email');
         let format = /^[a-zA-Z0-9_-]+@([a-zA-Z0-9]+\.)+(com|cn|net|org)$/;
 
-        ver.addEventListener("click",function () {
-            if (format.test(emailAdd.value)) {
-                myAlert("正在发送邮件...");
-            } else {
-                myAlert("请输入正确的邮箱地址");
-            }
+        ver.addEventListener("click", () => {
+          if (format.test(emailAdd.value)) {
+            myAlert("正在发送邮件...");
+          } else {
+            myAlert("请输入正确的邮箱地址");
+          }
         },false);
 /*=====================================以上步骤验证邮箱格式==========================================*/
         let mail = $("#input_email").val();
@@ -319,7 +319,7 @@
     let navMenuItems = document.querySelectorAll(".nav-list li");
     let widthHr = document.querySelector(".triangle");
     // console.info(burger);
-    burger.addEventListener("click", function () {
+    burger.addEventListener("click", () => {
         burger.classList.toggle("active");
         navMenu.classList.toggle("open");
         navMenuItems.forEach((item, index) => {
