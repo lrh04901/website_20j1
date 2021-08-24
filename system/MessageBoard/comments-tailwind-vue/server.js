@@ -47,17 +47,8 @@ async function getAllComments() {
 
   //原始评论数据
   result?.results?.forEach((page) => {
-    comments.set(page.id, {
-      id: page.id,
-      user: page.properties.users.rich_text[0].text.content,
-      time: getRelativeTimeDesc(page.properties.time.created_time),
-      content: page.properties.content.rich_text[0].text.content,
-      avatar: page.properties.avatar.url,
-      replies: page.properties.replies.relation,
-      replyTo: page.properties.replyTo?.relation[0]?.id,
-    });
+    comments.set(page.id, transformPageObject(page));
   });
-
   //将关系id重新替换为实际评论
   let commentsPopulated = [...comments.values()].reduce((acc,curr) => {
     if (!curr.replyTo) {
@@ -66,6 +57,7 @@ async function getAllComments() {
     }
     return acc;
   },[]);
+
   return commentsPopulated;
 }
 
@@ -75,7 +67,7 @@ async function addComment({ content, replyTo = "" }) {
     user_id: NOTION_CURR_USER_ID,
   });
 
-  notion.request({
+  const page = await notion.request({
     path: "pages",
     method: "POST",
     body: {
@@ -124,6 +116,20 @@ async function addComment({ content, replyTo = "" }) {
       },
     },
   });
+
+  return transformPageObject(page);
+}
+
+function transformPageObject(page) {
+  return {
+    id: page.id,
+    user: page.properties.users.rich_text[0].text.content,
+    time: getRelativeTimeDesc(page.properties.time.created_time),
+    content: page.properties.content.rich_text[0].text.content,
+    avatar: page.properties.avatar.url,
+    replies: page.properties.replies.relation,
+    replyTo: page.properties.replyTo?.relation[0]?.id,
+  };
 }
 
 //处理Get请求
@@ -140,8 +146,8 @@ app.get('/comments', async (req, res) => {
 
 app.post('/comments', async (req, res) => {
   try {
-    await addComment(req.body);
-    res.sendStatus(201);
+    const newPage = await addComment(req.body);
+    res.sendStatus(201).json(newPage);
   } catch (error) {
     console.log(error);
     res.sendStatus(500);
