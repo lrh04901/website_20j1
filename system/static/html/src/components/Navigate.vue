@@ -1,0 +1,135 @@
+<template>
+  <nav>
+    <div class="nav-h" id="nav-h" v-html="url" v-cloak></div>
+    <ul class="nav-list" type="none" id="navList">
+      <li v-for="(urls,i) in url" v-html="url[i]" v-cloak :key="urls">{{urls}}</li>
+    </ul>
+    <div class="burger">
+      <div class="top-line"></div>
+      <div class="middle-line"></div>
+      <div class="bottom-line"></div>
+    </div>
+  </nav>
+
+
+  <!-- Language Part -->
+  <div id="language_choose_box" style="background:#cccccccc;z-index: 999;position: fixed;top: 10%;left:10%;width: 80%;height: 80%;display: none">
+    <h1 style="text-align: center;margin: 5% auto;color: white">{TEXT_CHOOSE_LANGUAGE}</h1>
+    <div style="position:absolute;right: 5%;top: 5%;font-size: 80px;line-height: 60px"><a class="close_button" href="javascript:;">&times;</a></div>
+    <ul style="margin-left: 10%;line-height: 50px;font-size: 30px;list-style: none">
+      {language_list}
+      <!--    <li><a data-language="zh-cn" class="lang">简体中文</a></li>-->
+      <!--    <li><a data-language="zh-tw" class="lang">繁体中文</a></li>-->
+      <!--    <li><a data-language="en" class="lang">English</a></li>-->
+    </ul>
+  </div>
+</template>
+
+<script setup>
+setTimeout(() => {
+  const navH = new Vue({
+    el: '#nav-h',
+    data: {
+      message: 'null',
+      url: '<a target="_self" href="{LINK_/}">{TEXT_MAIN_TITLE}</a>',
+    },
+    methods: {
+      /* mouseOver: function(){
+         this.navHoverStyle = 'color: rgb(46,127,175)';
+         this.navHoverStyle = 'transition: 0.3s';
+       },
+       mouseLeave: function () {
+         this.navHoverStyle = '';
+       },*/
+    }
+  })
+}, 10);
+
+const navList = new Vue({
+  el: '#navList',
+  data: {
+    message: '',
+    //右侧导航栏地址
+    url: [
+      '<a href="{LINK_/}">{TEXT_HOME}</a>',
+      '<a href="{LINK_classIntroduce}">{TEXT_INTRODUCE}</a>',
+      '<a href="{LINK_Page404}">{TEXT_YOUTH_LEAGUE_ACTIVE}</a>',
+      '<a href="{LINK_yule}">{TEXT_ENTERTAINMENT}</a>',
+      '<a id="language_choose_button" href="javascript:;">{TEXT_LANGUAGE_NAME}</a>',
+    ],
+  },
+});
+
+const myHover = document.querySelector('.lang');
+myHover.addEventListener("click", () => {
+  myHover.style.color = "#33d4c0"
+},false);
+
+$(function () {
+  $("#language_choose_box").hide();
+  $("#language_choose_button").click(function (){
+    $("#language_choose_box").fadeIn();
+    $(".burger").click();
+  });
+  $(".close_button").click(function (){
+    $("#language_choose_box").fadeOut();
+  });
+  $("#language_choose_box ul a").click(function (){
+    var target_lang = $(this).attr("data-language");
+    var from = location.search.substr(2);
+    from = from ? from :"index";
+    location.href = "{LINK_setLang}"+"&lang="+target_lang+"&from="+from;
+  });
+});
+</script>
+
+<style>
+[v-cloak]{
+  display: none;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 2s
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0
+}
+
+#language_choose_box{
+  border-radius: 20px;
+}
+
+#language_choose_box ul a{
+  transition: 0.3s ease-in;
+  line-height: 3em;
+  font-size: 40px;
+}
+
+#language_choose_box ul a,
+#language_choose_box ul a:link{
+  text-decoration: none;
+  color: rgb(137,113,133);
+}
+#language_choose_box ul a:visited{
+
+  color: rgb(137,113,133);
+}
+#language_choose_box ul a:hover{
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+
+}
+#language_choose_box ul a:active{
+  text-decoration: none;
+  color: yellow;
+}
+.close_button:link,
+.close_button:hover,
+.close_button:active,
+.close_button:visited{
+  color: white;
+  text-decoration: none;
+}
+</style>
