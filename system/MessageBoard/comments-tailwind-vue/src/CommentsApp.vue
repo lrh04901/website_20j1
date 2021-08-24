@@ -42,49 +42,55 @@ import ReplyContainer from "./components/ReplyContainer.vue";
 
 //图片引入
 import lrh from "./assets/lrh.jpg";
+import defaultAva from "./assets/default.jpg";
 import lrh2 from "./assets/lrh2.jpg";
 /*import mAva from "./assets/index.png";*/
-import {ref} from "vue";
+import { ref, onMounted } from "vue";
 
 //示例数组
 let rid = ref(3);
-const comments = ref([
-  {
-    id: 1,
-    user: "lrhAdmin",
-    avatar: lrh,
-    time: "2021-7-26",
-    content:
-      "lrh发布的第一条测试留言",
-    replies: [
-      {
-        id: 2,
-        user: "adminLrh",
-        avatar: lrh2,
-        time: "2021-7-26",
-        content:
-          "回复测试",
-      }
-    ]
-  }
-]);
+const comments = ref([]);
 
-const constructNewComment = (content) => {
+async function getAllComments() {
+  const res = await fetch("/api/comments");
+  comments.value = await res.json();
+}
+
+onMounted(() => {
+  getAllComments();
+})
+
+/*const constructNewComment = async (content, ) => {
   return {
     id: rid.value++,
     user: "当前用户",
-    avatar: lrh,
+    avatar: defaultAva,
     content,
     time: "10分钟前",
   };
+};*/
+
+const addNewComment = async (content, replyTo) => {
+  const res = await fetch(`/api/comments`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      content,
+      ...(replyTo && { replyTo }),
+    }),
+  });
+
+  const newComment = await res.json();
+  if (!replyTo) {
+    comments.value.unshift(newComment);
+  } else {
+    comments.value.find( c => c.id === replyTo)
+  }
 };
 
-const addNewComment = (content) => {
-  const newComment = constructNewComment(content);
-  comments.value.push(newComment);
-};
-
-const addReply = (content, id) => {
+/*const addReply = (content, id) => {
   const reply = constructNewComment(content);
   let comment = comments.value.find((comment) => comment.id === id);
   if (comment.replies) {
@@ -92,7 +98,7 @@ const addReply = (content, id) => {
   } else {
     comment.replies = [reply];
   }
-};
+};*/
 </script>
 
 <style>
