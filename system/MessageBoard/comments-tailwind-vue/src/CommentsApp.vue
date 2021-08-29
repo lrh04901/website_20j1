@@ -26,7 +26,7 @@
             :content="reply.content"
           />
         </ReplyContainer>
-        <ReplyBox @submit="addReply($event,comment.id)"/>
+        <ReplyBox @submit="addNewComment($event,comment.id)"/>
       </div>
     </div>
   </main>
@@ -86,7 +86,7 @@ const addNewComment = async (content, replyTo) => {
   if (!replyTo) {
     comments.value.unshift(newComment);
   } else {
-    comments.value.find( c => c.id === replyTo)
+    comments.value.find( c => c.id === replyTo).replies.unshift(newComment);
   }
 };
 
